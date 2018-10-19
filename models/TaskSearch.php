@@ -30,6 +30,21 @@ class TaskSearch extends Task
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'check_time1' => 'За последний час',
+            'check_time3' => 'За последние 3 часа',
+            'check_time6' => 'За последние 6 часов',
+            'check_time7dn' => 'За неделю',
+            'min_price' => 'Минимальная цена',
+            'subcategories_id' => 'Категория',
+            'title' => 'Ключевое слово',
+            'site_id' => 'Выбрать сайт',
+            'check_price' => 'По договоренности',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -75,12 +90,12 @@ class TaskSearch extends Task
         ]);
 
 //var_dump($this->min_price);
-        if ($this->min_price!='' and $this->max_price!='') {
+        if ($this->min_price!='') {
             $query->andFilterWhere(['like', 'title', $this->title])
 //            ->andFilterWhere(['like', 'text', $this->text])
                 ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
 //            ->andFilterWhere(['like', 'status', $this->status])
-                ->andFilterWhere(['and', 'price', ['>=', 'price', $this->min_price], ['<=', 'price', $this->max_price]])
+                ->andFilterWhere(['>=', 'price', $this->min_price])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time6])

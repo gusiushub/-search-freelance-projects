@@ -34,17 +34,21 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'price') ?>
-    <?php  echo $form->field($model, 'min_price') ?>
-    <?php  echo $form->field($model, 'max_price') ?>
-    <?php  echo $form->field($model, 'check_price')->checkbox([ 'value' => 0])->label('По договоренности') ?>
-    <?php  echo $form->field($model, 'check_time1')->checkbox(['value'=>(int)(time()/3600)-3600,'checked'=>false]) ?>
+    <?php  echo $form->field($model, 'min_price')->textInput(['style'=>'width:25%;']) ?>
+<!--    --><?php // echo $form->field($model, 'max_price') ?>
+    <div class="control-group">
+        <div class="controls">
+    <?php  echo $form->field($model, 'check_price')->checkbox([ 'value' => false]) ?>
+
+    <?php  echo $form->field($model, 'check_time1')->checkbox(['value'=>(int)(time()/3600)-3600]) ?>
     <?php  echo $form->field($model, 'check_time3')->checkbox(['value' => (int)(time()/3600)-10800]) ?>
     <?php  echo $form->field($model, 'check_time6')->checkbox(['value' => (int)(time()/3600)-21600]) ?>
     <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()/3600)-604800]) ?>
-
+    </div>
+    </div>
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger']) ?>
+        <?= Html::resetButton('Сброс', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

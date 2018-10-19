@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -40,14 +41,19 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
         ['label' => 'О нас', 'url' => ['/site/about']],
-//        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Поиск', 'url' => ['/task-list/index']],
+//        ['label' => 'Поиск', 'url' => ['/task-list/index']],
     ];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
     } else {
+        $menuItems = [
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'О нас', 'url' => ['/site/about']],
+            ['label' => 'Личный кабинет', 'url' => ['/user/index']],
+            ['label' => 'Поиск', 'url' => ['/task-list/index']],
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

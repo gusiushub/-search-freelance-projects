@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Parser;
 use app\models\SignupForm;
 use app\models\User;
 use Yii;
@@ -13,19 +12,11 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
 
 class SiteController extends Controller
 {
-
-    public function actionPar()
-    {
-        $parser = new Parser(['url' => 'https://freelansim.ru/tasks?categories=marketing_smm']);
-        var_dump($parser->parse()) ;
-    }
-
 
     /**
      * {@inheritdoc}
@@ -102,19 +93,19 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionAddAdmin() {
-        $model = User::find()->where(['username' => 'admin'])->one();
-        if (empty($model)) {
-            $user = new User();
-            $user->username = 'admin';
-            $user->email = 'admin@кодер.укр';
-            $user->setPassword('admin');
-            $user->generateAuthKey();
-            if ($user->save()) {
-                echo 'good';
-            }
-        }
-    }
+//    public function actionAddAdmin() {
+//        $model = User::find()->where(['username' => 'admin'])->one();
+//        if (empty($model)) {
+//            $user = new User();
+//            $user->username = 'admin';
+//            $user->email = 'admin@кодер.укр';
+//            $user->setPassword('admin');
+//            $user->generateAuthKey();
+//            if ($user->save()) {
+//                echo 'good';
+//            }
+//        }
+//    }
 
 
     /**
@@ -183,10 +174,11 @@ class SiteController extends Controller
             try {
                 if ($eauth->authenticate()) {
 					//var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes()); exit;
-//                    $user_vk = $eauth->getAttributes();
-//                    $name_vk = explode(' ',$user_vk['name']);
+                    //$user_vk = $eauth->getAttributes();
+                    //$name_vk = explode(' ',$user_vk['name']);
+                   // $identity = Yii::$app->getUser()->getIdentity();
 
-					//var_dump($name_vk); exit;
+					//var_dump($name_vk);
 
 
 //                    $user = new User();
@@ -196,8 +188,26 @@ class SiteController extends Controller
 //                    $user->save();
 
                     $identity = User::findByEAuth($eauth);
-                    Yii::$app->getUser()->login($identity);
-
+                    //Yii::$app->getUser()->login($identity);
+                    if (isset($identity->profile) and Yii::$app->getUser()->login($identity)) {
+                        $user_vk = $identity->profile;
+                        $name_vk = explode(' ',$user_vk['name']);
+                        $model = User::find()->where(['username' => 'vk_'.$user_vk['id']])->one();
+                        if (empty($model)) {
+                            $user = new User();
+                            $user->username = 'vk_'.$user_vk['id'];
+//                            $user->email = 'admin@кодер.укр';
+                            $user->f_name = $name_vk['0'];
+                            $user->s_name = $name_vk['1'];
+                            $user->setPassword($user_vk['id']);
+                            $user->generateAuthKey();
+                            if ($user->save()) {
+                                $eauth->redirect();
+                            }
+                        }
+//                        var_dump($user_vk['id']);
+                       // VarDumper::dump($identity->profile, 10, true);
+                    }
                     // special redirect with closing popup window
                     $eauth->redirect();
                 }
@@ -237,28 +247,29 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
     }
+
+//    /**
+//     * Displays contact page.
+//     *
+//     * @return Response|string
+//     */
+//    public function actionContact()
+//    {
+//        $model = new ContactForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+//            Yii::$app->session->setFlash('contactFormSubmitted');
+//
+//            return $this->refresh();
+//        }
+//        return $this->render('contact', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Displays about page.
