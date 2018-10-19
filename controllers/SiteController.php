@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Parser;
 use app\models\SignupForm;
 use app\models\User;
 use Yii;
@@ -18,6 +19,14 @@ use app\models\ResetPasswordForm;
 
 class SiteController extends Controller
 {
+
+    public function actionPar()
+    {
+        $parser = new Parser(['url' => 'https://freelansim.ru/tasks?categories=marketing_smm']);
+        var_dump($parser->parse()) ;
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -126,7 +135,7 @@ class SiteController extends Controller
             }
         }
 
-        return $this->render('requestPasswordResetToken', [
+        return $this->render('passwordResetRequestForm', [
             'model' => $model,
         ]);
     }
@@ -140,6 +149,7 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
+        //var_dump($token);exit;
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -151,7 +161,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('resetPassword', [
+        return $this->render('resetPasswordForm', [
             'model' => $model]);
       }
 
