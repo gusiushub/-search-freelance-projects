@@ -11,7 +11,49 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
     'components' => [
+
+        'eauth' => [
+            'class' => 'nodge\eauth\EAuth',
+            'popup' => true, // Use the popup window instead of redirecting.
+            'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache' on production environments.
+            'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
+            'httpClient' => [
+                // uncomment this to use streams in safe_mode
+                //'useStreamsFallback' => true,
+            ],
+            'services' => [ // You can change the providers and their classes.
+                'vkontakte' => [
+                    // register your app here: https://vk.com/editapp?act=create&site=1
+                    'class' => 'nodge\eauth\services\VKontakteOAuth2Service',
+                    'clientId' => '6725333',
+                    'clientSecret' => 'NxXToyRVyYV9Dao6e6CE',
+                ],
+            ],
+        ],
+
+    'i18n' => [
+        'translations' => [
+            'eauth' => [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => '@eauth/messages',
+            ],
+        ],
+    ],
+// (optionally) you can configure logging
+        'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => '@app/runtime/logs/eauth.log',
+                    'categories' => ['nodge\eauth\*'],
+                    'logVars' => [],
+                ],
+            ],
+        ],
+
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'jYETHKXHZfdbQqpA1PSDizEklR9x0zQF',
@@ -49,6 +91,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'login/vkontakte' => 'site/login',
             ],
         ],
 
