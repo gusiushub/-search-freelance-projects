@@ -88,7 +88,7 @@ class TaskSearch extends Task
             'subcategories_id' => $this->subcategories_id,
 //            'check_time1' => $this->time_unix,
         ]);
-
+//var_dump($this->check_time1);
         if ($this->min_price!='') {
             $query->andFilterWhere(['like', 'title', $this->title])
 //            ->andFilterWhere(['like', 'text', $this->text])

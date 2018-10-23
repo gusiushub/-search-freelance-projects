@@ -12,20 +12,13 @@ $this->title = 'Заказы';
 
 
 ?>
-<div class="task-index">
-
-<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
-
-
-    <p>
-<!--        --><?//= Html::a('Create Task', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<!--<div class="task-index">-->
 
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-sm-3">
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
-        <div class="col-xs-9">
+        <div class="col-sm-9">
             <?php Pjax::begin(); ?>
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,
@@ -35,12 +28,10 @@ $this->title = 'Заказы';
 //                },
             ]) ?>
             <?php Pjax::end(); ?>
-
-
-        </div>
-
         </div>
 
     </div>
+<!---->
+<!--</div>-->
 
 
