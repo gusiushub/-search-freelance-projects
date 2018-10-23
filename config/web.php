@@ -91,7 +91,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-//                'login/vkontakte' => 'site/login',
+                    'login/vkontakte' => 'site/login',
             ],
         ],
 
