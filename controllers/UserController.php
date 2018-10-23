@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\models\SettingForm;
+use app\models\User;
 use yii\web\Controller;
 
 class UserController extends Controller
@@ -11,6 +12,8 @@ class UserController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
+//            $user = new User();
+            //$user->trialPeriod();
             return $this->render('index');
         }
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc19687e5ba2e8e092d9199e98b3de51",
+    "content-hash": "953898d44b12d972b67ac997982647c8",
     "packages": [
         {
             "name": "aszone/simple_html_dom",
@@ -499,6 +499,51 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "yii-cms/yii2-robokassa",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii-cms/yii2-robokassa.git",
+                "reference": "7558c1098d75d1aad81117dfe368da8ea484d52a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii-cms/yii2-robokassa/zipball/7558c1098d75d1aad81117dfe368da8ea484d52a",
+                "reference": "7558c1098d75d1aad81117dfe368da8ea484d52a",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.13"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "robokassa\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Gonimar",
+                    "email": "sergey.gonimar@gmail.com"
+                }
+            ],
+            "description": "Robokassa payment extension.",
+            "keywords": [
+                "robokassa",
+                "yii2"
+            ],
+            "time": "2018-06-19T21:07:55+00:00"
         },
         {
             "name": "yiisoft/yii2",
