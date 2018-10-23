@@ -30,11 +30,11 @@ use yii\widgets\ActiveForm;
 <!--    --><?php // echo $form->field($model, 'max_price') ?>
     <div class="control-group">
         <div class="controls">
-            <?php  echo $form->field($model, 'check_price')->checkbox([ 'value' => false]) ?>
-            <?php  echo $form->field($model, 'check_time1')->checkbox(['value'=>(int)(time()/3600)-3600]) ?>
-            <?php  echo $form->field($model, 'check_time3')->checkbox(['value' => (int)(time()/3600)-10800]) ?>
-            <?php  echo $form->field($model, 'check_time6')->checkbox(['value' => (int)(time()/3600)-21600]) ?>
-            <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()/3600)-604800]) ?>
+            <?php  echo $form->field($model, 'check_price')->checkbox(['value' => false]) ?>
+            <?php  echo $form->field($model, 'check_time1')->checkbox(['value'=>(int)(time()-3600)]) ?>
+            <?php  echo $form->field($model, 'check_time3')->checkbox(['value' => (int)(time()-10800)]) ?>
+            <?php  echo $form->field($model, 'check_time6')->checkbox(['value' => (int)(time()-21600)]) ?>
+            <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()-604800)]) ?>
         </div>
     </div>
     <div class="form-group">

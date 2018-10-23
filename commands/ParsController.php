@@ -33,7 +33,7 @@ class ParsController extends Controller
                     'list_id' => $job['id'],
                     'url' => 'https://freelansim.ru'.$job['link'],
                     'date' => date('Y-m-d'),
-                    'time_unix' => (int)(time()/3600),
+                    'time_unix' => (int)(time()),
                 ])->execute();
             }
 
@@ -63,7 +63,7 @@ class ParsController extends Controller
                     'list_id' => $job['id'],
                     'url' => 'https://fl.ru'.$job['link'],
                     'date' => date('Y-m-d'),
-                    'time_unix' => (int)(time()/3600),
+                    'time_unix' => (int)(time()),
                 ])->execute();
             }
         }
@@ -91,7 +91,7 @@ class ParsController extends Controller
                     'list_id' => $job['id'],
                     'url' => 'https://fl.ru'.$job['link'],
                     'date' => date('Y-m-d'),
-                    'time_unix' => (int)(time()/3600),
+                    'time_unix' => (int)(time()),
                 ])->execute();
             }
         }
