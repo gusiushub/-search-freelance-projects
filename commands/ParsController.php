@@ -17,6 +17,9 @@ class ParsController extends Controller
         $parser = new Parser(['url' => 'https://freelansim.ru/tasks?categories=marketing_smm']);
         $jobs = $parser->parse() ;
         foreach ($jobs as $job){
+            $price = str_replace([' ','руб.','за','час','месяц','проект'], "", $job['price']);
+            $price = (int)$price['price'];
+            //var_dump();
             echo "Цикл \n";
             $unic =Task::find()->where(['list_id' => $job['id']])->exists();
             if(!$unic){
@@ -26,7 +29,7 @@ class ParsController extends Controller
                     'subcategories_id' => 3,
                     'title' => $job['title'],
 //                    'text' => $job['description'],
-                    'price' => (int)$job['price'],
+                    'price' => $price,
                     'list_id' => $job['id'],
                     'url' => 'https://freelansim.ru'.$job['link'],
                     'date' => date('Y-m-d'),
