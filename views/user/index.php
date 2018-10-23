@@ -6,8 +6,8 @@ use yii\bootstrap\Html;
 ?>
 <ul class="nav nav-tabs">
     <li class="active"><a href="#">Профиль</a></li>
-    <li><a href="#">Настройки</a></li>
-    <li><a href="#">Уведомления: </a></li>
+    <li><a href="/user/pay">Оплата</a></li>
+<!--    <li><a href="#">Уведомления: </a></li>-->
 </ul>
 
 <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -57,7 +57,6 @@ use yii\bootstrap\Html;
                     </div>
                     <hr>
                 <?= Html::submitButton('Обновить', ['class'=>'btn btn-danger']) ?>
-<!--                    <input name="submit" type="button" id="submittt" class="btn btn-danger" value="Обновить">-->
                 <?php ActiveForm::end(); ?>
                 <?php
                 $js = <<<JS
