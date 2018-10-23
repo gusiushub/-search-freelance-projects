@@ -12,8 +12,7 @@ $this->title = 'Заказы';
 
 
 ?>
-<!--<div class="task-index">-->
-
+<div class="container">
     <div class="row">
         <div class="col-sm-3">
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,7 +30,6 @@ $this->title = 'Заказы';
         </div>
 
     </div>
-<!---->
-<!--</div>-->
+</div>
 
 
