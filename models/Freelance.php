@@ -3,7 +3,7 @@
 namespace app\models;
 
 use phpQuery;
-use Yii;
+//use Yii;
 use yii\base\Model;
 
 class Freelance extends Model {
@@ -54,20 +54,20 @@ class Freelance extends Model {
                 var_dump($price);
                 var_dump($id   );
                 $unic =Task::find()->where(['list_id' => $id])->exists();
-                if(!$unic){
-//                    var_dump($unic);
-                    Yii::$app->db->createCommand()->insert('task', [
-                        'site_id' => 4,
-                        'subcategories_id' => 2,
-                        'title' => $title[0],
-                        'text' => $text[0],
-                        'price' => $price[0],
-                        'list_id' => (int)$id[1][0],
-                        'url' => 'https://freelance.ru'.$href[0],
-                        'date' => date('Y-m-d'),
-                        'time_unix' => (int)(time()),
-                    ])->execute();
-                }
+//                if(!$unic){
+////                    var_dump($unic);
+//                    Yii::$app->db->createCommand()->insert('task', [
+//                        'site_id' => 4,
+//                        'subcategories_id' => 2,
+//                        'title' => $title[0],
+//                        'text' => $text[0],
+//                        'price' => $price[0],
+//                        'list_id' => (int)$id[1][0],
+//                        'url' => 'https://freelance.ru'.$href[0],
+//                        'date' => date('Y-m-d'),
+//                        'time_unix' => (int)(time()),
+//                    ])->execute();
+//                }
             }
 
 //            var_dump($href[0]);

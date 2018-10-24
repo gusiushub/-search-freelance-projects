@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Subcategories;
 use app\models\User;
 use Yii;
 use app\models\Task;
@@ -28,6 +29,26 @@ class TaskListController extends Controller
                 ],
             ],
         ];
+    }
+
+
+    public function actionDropdown($id)
+    {
+        $countPosts = Subcategories::find()
+            ->where(['categories_id' => $id])
+            ->count();
+
+        $posts = Subcategories::find()
+            ->where(['categories_id' => $id])
+            ->orderBy('name ASC')
+            ->all();
+        echo "<option value=''>-</option>";
+        if($countPosts>0){
+            foreach($posts as $post){
+                echo "<option value='".$post->id."'>".Yii::t('app',$post->name)."</option>";
+            }
+        }
+
     }
 
     /**

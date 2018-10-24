@@ -2,10 +2,12 @@
 
 namespace app\models;
 
-use Yii;
+//use Yii;
 
 
-class Сategories extends \yii\db\ActiveRecord
+use yii\db\ActiveRecord;
+
+class Сategories extends ActiveRecord
 {
     /**
      * {@inheritdoc}
