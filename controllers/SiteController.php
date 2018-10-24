@@ -78,19 +78,21 @@ class SiteController extends Controller
 
     public function actionSignup()
     {
-        $model = new SignupForm();
+        if (Yii::$app->user->isGuest) {
+            $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+            if ($model->load(Yii::$app->request->post())) {
+                if ($user = $model->signup()) {
+                    if (Yii::$app->getUser()->login($user)) {
+                        return $this->goHome();
+                    }
                 }
             }
-        }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
+            return $this->render('signup', [
+                'model' => $model,
+            ]);
+        }
     }
 
 //    public function actionAddAdmin() {
@@ -140,7 +142,6 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
-        //var_dump($token);exit;
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -164,6 +165,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $redirect = '/task-list/index';
         $serviceName = Yii::$app->getRequest()->getQueryParam('service');
         if (isset($serviceName)) {
             /** @var $eauth \nodge\eauth\ServiceBase */
@@ -202,14 +204,14 @@ class SiteController extends Controller
                             $user->setPassword($user_vk['id']);
                             $user->generateAuthKey();
                             if ($user->save()) {
-                                $eauth->redirect();
+                                $eauth->redirect($redirect);
                             }
                         }
 //                        var_dump($user_vk['id']);
                        // VarDumper::dump($identity->profile, 10, true);
                     }
                     // special redirect with closing popup window
-                    $eauth->redirect();
+                    $eauth->redirect($redirect);
                 }
                 else {
                     // close popup window and redirect to cancelUrl
@@ -226,12 +228,12 @@ class SiteController extends Controller
             }
         }
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect($redirect);
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goHome();
+            return $this->redirect($redirect);
         }
 
         $model->password = '';
@@ -252,24 +254,6 @@ class SiteController extends Controller
             return $this->goHome();
         }
     }
-
-//    /**
-//     * Displays contact page.
-//     *
-//     * @return Response|string
-//     */
-//    public function actionContact()
-//    {
-//        $model = new ContactForm();
-//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-//            Yii::$app->session->setFlash('contactFormSubmitted');
-//
-//            return $this->refresh();
-//        }
-//        return $this->render('contact', [
-//            'model' => $model,
-//        ]);
-//    }
 
     /**
      * Displays about page.

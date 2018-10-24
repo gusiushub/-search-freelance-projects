@@ -1,5 +1,6 @@
 <?php
 
+use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 
@@ -10,12 +11,14 @@ use yii\bootstrap\Html;
 <!--    <li><a href="#">Уведомления: </a></li>-->
 </ul>
 
+<?php if (User::isProfileComplete()!=1){ ?>
 <div class="alert alert-danger alert-dismissible fade in" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Заполните профиль!</strong> Чтобы пользоваться всем функционалом, вы должны заполнить свой профиль.
+    <strong>Заполните профиль!</strong> Чтобы пользоваться всем функционалом, вы должны <?php echo User::isProfileComplete(); ?>
 </div>
+<?php } ?>
 <div style="margin-top: 30px" class="row">
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-danger">
@@ -79,7 +82,7 @@ use yii\bootstrap\Html;
                     type: 'POST',
                     data: data,
                     success: function(res){
-                        console.log(res);
+                        // console.log(res);
                     },
                     error: function(){
                         alert('Error!');
@@ -95,11 +98,20 @@ JS;
     </div>
     <h3>Прогресс бар</h3>
     <div class="progress progress-striped">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+        <?php if (User::isProfileComplete()==1){ ?>
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <?php }elseif (User::isProfileComplete()=='заполнить E-mail и телефон!'){ ?>
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+        <?php }elseif (User::isProfileComplete()=='заполнить телефон!'){ ?>
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+        <?php }elseif (User::isProfileComplete()=='заполнить E-mail!!'){ ?>
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+        <?php } ?>
             <span class="sr-only">80% Complete (danger)</span>
         </div>
     </div>
     <h3>Уведомления: </h3><br>
+    <?php if (User::isProfileComplete()!=1){ ?>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img  src="../../web/img/vnimanie.jpg" alt="...">
@@ -110,6 +122,7 @@ JS;
             </div>
         </div>
     </div>
+    <?php } ?>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="../../web/img/tarif.png" alt="...">
