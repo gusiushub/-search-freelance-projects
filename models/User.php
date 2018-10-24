@@ -169,4 +169,20 @@ class User extends ActiveRecord  implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+    /**
+     * Проверка пробного периода
+     */
+    public static function trialPeriod()
+    {
+        $created = Yii::$app->user->identity->created_at;
+        $D = time() - $created;
+        $days = round($D/(3600*24));
+        if ($days>3){
+            return false;
+        }
+        return true;
+    }
+
 }

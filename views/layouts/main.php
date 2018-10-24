@@ -49,10 +49,10 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
     } else {
         $menuItems = [
-            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Поиск', 'url' => ['/task-list/index']],
 //            ['label' => 'О нас', 'url' => ['/site/about']],
             ['label' => 'Личный кабинет', 'url' => ['/user/index']],
-            ['label' => 'Поиск', 'url' => ['/task-list/index']],
+
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

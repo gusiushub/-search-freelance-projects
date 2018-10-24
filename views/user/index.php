@@ -5,11 +5,17 @@ use yii\bootstrap\Html;
 
 ?>
 <ul class="nav nav-tabs">
-<li class="active"><a href="#">Профиль</a></li>
-<li><a href="#">Настройки</a></li>
-<li><a href="#">Уведомления: </a></li>
+    <li class="active"><a href="#">Профиль</a></li>
+    <li><a href="#">Настройки</a></li>
+    <li><a href="#">Уведомления: </a></li>
 </ul>
 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Заполните профиль!</strong> Чтобы пользоваться всем функционалом, вы должны заполнить свой профиль.
+</div>
 <div style="margin-top: 30px" class="row">
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-danger">
@@ -18,8 +24,12 @@ use yii\bootstrap\Html;
                 <h2 class="panel-title">Информация о профиле: </h2>
             </div>
             <div class="panel-body">
-<!--                <form id="form" method="post">-->
                 <?php $form = ActiveForm::begin() ?>
+                    <div class="input-group">
+                        <span class="input-group-addon">Логин:<?= Yii::$app->user->identity->username ?></span>
+                        <input type="hidden" class="form-control">
+                    </div>
+                    <hr>
                     <div class="input-group">
                         <span class="input-group-addon">Имя: </span>
                         <input name="f_name" type="text" class="form-control" value="<?= Yii::$app->user->identity->f_name ?>">
@@ -30,11 +40,7 @@ use yii\bootstrap\Html;
                         <input name="s_name" type="text" class="form-control" value="<?= Yii::$app->user->identity->s_name ?>">
                     </div>
                     <hr>
-                    <div class="input-group">
-                        <span class="input-group-addon">Логин: </span>
-                        <input name="login" type="text" class="form-control" value="<?= Yii::$app->user->identity->username ?>">
-                    </div>
-                    <hr>
+
                     <div class="input-group">
                         <span class="input-group-addon"> E-mail: </span>
                         <input name="email" type="text" class="form-control" value="<?= Yii::$app->user->identity->email ?>">
@@ -50,12 +56,9 @@ use yii\bootstrap\Html;
                         <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
                     </div>
                     <hr>
-<!--                    <input name="_csrf" type="hidden" value="--><?//=Yii::$app->request->getCsrfToken()?><!--">-->
                 <?= Html::submitButton('Обновить', ['class'=>'btn btn-danger']) ?>
 <!--                    <input name="submit" type="button" id="submittt" class="btn btn-danger" value="Обновить">-->
                 <?php ActiveForm::end(); ?>
-<!--                </form>-->
-
                 <?php
                 $js = <<<JS
             $('form').on('beforeSubmit', function(){
@@ -86,11 +89,9 @@ use yii\bootstrap\Html;
                 return false;
             });
 JS;
-
                 $this->registerJs($js);
                 ?>
             </div>
-
         </div>
     </div>
     <h3>Прогресс бар</h3>
@@ -122,25 +123,7 @@ JS;
     </div>
 
 </div>
-<script>
-    // alert('sdads');
-    // $('#submittt').click(function() {
-    //
-    //     var name = $('input[name="f_name"]').val(),
-    //         _csrf = $('input[name="_csrf"]').val(),
-    //         data = {
-    //             name
-    //         };
-    //     var jsdata = JSON.stringify(data);
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/ajax/setting",
-    //         data: {
-    //             profile_seller7: jsdata,
-    //             _csrf: _csrf
-    //         }
-    //     });
-    // }
-</script>
+
+<!--<script type="text/javascript" src="https://auth.robokassa.ru/Merchant/PaymentForm/FormSS.js?MerchantLogin=waytowork&InvoiceID=0&Culture=ru&Encoding=utf-8&OutSum=1&SignatureValue=fea798e07fb286deecfbec5e00af361d"></script>-->
 
 

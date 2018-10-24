@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dirst/flrugrabber": "*",
         "yiisoft/yii2-authclient": "^2.1",
-        "nodge/yii2-eauth": "~2.0"
+        "nodge/yii2-eauth": "~2.0",
+        "yii-cms/yii2-robokassa": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

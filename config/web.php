@@ -14,6 +14,16 @@ $config = [
 
     'components' => [
 
+
+        'robokassa' => [
+            'class' => '\robokassa\Merchant',
+            'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
+            'sMerchantLogin' => 'waytowork',
+            'sMerchantPass1' => 'kawN6Q0dPg77BbrxUWw6',
+            'sMerchantPass2' => 'WDoIJX0yf1a5MALu0ys5',
+            'isTest' => !YII_ENV_PROD,
+        ],
+
         'eauth' => [
             'class' => 'nodge\eauth\EAuth',
             'popup' => true, // Use the popup window instead of redirecting.
