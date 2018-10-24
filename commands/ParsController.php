@@ -2,15 +2,32 @@
 
 namespace app\commands;
 
+use app\models\Freelance;
 use app\models\Parser;
 use app\models\Task;
+use phpQuery;
 use Yii;
 use yii\console\Controller;
 use Dirst\Flrugrabber\FlGrabber;
 
 class ParsController extends Controller
 {
+    /**
+     * freelance.ru
+     */
+    public function actionFreelance()
+    {
+       $model = new Freelance();
+       var_dump($model->freelance());
 
+    }
+
+
+
+    /**
+     * freelansim.ru
+     * @throws \yii\db\Exception
+     */
     public function actionFreelansim()
     {
         echo "Начало \n";
@@ -41,6 +58,10 @@ class ParsController extends Controller
         echo "Конец \n";
     }
 
+    /**
+     * fl.ru
+     * @throws \yii\db\Exception
+     */
     public function actionFl()
     {
         $arr = [2];
@@ -95,6 +116,5 @@ class ParsController extends Controller
                 ])->execute();
             }
         }
-        //var_dump($field) ;
     }
 }

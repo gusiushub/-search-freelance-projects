@@ -213,20 +213,16 @@ class User extends ActiveRecord  implements IdentityInterface
 
             return 1;
         }elseif (empty($email) and empty($phone)){
+
             return 'заполнить E-mail и телефон!';
-
-            //return false;
         }elseif(empty($email)){
+
             return 'заполнить E-mail!';
-
-            //return false;
         }elseif(empty($phone)){
-            return 'заполнить телефон!';
 
-            //return false;
+            return 'заполнить телефон!';
         }
 
-        //exit('Ошибка');
     }
 
 }
