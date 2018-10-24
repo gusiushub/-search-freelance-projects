@@ -173,16 +173,60 @@ class User extends ActiveRecord  implements IdentityInterface
 
     /**
      * Проверка пробного периода
+     *
+     * @return bool
      */
-    public static function trialPeriod()
+    public static function trialPeriod($numDay=3)
     {
         $created = Yii::$app->user->identity->created_at;
         $D = time() - $created;
         $days = round($D/(3600*24));
-        if ($days>3){
+        if ($days>$numDay){
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function accessPermission()
+    {
+        if (Yii::$app->user->identity->payment_status==0 and self::trialPeriod()){
+            return true;
+        }elseif (Yii::$app->user->identity->payment_status!=0){
+            return true;
+        }elseif (self::trialPeriod()){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public static function isProfileComplete()
+    {
+        $email = Yii::$app->user->identity->email;
+        $phone = Yii::$app->user->identity->phone;
+
+        if (!empty($email) and !empty($phone)){
+
+            return 1;
+        }elseif (empty($email) and empty($phone)){
+            return 'заполнить E-mail и телефон!';
+
+            //return false;
+        }elseif(empty($email)){
+            return 'заполнить E-mail!';
+
+            //return false;
+        }elseif(empty($phone)){
+            return 'заполнить телефон!';
+
+            //return false;
+        }
+
+        //exit('Ошибка');
     }
 
 }

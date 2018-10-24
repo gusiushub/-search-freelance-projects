@@ -28,4 +28,9 @@ class UserController extends Controller
         }
     }
 
+    public function actionPay()
+    {
+        return $this->render('pay');
+    }
+
 }

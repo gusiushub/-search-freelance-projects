@@ -36,7 +36,7 @@ class TaskListController extends Controller
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->isGuest and User::trialPeriod()) {
+        if (!Yii::$app->user->isGuest and User::accessPermission()) {
             $searchModel = new TaskSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

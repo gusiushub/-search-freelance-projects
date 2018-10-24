@@ -13,6 +13,9 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $phone;
+    public $s_name;
+    public $f_name;
 
     /**
      * @inheritdoc
@@ -22,6 +25,9 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
+            ['s_name', 'required'],
+            ['f_name', 'required'],
+            ['phone', 'required'],
             ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['email', 'trim'],
@@ -31,6 +37,21 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'email' => 'E-mail',
+            'password' => 'Пароль',
+            'phone' => 'Телефон',
+            'f_name' => 'Имя',
+            's_name' => 'Фамилия',
         ];
     }
 
@@ -49,6 +70,9 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->f_name = $this->f_name;
+        $user->s_name = $this->s_name;
+        $user->phone = $this->phone;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         return $user->save() ? $user : null;

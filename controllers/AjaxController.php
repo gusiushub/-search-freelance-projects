@@ -16,7 +16,7 @@ class AjaxController extends Controller
             $model = User::find()->where(['id' => $id])->one();
             $model->f_name = $_POST['f_name'];
             $model->s_name = $_POST['s_name'];
-            $model->username = $_POST['login'];
+//            $model->username = $_POST['login'];
             $model->email = $_POST['email'];
             $model->phone = $_POST['phone'];
             $model->save();
