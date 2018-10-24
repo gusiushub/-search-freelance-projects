@@ -3,19 +3,27 @@
 namespace app\commands;
 
 use app\models\FlParser;
-use app\models\Freelance;
+use app\models\FreelanceParser;
 use app\models\FreelansimParser;
+
+use app\models\VkParser;
 use yii\console\Controller;
 
 
 class ParsController extends Controller
 {
+    public function actionVk()
+    {
+        $robber = new VkParser();
+        var_dump($robber);
+
+    }
     /**
      * freelance.ru
      */
     public function actionFreelance()
     {
-       $model = new Freelance();
+       $model = new FreelanceParser();
        var_dump($model->freelance());
 
     }

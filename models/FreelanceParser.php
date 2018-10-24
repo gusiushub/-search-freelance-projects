@@ -6,7 +6,7 @@ use phpQuery;
 //use Yii;
 use yii\base\Model;
 
-class Freelance extends Model {
+class FreelanceParser extends Model {
 
     /**
      *
@@ -14,7 +14,7 @@ class Freelance extends Model {
     public function freelance()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://freelance.ru/projects/?spec=577");
+        curl_setopt($ch, CURLOPT_URL, "https://freelance.ru/projects/filter");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
@@ -27,15 +27,24 @@ class Freelance extends Model {
         $headers[] = "Accept-Language: ru,en;q=0.9";
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $result = curl_exec($ch);
+//var_dump($result);
+//            $zxdsl = iconv($this->detect_encoding($result),'utf-8', $result);
+//        $formattedString = mb_strtolower($result);
+//        $strCleaned = iconv('UTF-8', 'utf-8//TRANSLIT', $formattedString);
+        echo iconv('UTF-8', 'ASCII//TRANSLIT', utf8_encode($result));
+            $pq = phpQuery::newDocument(iconv('UTF-8', 'windows-1251//TRANSLIT', utf8_encode($result)));
 
-            $zxdsl = iconv($this->detect_encoding($result),'utf-8', $result);
-            $pq = phpQuery::newDocument($zxdsl);
-
-            $posts = $pq->find('div.proj.not_public');
+//            $posts = $pq->find('div.proj.public.prio');
+//            $posts = $pq->find('div.projects');
+            $posts = $pq->find('div');
 
             foreach ($posts as $post) {
                 $pqLink = pq($post);
-                $price[] = $pqLink->find('b.visible-xs.cost_xs')->html();
+
+                $price[] = $pqLink->find('span')->html();
+                var_dump($price);
+//                $price[] = $pqLink->find('b.visible-xs.cost_xs')->html();
+
             }
 
             foreach ($posts as $post) {
@@ -47,13 +56,13 @@ class Freelance extends Model {
                 $href[] = $pqLink->find('a.ptitle')->attr('href');
                 $id[] = $pqLink->find('span.anchor.proj_anchor')->attr('id');
                 $id[] = str_replace ('proj','',$id);
-                var_dump($href );
-                var_dump($title);
-                var_dump($text );
-                var_dump($tag  );
-                var_dump($price);
-                var_dump($id   );
-                $unic =Task::find()->where(['list_id' => $id])->exists();
+//                var_dump($href );
+//                var_dump($title);
+//                var_dump($text );
+//                var_dump($tag  );
+////                var_dump($price);
+//                var_dump($id   );
+//                $unic =Task::find()->where(['list_id' => $id])->exists();
 //                if(!$unic){
 ////                    var_dump($unic);
 //                    Yii::$app->db->createCommand()->insert('task', [

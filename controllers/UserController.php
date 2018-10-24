@@ -11,137 +11,14 @@ use yii\web\Controller;
 
 class UserController extends Controller
 {
-//    private static $error_codes = [
-//        "CURLE_UNSUPPORTED_PROTOCOL",
-//        "CURLE_FAILED_INIT",
-//
-//        // Тут более 60 элементов, в архиве вы найдете весь список
-//
-//        "CURLE_FTP_BAD_FILE_LIST",
-//        "CURLE_CHUNK_FAILED"
-//    ];
-//    public static function getPage($params = []){
-//
-//        if($params){
-//
-//            if(!empty($params["url"])){
-//                $params["cookie"]["file"] = __DIR__."/cookie.txt";
-//                $params["head"] = [
-//                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-//                    'Accept-Encoding: gzip, deflate, br'
-//                ];
-////                $url = 'https://freelance.ru/projects/filter/?page=2';
-//                $url = $params["url"];
-//
-//                $useragent      = !empty($params["useragent"]) ? $params["useragent"] : "Mozilla/5.0 (Windows NT 6.3; W…) Gecko/20100101 Firefox/57.0";
-//                $timeout        = !empty($params["timeout"]) ? $params["timeout"] : 5;
-//                $connecttimeout = !empty($params["connecttimeout"]) ? $params["connecttimeout"] : 5;
-//                $head           = !empty($params["head"]) ? $params["head"] : false;
-//
-//                $cookie_file    = !empty($params["cookie"]["file"]) ? $params["cookie"]["file"] : false;
-//                $cookie_session = !empty($params["cookie"]["session"]) ? $params["cookie"]["session"] : false;
-//
-//                $proxy_ip   = !empty($params["proxy"]["ip"]) ? $params["proxy"]["ip"] : false;
-//                $proxy_port = !empty($params["proxy"]["port"]) ? $params["proxy"]["port"] : false;
-//                $proxy_type = !empty($params["proxy"]["type"]) ? $params["proxy"]["type"] : false;
-//
-////                $headers = !empty($params["headers"]) ? $params["headers"] : false;
-//                $headers = array(
-//                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-//                    'Accept-Encoding: gzip, deflate, br',
-//                    'Accept-Language: ru,en;q=0.9',
-//                    'Cache-Control: max-age=0',
-//                    'Connection: keep-alive',
-//                );
-//
-//                $post = !empty($params["post"]) ? $params["post"] : false;
-//                if($cookie_file){
-//                    //file_put_contents(__DIR__."/".$cookie_file, "");
-//                }
-//                $ch = curl_init();
-//
-//                curl_setopt($ch, CURLOPT_URL, $url);
-//                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-//                curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
-//
-//                curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-//                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $connecttimeout);
-////                if($head){
-////
-////                    curl_setopt($ch, CURLOPT_HEADER, true);
-////                    curl_setopt($ch, CURLOPT_NOBODY, true);
-////                }
-//                if(strpos($url, "https") !== false){
-//
-//                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);
-//                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-//                }
-////                if($cookie_file){
-////
-////                    curl_setopt($ch, CURLOPT_COOKIEJAR, __DIR__."/".$cookie_file);
-////                    curl_setopt($ch, CURLOPT_COOKIEFILE, __DIR__."/".$cookie_file);
-////
-////                    if($cookie_session){
-////
-////                        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-////                    }
-////                }
-////                if($proxy_ip && $proxy_port && $proxy_type){
-////
-////                    curl_setopt($ch, CURLOPT_PROXY, $proxy_ip.":".$proxy_port);
-////                    curl_setopt($ch, CURLOPT_PROXYTYPE, $proxy_type);
-////                }
-//
-////                if($headers){
-////
-////                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-////                }
-//
-//
-//// Далее продолжаем кодить тут
-//
-//                curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-//
-//                $content = curl_exec($ch);
-//                $info 	 = curl_getinfo($ch);
-//
-//                $error = false;
-//
-//                if($content === false){
-//
-//                    $data = false;
-//
-//                    $error["message"] = curl_error($ch);
-//                    $error["code"] 	  = self::$error_codes[
-//                    curl_errno($ch)
-//                    ];
-//                }else{
-//
-//                    $data["content"] = $content;
-//                    $data["info"] 	 = $info;
-//                }
-//
-//                curl_close($ch);
-//
-//                return [
-//                    "data" 	=> $data,
-//                    "error" => $error
-//                ];
-//            }
-//        }
-//
-//        return false;
-//    }
 
-
-public function actionVk()
-{
-    $model = new VkParser();
-    $model->Login('89859929791','gusigusi');
-    $html = $model->search('https://vk.com/php2all');
-    var_dump($html);
-}
+    public function actionVk()
+    {
+        $model = new VkParser();
+        $model->Login('89859929791','gusigusi');
+        $html = $model->search('https://vk.com/php2all');
+        var_dump($html);
+    }
 
 
     /**
@@ -248,8 +125,7 @@ public function actionVk()
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-//            $user = new User();
-            //$user->trialPeriod();
+
             return $this->render('index');
         }
     }
