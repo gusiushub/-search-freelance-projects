@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
+//use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Task;
+//use app\models\Task;
 
 /**
  * TaskSearch represents the model behind the search form of `app\models\Task`.
@@ -14,6 +14,7 @@ class TaskSearch extends Task
 {
     public $min_price;
     public $max_price;
+    public $categories_id;
     public $check_price;
     public $check_time1;
     public $check_time3;
@@ -25,23 +26,30 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'site_id', 'price','subcategories_id','min_price','max_price','check_time1','time_unix','check_time3','check_time6','check_time7dn','check_price'], 'integer'],
-            [['title', 'date', 'text', 'status','subcategories_id'], 'safe'],
+            [[  'id','categories_id', 'site_id', 'price',
+                'min_price','max_price',
+                'check_time1','time_unix','check_time3',
+                'check_time6','check_time7dn','check_price'],
+                'integer'],
+            [['title', 'date', 'text', 'status','subcategories_id',
+                'check_time1','check_time3','check_time6','check_time7dn'], 'safe'],
+//            [['check_time1','check_time3','check_time6','check_time7dn'], 'boolean'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'check_time1' => 'За последний час',
-            'check_time3' => 'За последние 3 часа',
-            'check_time6' => 'За последние 6 часов',
-            'check_time7dn' => 'За неделю',
-            'min_price' => 'Минимальная цена',
-            'subcategories_id' => 'Категория',
-            'title' => 'Ключевое слово',
-            'site_id' => 'Выбрать сайт',
-            'check_price' => 'По договоренности',
+            'check_time1'       => 'За последний час',
+            'check_time3'       => 'За последние 3 часа',
+            'check_time6'       => 'За последние 6 часов',
+            'check_time7dn'     => 'За неделю',
+            'min_price'         => 'Минимальная цена',
+            'subcategories_id'  => 'Подкатегория',
+            'categories_id'     => 'Категория',
+            'title'             => 'Ключевое слово',
+            'site_id'           => 'Выбрать сайт',
+            'check_price'       => 'По договоренности',
         ];
     }
 
@@ -88,25 +96,25 @@ class TaskSearch extends Task
             'subcategories_id' => $this->subcategories_id,
 //            'check_time1' => $this->time_unix,
         ]);
-//var_dump($this->check_time1);
+
         if ($this->min_price!='') {
-            $query->andFilterWhere(['like', 'title', $this->title])
-//            ->andFilterWhere(['like', 'text', $this->text])
-                ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
-//            ->andFilterWhere(['like', 'status', $this->status])
-                ->andFilterWhere(['>=', 'price', $this->min_price])
-                ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
-                ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
-                ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
-                ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
+            $query  ->andFilterWhere(['like', 'title', $this->title])
+                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
+                    ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
+                    ->andFilterWhere(['>=', 'price', $this->min_price])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
         }else{
-            $query->andFilterWhere(['like', 'title', $this->title])
-                  ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
-                  ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
-                  ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
-                  ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
-                  ->andFilterWhere(['like', 'price', $this->check_price])
-                  ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
+            $query  ->andFilterWhere(['like', 'title', $this->title])
+                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
+                    ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
+                    ->andFilterWhere(['like', 'price', $this->check_price])
+                    ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
         }
 
         return $dataProvider;
