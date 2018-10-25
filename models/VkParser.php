@@ -28,7 +28,7 @@ $robber->SetVar("max_post", "100"); #Из скольки последних за
 
 $robber->init();
 
-class VkParser 
+class VkParser
 {
 
     function init()
@@ -52,7 +52,7 @@ class VkParser
 //                'subcategories_id' => $subcategories_id,
                     'categories_id' => 7,
                     'title' => 'vkGroupe_frwork_ru',
-                    'text' => $text,
+                    'text' => iconv(mb_detect_encoding($text),'CP1251',$text),
                     'price' => 'договор',
                     'list_id' => $from_id . $id,
                     'url' => $link,

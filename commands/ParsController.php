@@ -15,7 +15,7 @@ class ParsController extends Controller
     public function actionVk()
     {
         $robber = new VkParser();
-        var_dump($robber);
+        //var_dump($robber);
 
     }
     /**
@@ -24,14 +24,12 @@ class ParsController extends Controller
     public function actionFreelance()
     {
        $model = new FreelanceParser();
-       var_dump($model->freelance());
-
+       $model->freelance();
     }
 
 
     /**
      * freelansim.ru
-     * @throws \yii\db\Exception
      */
     public function actionFreelansim()
     {
@@ -40,12 +38,12 @@ class ParsController extends Controller
         FreelansimParser::run('https://freelansim.ru/tasks?categories=development_frontend',1,2);
         FreelansimParser::run('https://freelansim.ru/tasks?categories=content_copywriting',6,5);
         FreelansimParser::run('https://freelansim.ru/tasks?categories=development_desktop',1,9);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',1,10);
+        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',6,11);
+        FreelansimParser::run('https://freelansim.ru/tasks?categories=testing_sites',5,12);
     }
 
     /**
      * fl.ru
-     * @throws \yii\db\Exception
      */
     public function actionFl()
     {

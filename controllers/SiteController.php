@@ -95,20 +95,6 @@ class SiteController extends Controller
         }
     }
 
-//    public function actionAddAdmin() {
-//        $model = User::find()->where(['username' => 'admin'])->one();
-//        if (empty($model)) {
-//            $user = new User();
-//            $user->username = 'admin';
-//            $user->email = 'admin@кодер.укр';
-//            $user->setPassword('admin');
-//            $user->generateAuthKey();
-//            if ($user->save()) {
-//                echo 'good';
-//            }
-//        }
-//    }
-
 
     /**
      * Requests password reset.
@@ -162,6 +148,7 @@ class SiteController extends Controller
      * Login action.
      *
      * @return Response|string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionLogin()
     {

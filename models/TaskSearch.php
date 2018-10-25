@@ -33,7 +33,6 @@ class TaskSearch extends Task
                 'integer'],
             [['title', 'date', 'text', 'status','subcategories_id',
                 'check_time1','check_time3','check_time6','check_time7dn'], 'safe'],
-//            [['check_time1','check_time3','check_time6','check_time7dn'], 'boolean'],
         ];
     }
 
@@ -83,7 +82,7 @@ class TaskSearch extends Task
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+             $query->where('0=1');
             return $dataProvider;
         }
 
@@ -92,9 +91,8 @@ class TaskSearch extends Task
             'id' => $this->id,
             'site_id' => $this->site_id,
             'date' => $this->date,
-//            'price' => $this->price,
             'subcategories_id' => $this->subcategories_id,
-//            'check_time1' => $this->time_unix,
+            'check_time1' => $this->time_unix,
         ]);
 
         if ($this->min_price!='') {
@@ -107,13 +105,16 @@ class TaskSearch extends Task
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
         }else{
+            if ($this->check_price==1){
+                $check_price = 0;
+            }
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['like', 'categories_id', $this->categories_id])
                     ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
-                    ->andFilterWhere(['like', 'price', $this->check_price])
+                    ->andFilterWhere(['like', 'price', $check_price])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
         }
 

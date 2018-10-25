@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'min_price')->textInput(['style'=>'width:25%;']) ?>
     <div class="control-group">
         <div class="controls">
-            <?php  echo $form->field($model, 'check_price')->checkbox(['value'   => true]) ?>
+            <?php  echo $form->field($model, 'check_price')->checkbox(['value'   => 1]) ?>
             <?php  echo $form->field($model, 'check_time1')->checkbox(['value'   => (int)(time()-3600),'disabled' => false]) ?>
             <?php  echo $form->field($model, 'check_time3')->checkbox(['value'   => (int)(time()-10800)]) ?>
             <?php  echo $form->field($model, 'check_time6')->checkbox(['value'   => (int)(time()-21600)]) ?>
