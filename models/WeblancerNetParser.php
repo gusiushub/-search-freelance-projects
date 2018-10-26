@@ -93,46 +93,38 @@ class WeblancerNetParser extends Model
             $nameH1 = '<h1>';
             if (stristr($data, $nameH1) === FALSE) {
                 $item->setError();
-//                continue;
             }
             $name = FunctionHelper::resOtDo($nameH1, '</h1>', $data);
             if (!$name[0] || $name[0] == 'Вы не авторизованы' || $name[0] == 'Ошибка 404: Страница не найдена') {
                 $item->setError();
-//                continue;
             }
             //--END--Название проекта
             //--START--Дату публикации
             $publishDiv = '<div class="float-right text-muted hidden-xs-down">';
             if (stristr($data, $publishDiv) === FALSE) {
                 $item->setError();
-//                continue;
             }
             $publish = FunctionHelper::resOtDo($publishDiv, '</div>', $data);
             if (!$publish[0]) {
                 $item->setError();
-//                continue;
             }
             $publishDate = FunctionHelper::resOtDo('data-timestamp="', '" class="time_ago"', $publish[0]);
             if (!$publishDate[0]) {
                 $item->setError();
-//                continue;
             }
             //--END--Дату публикации
             //--START--Текст проекта
             $textDiv = '<div class="col-12 text_field">';
             if (stristr($data, $textDiv) === FALSE) {
                 $item->setError();
-//                continue;
             }
             $textProjectDiv = FunctionHelper::resOtDo($textDiv, '</div>', $data);
             if (!$textProjectDiv[0]) {
                 $item->setError();
-//                continue;
             }
             $textProjectP = FunctionHelper::resOtDo('<p>', '</p>', $data);
             if (!$textProjectP[0]) {
                 $item->setError();
-//                continue;
             }
             $projectText = $textProjectP[0];
 
@@ -158,17 +150,14 @@ class WeblancerNetParser extends Model
             $blockCategories = '<span itemprop="itemListElement"';
             if (stristr($data, $blockCategories) === FALSE) {
                 $item->setError();
-//                continue;
             }
             $textCategories = FunctionHelper::resOtDo($blockCategories, '</a>', $data);
             if (!$textCategories[0]) {
                 $item->setError();
-//                continue;
             }
             $category = FunctionHelper::resOtDo('<span itemprop="name">', '</span>', $textCategories[0]);
             if (!$category[0]) {
                 $item->setError();
-//                continue;
             }
 
             foreach ($original as $key => $value) {

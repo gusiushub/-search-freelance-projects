@@ -112,7 +112,7 @@ JS;
             <span class="sr-only">80% Complete (danger)</span>
         </div>
     </div>
-
+    <hr>
     <h3>Уведомления: </h3><br>
     <?php if (User::isProfileComplete()!=1){ ?>
     <div class="col-sm-6 col-md-4">

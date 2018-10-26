@@ -35,7 +35,7 @@ AppAsset::register($this);
     <?php
 
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Way to Work',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -87,9 +87,12 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy;Way to Work <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><?php echo \Yii::t('yii', 'By {yii}', [
+                'yii' => '<a href="http://www.yiiframework.com/" rel="external">' . \Yii::t('yii',
+                        'gusiushub') . '</a>',
+            ]); ?></p>
     </div>
 </footer>
 
