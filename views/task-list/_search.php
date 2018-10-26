@@ -42,16 +42,16 @@ use yii\widgets\ActiveForm;
     <div class="control-group">
         <div class="controls">
             <?php  echo $form->field($model, 'check_price')->checkbox(['value'   => 1]) ?>
-            <?php  echo $form->field($model, 'check_time1')->checkbox(['value'   => (int)(time()-3600),'disabled' => false]) ?>
+            <?php  echo $form->field($model, 'check_time1')->checkbox(['value'   => (int)(time()-3600)]) ?>
             <?php  echo $form->field($model, 'check_time3')->checkbox(['value'   => (int)(time()-10800)]) ?>
             <?php  echo $form->field($model, 'check_time6')->checkbox(['value'   => (int)(time()-21600)]) ?>
             <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()-604800)]) ?>
 <!--            --><?php //echo empty($_POST['check_time1']) ? '' : ' checked="checked" '; ?>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6"><?= Html::submitButton('Поиск', ['class' => 'btn btn-danger' ]) ?></div>
-        <div class="col-sm-6"><?= Html::resetButton ('Сброс', ['class' => 'btn btn-default']) ?></div>
+    <div  class="btn-group-sm">
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger',"style"=>"margin: 5px; width:30%" ]) ?>
+        <?= Html::resetButton ('Сброс', ['class' => 'btn btn-default',"style"=>"margin: 5px; width:30% "]) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
