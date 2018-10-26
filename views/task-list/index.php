@@ -11,26 +11,29 @@ $this->title = 'Заказы';
 
 ?>
 
+<div class="container">
     <div class="task-index">
-        <div class="row">
-            <div class="col-lg-3 col-sm-3" >
+
+            <aside  class="column_sidebar">
+            <div  class="col-lg-3 col-sm-3" >
                     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
             </div>
-
-            <div class="col-lg-9 col-sm-9">
-                <?php Pjax::begin(); ?>
-                <?= ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemOptions' => ['class' => 'item'],
-                    'itemView' => '_list',//function ($model, $key, $index, $widget) {
-    //                    return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-    //                },
-                ]) ?>
-                <?php Pjax::end(); ?>
-            </div>
+    </aside>
+            <div class="column_main">
+                <div  class="col-lg-9 col-sm-9">
+                    <?php Pjax::begin(); ?>
+                    <?= ListView::widget([
+                        'dataProvider' => $dataProvider,
+                        'itemOptions' => ['class' => 'item'],
+                        'itemView' => '_list',//function ($model, $key, $index, $widget) {
+        //                    return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
+        //                },
+                    ]) ?>
+                    <?php Pjax::end(); ?>
+                </div>
         </div>
     </div>
-
+</div>
 
 
 

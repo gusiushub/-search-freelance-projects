@@ -19,8 +19,9 @@ use yii\bootstrap\Html;
     <strong>Заполните профиль!</strong> Чтобы пользоваться всем функционалом, вы должны <?php echo User::isProfileComplete(); ?>
 </div>
 <?php } ?>
-<div style="margin-top: 30px" class="row">
-    <div class="col-sm-6 col-md-4">
+<!--    <div class="container">-->
+        <div style="margin-top: 25px" class="container">
+            <div class="col-sm-6 col-md-4">
         <div class="panel panel-danger">
 
             <div class="panel-heading">
@@ -96,7 +97,7 @@ JS;
             </div>
         </div>
     </div>
-    <div class="container">
+    <div >
     <h3>Прогресс бар</h3>
 
     <div class="progress progress-striped">
@@ -126,13 +127,14 @@ JS;
         </div>
     </div>
     <?php } ?>
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="../../web/img/tarif.png" alt="...">
-            <div class="caption">
-                <h3>Тариф</h3>
-                <p>Подключите тариф *** для безлимитного доступа к поиску заказов</p>
-                <p><a href="#" class="btn btn-danger" role="button">Подключить</a> <a href="#" class="btn btn-default" role="button">Подробнее</a></p>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="../../web/img/tarif.png" alt="...">
+                <div class="caption">
+                    <h3>Тариф</h3>
+                    <p>Подключите тариф *** для безлимитного доступа к поиску заказов</p>
+                    <p><a href="#" class="btn btn-danger" role="button">Подключить</a> <a href="#" class="btn btn-default" role="button">Подробнее</a></p>
+                </div>
             </div>
         </div>
     </div>

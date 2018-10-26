@@ -18,8 +18,9 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <!--    <meta name="generator" content="2018.0.0.379"/>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     <?= Html::csrfMetaTags() ?>
 

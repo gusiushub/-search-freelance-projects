@@ -5,7 +5,8 @@ use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 ?>
 <?php  $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->one(); ?>
-
+        <div class="page">
+        <div class="main-content">
         <div class="media">
             <a class="pull-left" href="#">
                 <img style="margin-right: 5px" class="media-object" src="../../web/img/<?php  echo $site['logo']; ?>" width="60px" height="60px" alt="...">
@@ -28,6 +29,8 @@ use yii\helpers\HtmlPurifier;
                 </p>
 <!--                    <p><a href="--><?//= HtmlPurifier::process($model->url) ?><!--">--><?//= HtmlPurifier::process($model->url) ?><!--</a> </p>-->
             </div>
+        </div>
+        </div>
         </div>
 <hr>
 
