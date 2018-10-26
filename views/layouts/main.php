@@ -36,7 +36,7 @@ AppAsset::register($this);
     <?php
 
     NavBar::begin([
-        'brandLabel' => 'Way to Work',
+        'brandLabel' => '<img src="../../web/img/logo.jpg" style="display:inline; vertical-align: top; height:32px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

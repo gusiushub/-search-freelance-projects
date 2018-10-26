@@ -35,17 +35,15 @@ class TaskListController extends Controller
     public function actionDropdown($id)
     {
         $countPosts = Subcategories::find()
-            ->where(['categories_id' => $id])
-            ->count();
-
+            ->where('categories_id=:categories_id',[':categories_id' => $id])->count();
         $posts = Subcategories::find()
-            ->where(['categories_id' => $id])
+            ->where('categories_id=:categories_id',[':categories_id' => $id])
             ->orderBy('name ASC')
             ->all();
         echo "<option value=''>-</option>";
         if($countPosts>0){
             foreach($posts as $post){
-                echo "<option value='".$post->id."'>".Yii::t('app',$post->name)."</option>";
+                echo "<option value='".$post->id."'>".Yii::t('name',$post->name)."</option>";
             }
         }
 

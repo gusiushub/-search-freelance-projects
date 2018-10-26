@@ -18,7 +18,11 @@ class ParsController extends Controller
 {
     public function actionIndex()
     {
-
+        $this->actionFreelansim();
+        $this->actionFl();
+        $this->actionFreelancehunt();
+        $this->actionWeblancer();
+        $this->actionFreelance();
     }
 
     public function actionVk()
@@ -63,19 +67,19 @@ class ParsController extends Controller
                     'time_unix' => (int)(time()),
                 ])->execute();
             }
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post);
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post['skills']);
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post['project_id']);
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post['url']);
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post['description']);
-            echo "<br>"; echo "<br>"; echo "<br>";
-            var_dump($post['description_html']);
-            echo "<br>"; echo "<br>"; echo "<br>";
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post);
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post['skills']);
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post['project_id']);
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post['url']);
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post['description']);
+//            echo "<br>"; echo "<br>"; echo "<br>";
+//            var_dump($post['description_html']);
+//            echo "<br>"; echo "<br>"; echo "<br>";
         }
 
 //        var_dump($model->parseProjects(2));
