@@ -10,16 +10,11 @@ $this->title = 'Заказы';
 
 
 ?>
-
-<div class="container">
     <div class="task-index">
 
-            <aside  class="column_sidebar">
             <div  class="col-lg-3 col-sm-3" >
                     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
             </div>
-    </aside>
-            <div class="column_main">
                 <div  class="col-lg-9 col-sm-9">
                     <?php Pjax::begin(); ?>
                     <?= ListView::widget([
@@ -32,8 +27,6 @@ $this->title = 'Заказы';
                     <?php Pjax::end(); ?>
                 </div>
         </div>
-    </div>
-</div>
 
 
 
