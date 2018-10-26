@@ -40,6 +40,16 @@ class Task extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return bool
+     */
+    public function setError()
+    {
+//        $this->name = 'Не удалось спарсить';
+//        $this->parse = self::PARSE_ERROR;
+//        return $this->save();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function attributeLabels()

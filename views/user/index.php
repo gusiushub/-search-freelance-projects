@@ -96,7 +96,9 @@ JS;
             </div>
         </div>
     </div>
+    <div class="container">
     <h3>Прогресс бар</h3>
+
     <div class="progress progress-striped">
         <?php if (User::isProfileComplete()==1){ ?>
         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -110,6 +112,7 @@ JS;
             <span class="sr-only">80% Complete (danger)</span>
         </div>
     </div>
+
     <h3>Уведомления: </h3><br>
     <?php if (User::isProfileComplete()!=1){ ?>
     <div class="col-sm-6 col-md-4">
@@ -132,6 +135,7 @@ JS;
                 <p><a href="#" class="btn btn-danger" role="button">Подключить</a> <a href="#" class="btn btn-default" role="button">Подробнее</a></p>
             </div>
         </div>
+    </div>
     </div>
 
 </div>

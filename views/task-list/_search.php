@@ -50,8 +50,9 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger' ]) ?>
-        <?= Html::resetButton ('Сброс', ['class' => 'btn btn-default']) ?>
+        <div class="col-sm-6"><?= Html::submitButton('Поиск', ['class' => 'btn btn-danger' ]) ?></div>
+        <div class="col-sm-6"><?= Html::resetButton ('Сброс', ['class' => 'btn btn-default']) ?></div>
+
     </div>
     <?php ActiveForm::end(); ?>
 </div>

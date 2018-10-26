@@ -3,15 +3,24 @@
 namespace app\commands;
 
 use app\models\FlParser;
+use app\models\FreelancehuntComParser;
 use app\models\FreelanceParser;
 use app\models\FreelansimParser;
 
+use app\models\Task;
+use app\models\WeblancerNetParser;
 use app\models\VkParser;
+use Yii;
 use yii\console\Controller;
 
 
 class ParsController extends Controller
 {
+    public function actionIndex()
+    {
+
+    }
+
     public function actionVk()
     {
         $robber = new VkParser();
@@ -27,6 +36,51 @@ class ParsController extends Controller
        $model->freelance();
     }
 
+    public function actionWeblancer()
+    {
+        $parseUrl = new WeblancerNetParser();
+        $parseUrl->getUrlProgects(2) ;
+    }
+
+    public function actionFreelancehunt()
+    {
+        $model = new FreelancehuntComParser();
+        $posts = $model->getProjectsByApi();
+        foreach ($posts as $post) {
+            $unic =Task::find()->where(['list_id' => $post['project_id']])->exists();
+            if(!$unic){
+                echo "Запись в бд нового поста \n";
+                Yii::$app->db->createCommand()->insert('task', [
+                    'site_id' => 1,
+//                    'categories_id' => $category,
+//                    'subcategories_id' => $subCutegory,
+//                    'title' => $job['title'],
+                    'text' => $post['description'],
+//                    'price' => trim($job['budget']),
+                    'list_id' => $post['project_id'],
+                    'url' => 'https://fl.ru'.$post['url'],
+                    'date' => date('Y-m-d'),
+                    'time_unix' => (int)(time()),
+                ])->execute();
+            }
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post);
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post['skills']);
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post['project_id']);
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post['url']);
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post['description']);
+            echo "<br>"; echo "<br>"; echo "<br>";
+            var_dump($post['description_html']);
+            echo "<br>"; echo "<br>"; echo "<br>";
+        }
+
+//        var_dump($model->parseProjects(2));
+
+    }
 
     /**
      * freelansim.ru

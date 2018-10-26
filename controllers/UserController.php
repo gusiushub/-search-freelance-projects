@@ -3,10 +3,14 @@
 
 namespace app\controllers;
 
+use app\models\FreelancehuntComParser;
 use app\models\SettingForm;
+use app\models\Task;
 use app\models\User;
+use app\models\WeblancerNetParser;
 use phpQuery;
 use app\models\VkParser;
+use Yii;
 use yii\web\Controller;
 
 class UserController extends Controller
@@ -18,6 +22,30 @@ class UserController extends Controller
         $model->Login('89859929791','gusigusi');
         $html = $model->search('https://vk.com/php2all');
         var_dump($html);
+    }
+
+    public function actionTest()
+    {
+        $model = new FreelancehuntComParser();
+        $posts = $model->getProjectsByApi();
+        foreach ($posts as $post) {
+            $unic =Task::find()->where(['list_id' => $post['project_id']])->exists();
+            if(!$unic){
+                echo "Запись в бд нового поста \n";
+                Yii::$app->db->createCommand()->insert('task', [
+                    'site_id' => 6,
+//                    'categories_id' => $category,
+//                    'subcategories_id' => $subCutegory,
+//                    'title' => $job['title'],
+                    'text' => $post['description'],
+//                    'price' => trim($job['budget']),
+                    'list_id' => $post['project_id'],
+                    'url' => 'https://fl.ru'.$post['url'],
+                    'date' => date('Y-m-d'),
+                    'time_unix' => (int)(time()),
+                ])->execute();
+            }
+            }
     }
 
 

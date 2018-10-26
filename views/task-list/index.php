@@ -13,10 +13,11 @@ $this->title = 'Заказы';
 
     <div class="task-index">
         <div class="row">
-            <div class="col-sm-3">
-                <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+            <div class="col-lg-3 col-sm-3" >
+                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
             </div>
-            <div class="col-sm-9">
+
+            <div class="col-lg-9 col-sm-9">
                 <?php Pjax::begin(); ?>
                 <?= ListView::widget([
                     'dataProvider' => $dataProvider,
