@@ -12,7 +12,7 @@ class Subcategories extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'Subcategories';
+        return 'subcategories';
     }
 
 }
