@@ -1,7 +1,6 @@
 <?php
 
 use app\models\Site;
-use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -10,35 +9,58 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 
 ?>
-<div class="task-view">
+<div class="task-view col-lg-offset-1 col-lg-10">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-//            'id',
-            ['label'  => 'Название сайта',
-                'value'  => function ($model) {
-        $site = Site::findOne($model['site_id']);
-                    return $site['name'];}],
-
-            ['label'  => 'title',
-                'value'  => function ($model) {
-//                    $site = Site::findOne($model['site_id']);
-                    echo $model['title']."<br>Ссыдка на пост  <a href='".$model['url']."'>".$model['url']."</a>";
-                    return $model->title;
-    }],
-            'date',
+//            ['label'  => 'Название сайта',
+//                'value'  => function ($model) {
+//        $site = Site::findOne($model['site_id']);
+//                    //return $site['name'];
+//                }
+//            ],
+//            'date',
             [
-                'attribute' => 'text',
-                'format' => 'raw',
-                'value' => function($data){
-                    return $data->text ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+                'label'  => 'Дата',
+                'value' => function($model){
+                    $site = Site::findOne($model['site_id']);
+                    echo "    <div class='media'>
+                                 <a class='pull-right' href='#'>
+                                    <img    class='media-object' src='../../web/img/".$site['logo']."' width='100x' height='100px' alt='...'>
+                                 </a>
+                                 <div class='media-body'>
+                                   <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3><hr>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+                    //return $data->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+                    if ($model['price']==0):
+                        echo "<br> <br><p class='media-left'><b>Оплата по договору</b></p>";
+                    endif;
+                    if ($model['price']!=0):
+                        echo " <br><br><p class='media-left' style='font-size: large'>Цена:<b> ".$model['price']. "р</b></p>";
+                    endif;
+                    echo "<p style='text-align: right' class='media-right'><a href='".$model['url']."'>Перейти на сайт с объявлением</a></p></div></div><br>";
+                    return $model['date'];
                 }
             ],
-            'price',
+//            [
+//                'label'  => '',
+//                'value'  => function ($model) {
+////                    $site = Site::findOne($model['site_id']);
+//                    if ($model['price']==0):
+//                        echo "<br> <br><b><p>Оплата по договору</p></b>";
+//                    endif;
+//                    if ($model['price']!=0):
+//                        echo " <br><br><p class='media-left' style='font-size: large'>Цена:<b> ".$model['price']. "р</b></p>";
+//                    endif;
+//                    echo "<p style='text-align: right' class='media-right'><a href='".$model['url']."'>Перейти на сайт с объявлением</a></p></div></div><br>";
+//                    //return $model->title;
+//                }
+//            ],
+
+//            'price',
         ],
     ]) ?>
 

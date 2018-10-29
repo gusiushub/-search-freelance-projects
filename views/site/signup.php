@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Регистрация';
 
 ?>
-<div class="site-signup">
+<div class="site-signup col-lg-offset-3 col-lg-12">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>Пожалуйста, заполните следующие поля для регистрации:</p>
     <div class="row">

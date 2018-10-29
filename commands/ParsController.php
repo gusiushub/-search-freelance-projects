@@ -7,6 +7,8 @@ use app\models\FreelancehuntComParser;
 use app\models\FreelanceParser;
 use app\models\FreelansimParser;
 
+use app\models\FreelansimParserRu;
+//use app\models\FreelansimRuParser;
 use app\models\Task;
 use app\models\WeblancerNetParser;
 use app\models\VkParser;
@@ -37,7 +39,7 @@ class ParsController extends Controller
     public function actionFreelance()
     {
        $model = new FreelanceParser();
-       $model->freelance();
+       echo $model->freelance();
     }
 
     public function actionWeblancer()
@@ -91,13 +93,15 @@ class ParsController extends Controller
      */
     public function actionFreelansim()
     {
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=marketing_smm',3,3);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_backend',1,1);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_frontend',1,2);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=content_copywriting',6,5);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_desktop',1,9);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',6,11);
-        FreelansimParser::run('https://freelansim.ru/tasks?categories=testing_sites',5,12);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=marketing_smm',3,3);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_backend',1,1);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_frontend',1,2);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=content_copywriting',6,5);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_desktop',1,9);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',6,11);
+//        FreelansimParser::run('https://freelansim.ru/tasks?categories=testing_sites',5,12);
+        $parseUrl = new FreelansimParserRu();
+        var_dump($parseUrl->getUrlProgects(2,'development_all_inclusive')) ;
     }
 
     /**
