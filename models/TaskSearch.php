@@ -15,6 +15,7 @@ class TaskSearch extends Task
     public $min_price;
     public $max_price;
     public $categories_id;
+    public $subcategories_id;
     public $check_price;
     public $check_time1;
     public $check_time3;
@@ -94,11 +95,21 @@ class TaskSearch extends Task
             'subcategories_id' => $this->subcategories_id,
             'check_time1' => $this->time_unix,
         ]);
+        $subcategory = $_GET;
+        unset($subcategory['TaskSearch']);
 
+        //$subcategory = array_keys($subcategory);
+
+        $subcat = array();
+        foreach ($subcategory as  $category){
+            $subcat[] =  $category;
+        }
+//        var_dump($subcat);
+//        exit;
         if ($this->min_price!='') {
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['like', 'categories_id', $this->categories_id])
-                    ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
+                    ->andFilterWhere([ 'subcategories_id'=>$subcat ])
                     ->andFilterWhere(['>=', 'price', $this->min_price])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
@@ -110,7 +121,7 @@ class TaskSearch extends Task
             }
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['like', 'categories_id', $this->categories_id])
-                    ->andFilterWhere(['like', 'subcategories_id', $this->subcategories_id])
+                    ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time6])

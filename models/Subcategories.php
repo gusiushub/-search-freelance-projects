@@ -15,4 +15,15 @@ class Subcategories extends ActiveRecord
         return 'subcategories';
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['categories_id'], 'safe'],
+        ];
+    }
+
+
 }

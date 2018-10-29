@@ -5,10 +5,8 @@ namespace app\commands;
 use app\models\FlParser;
 use app\models\FreelancehuntComParser;
 use app\models\FreelanceParser;
-use app\models\FreelansimParser;
 
 use app\models\FreelansimParserRu;
-//use app\models\FreelansimRuParser;
 use app\models\Task;
 use app\models\WeblancerNetParser;
 use app\models\VkParser;
@@ -52,19 +50,22 @@ class ParsController extends Controller
     {
         $model = new FreelancehuntComParser();
         $posts = $model->getProjectsByApi();
+
         foreach ($posts as $post) {
             $unic =Task::find()->where(['list_id' => $post['project_id']])->exists();
             if(!$unic){
                 echo "Запись в бд нового поста \n";
+
                 Yii::$app->db->createCommand()->insert('task', [
-                    'site_id' => 1,
+                    'site_id' => 6,
 //                    'categories_id' => $category,
 //                    'subcategories_id' => $subCutegory,
 //                    'title' => $job['title'],
+                    'title' => $post['name'],
                     'text' => $post['description'],
 //                    'price' => trim($job['budget']),
-                    'list_id' => $post['project_id'],
-                    'url' => 'https://fl.ru'.$post['url'],
+                    'list_id' => (int)$post['project_id'],
+                    'url' => $post['url'],
                     'date' => date('Y-m-d'),
                     'time_unix' => (int)(time()),
                 ])->execute();

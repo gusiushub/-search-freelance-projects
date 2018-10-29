@@ -3,27 +3,23 @@
 namespace app\models;
 
 
-use app\models\Task;
 use Yii;
-
 
 
 $start = microtime(true);
 echo "<meta charset=\"utf-8\">";
 $robber = new VkParser();
 
-####### настройка скрипта ######
 
 $grups = array ('-157585536'); #ID Группы откуда будут постить записили
 $randomm = mt_rand (0, count($grups)-1);
 $grup = $grups[$randomm]; #Рандом групп
 
 $robber->SetVar("token", "a5ce7136927fbb1a01516af9663855ca395fc82d6801d68824e33ee18841e0f74b09885f6789c4fa12673"); #токен от андройд
-$robber->SetVar("id_group_rob", "$grup"); #не трогать
-$robber->SetVar("id_group", "-173045687"); #ваша группа c минусом
-$robber->SetVar("max_post", "100"); #Из скольки последних записей парсить ( тут нечего не трогать )
+$robber->SetVar("id_group_rob", "$grup");
+$robber->SetVar("id_group", "-173045687");
+$robber->SetVar("max_post", "100"); #Из скольки последних записей парсить
 
-####### конец настройки #####
 
 
 $robber->init();
@@ -52,7 +48,7 @@ class VkParser
 //                'subcategories_id' => $subcategories_id,
                     'categories_id' => 7,
                     'title' => 'vkGroupe_frwork_ru',
-                    'text' => iconv(mb_detect_encoding($text),'CP1251',$text),
+                    'text' => $text,//iconv(mb_detect_encoding($text),'CP1251',$text),
                     'price' => 'договор',
                     'list_id' => $from_id . $id,
                     'url' => $link,
@@ -80,4 +76,4 @@ class VkParser
     }
 }
 
-echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\nАвтор скрипта Юрий Абрамов.\nСлив для VKSERV.ru от Yury Rolix vk.com/id141418455";
+echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";

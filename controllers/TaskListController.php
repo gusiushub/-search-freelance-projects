@@ -7,6 +7,7 @@ use app\models\User;
 use Yii;
 use app\models\Task;
 use app\models\TaskSearch;
+use yii\bootstrap\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,22 +33,45 @@ class TaskListController extends Controller
     }
 
 
-    public function actionDropdown($id)
+    public function actionDropdown($id=null, $subcategories_id=null)
     {
-        $countPosts = Subcategories::find()
-            ->where(['categories_id' => $id])
-            ->count();
+        if (isset($_GET['subcategories_id'])){
 
-        $posts = Subcategories::find()
-            ->where(['categories_id' => $id])
-            ->orderBy('name ASC')
-            ->all();
-        echo "<option value=''>-</option>";
-        if($countPosts>0){
-            foreach($posts as $post){
-                echo "<option value='".$post->id."'>".Yii::t('app',$post->name)."</option>";
-            }
         }
+
+        if (isset($_GET['id'])){
+            $countPosts = Subcategories::find()
+                ->where(['categories_id' => $id])
+                ->count();
+
+            $posts = Subcategories::find()
+                ->where(['categories_id' => $id])
+                ->orderBy('name ASC')
+                ->all();
+//            $posts= [
+//                'FR'=>'France',
+//                'DE'=>'Germany'
+//            ];
+            if($countPosts>0){
+                foreach($posts as $post){
+                    $name = $post->name;
+                    $value = $post->id;
+                    $checked = false;
+                    echo $this->getLi($index=null, $label=null, $name, $checked, $value);
+                }
+                exit;
+            }
+
+        }
+
+    }
+
+    public function getLi ($index, $label, $name, $checked, $value)
+    {
+        return $arr ='<li >' . Html::checkbox($name, false, [
+                'value' => $value,
+                'label' => Html::encode($name),
+            ]) . '</li>';
 
     }
 
@@ -64,6 +88,7 @@ class TaskListController extends Controller
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                //'subCat' => new Subcategories()
             ]);
         }else{
             return $this->redirect('/user/index');
