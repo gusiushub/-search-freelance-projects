@@ -31,57 +31,85 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<header>
+    <div id="big-logo">
+        <img src="../../web/img/2222.png">
+        <!--		<img src="img/to.png">-->
 
-<div class="wrap">
+    </div>
     <?php
 
-    NavBar::begin([
-        'brandLabel' => '<img src="../../web/img/logo.jpg" style="display:inline; vertical-align: top; height:32px;">',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-
-    $menuItems = [
-        ['label' => 'Главная', 'url' => ['/site/index']],
-//        ['label' => 'О нас', 'url' => ['/site/about']],
-//        ['label' => 'Поиск', 'url' => ['/task-list/index']],
-    ];
-
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
-    } else {
-        $menuItems = [
-            ['label' => 'Поиск', 'url' => ['/task-list/index']],
-//            ['label' => 'О нас', 'url' => ['/site/about']],
-            ['label' => 'Личный кабинет', 'url' => ['/user/index']],
-
-        ];
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Выход (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-
-    NavBar::end();
+//    NavBar::begin();
     ?>
+    <div id="top-menu">
+        <ul class="menu-list">
+            <?php if (Yii::$app->user->isGuest) { ?>
+                <li><a class="menu"  href="/site/index">Главния</a></li>
+            <?php }else{ ?>
+                <li><a class="menu" href="/task-list/index">Поиск</a></li>
+                <li><a class="menu" href="/user/index">Личный кабинет</a></li>
+            <?php } ?>
+            <li><a class="menu" href="#">Новости</a></li>
+            <li><a class="menu" href="#">FAQ</a></li>
+            <?php if (Yii::$app->user->isGuest) { ?>
+                <li><a class="menu" href="/site/signup">Регистрация</a></li>
+                <li><a class="menu" href="/site/login">Авторизация</a></li>
+            <?php } ?>
+            <?php if (!Yii::$app->user->isGuest) { ?>
+                <li><a class="menu" href="/user/logout">Выход</a></li>
+            <?php } ?>
+        </ul>
+    </div>
+    <?php
+//    NavBar::end();
+    ?>
+</header>
+<?php
+
+NavBar::begin();
+
+//    $menuItems = [
+//        ['label' => 'Главная', 'url' => ['/site/index']],
+////        ['label' => 'О нас', 'url' => ['/site/about']],
+////        ['label' => 'Поиск', 'url' => ['/task-list/index']],
+//    ];
+//
+//    if (Yii::$app->user->isGuest) {
+//        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
+//        $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
+//    } else {
+//        $menuItems = [
+//            ['label' => 'Поиск', 'url' => ['/task-list/index']],
+////            ['label' => 'О нас', 'url' => ['/site/about']],
+//            ['label' => 'Личный кабинет', 'url' => ['/user/index']],
+//
+//        ];
+//        $menuItems[] = '<li>'
+//            . Html::beginForm(['/site/logout'], 'post')
+//            . Html::submitButton(
+//                'Выход (' . Yii::$app->user->identity->username . ')',
+//                ['class' => 'btn btn-link logout']
+//            )
+//            . Html::endForm()
+//            . '</li>';
+//    }
+//
+//    echo Nav::widget([
+//        'options' => ['class' => 'navbar-nav navbar-right'],
+//        'items' => $menuItems,
+//    ]);
+
+NavBar::end();
+?>
+<div class="container">
+
+
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+<!--        --><?//= Breadcrumbs::widget([
+//            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+//        ]) ?>
+<!--        --><?//= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>

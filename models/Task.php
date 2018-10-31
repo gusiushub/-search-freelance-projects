@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-//use Yii;
+
 
 /**
  * This is the model class for table "task".
@@ -34,7 +34,7 @@ class Task extends \yii\db\ActiveRecord
             [['site_id', 'title', 'date', 'text', 'status', 'price','subcategories_id'], 'required'],
             [['site_id', 'price','subcategories_id'], 'integer'],
             [['title', 'text'], 'string'],
-            [['date'], 'safe'],
+            [['date','subcategories_id'], 'safe'],
             [['status'], 'string', 'max' => 32],
         ];
     }
@@ -57,12 +57,14 @@ class Task extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'site_id' => 'Сайт',
-            'title' => 'Ключевое слово',
+            'title' => '',
+//            'title' => 'Ключевое слово',
             'date' => 'Date',
             'text' => 'Text',
             'status' => 'Status',
             'price' => 'Price',
-            'subcategories_id' => 'Категория',
+            'subcategories_id' => '',
+//            'subcategories_id' => 'Категория',
         ];
     }
 

@@ -1,1 +1,0 @@
-{"name":"dirst\/flrugrabber","version":"1.0.1","autoload":{"psr-4":{"Dirst\\Flrugrabber\\":"src\/"}},"require":{"aszone\/simple_html_dom":"*"},"time":"2017-04-26T00:43:08+00:00","support":{"source":"https:\/\/github.com\/Dirst\/flrugrabber\/tree\/v1.0.1","issues":"https:\/\/github.com\/Dirst\/flrugrabber\/issues"}}

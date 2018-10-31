@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-//use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-//use app\models\Task;
 
 /**
  * TaskSearch represents the model behind the search form of `app\models\Task`.
@@ -46,8 +44,10 @@ class TaskSearch extends Task
             'check_time7dn'     => 'За неделю',
             'min_price'         => 'Минимальная цена',
             'subcategories_id'  => 'Подкатегория',
-            'categories_id'     => 'Категория',
-            'title'             => 'Ключевое слово',
+            'categories_id'     => '',
+//            'categories_id'     => 'Категория',
+            'title'             => '',
+//            'title'             => 'Ключевое слово',
             'site_id'           => 'Выбрать сайт',
             'check_price'       => 'По договоренности',
         ];
@@ -92,20 +92,18 @@ class TaskSearch extends Task
             'id' => $this->id,
             'site_id' => $this->site_id,
             'date' => $this->date,
-            'subcategories_id' => $this->subcategories_id,
+//            'subcategories_id' => $this->subcategories_id,
             'check_time1' => $this->time_unix,
         ]);
         $subcategory = $_GET;
         unset($subcategory['TaskSearch']);
 
-        //$subcategory = array_keys($subcategory);
 
         $subcat = array();
         foreach ($subcategory as  $category){
-            $subcat[] =  $category;
+            $subcat[] =  (int)$category;
         }
-//        var_dump($subcat);
-//        exit;
+
         if ($this->min_price!='') {
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['like', 'categories_id', $this->categories_id])

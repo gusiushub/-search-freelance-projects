@@ -6,8 +6,6 @@ namespace app\controllers;
 use app\models\FreelancehuntComParser;
 use app\models\SettingForm;
 use app\models\Task;
-use app\models\User;
-use app\models\WeblancerNetParser;
 use phpQuery;
 use app\models\VkParser;
 use Yii;
@@ -155,6 +153,19 @@ class UserController extends Controller
         if (!\Yii::$app->user->isGuest) {
 
             return $this->render('index');
+        }
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
     }
 

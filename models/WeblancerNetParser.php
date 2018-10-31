@@ -1,15 +1,12 @@
 <?php
 namespace app\models;
-use app\models\Projects;
+
 use yii\base\Model,
-    app\components\helpers\FunctionHelper,
-//    app\components\helpers\FunctionHelper,
-    app\models\Parser;
+    app\components\helpers\FunctionHelper;
 
 
 class WeblancerNetParser extends Model
 {
-    //public $url=0;
     public function getUrlProgects($pages)
     {
         $pagesArr = [];
@@ -57,20 +54,16 @@ class WeblancerNetParser extends Model
 //                        $model->title= $content['title'];
 //                        $model->text= $content['text'];
                         $model->site_id = 2;
+                        $model->time_unix = time();
                         $model->list_id = $item['id'];
                         $model->date = date('Y-m-d');
                         $model->save(false);
 
 //                        $content = $this->getProgects($item['url']);
-
                     }
                     $this->getProgects($item['url'],$item['id']);
                 }
                 }
-
-
-
-//            }
             }
 
         }

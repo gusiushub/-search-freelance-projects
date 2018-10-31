@@ -20,7 +20,7 @@ use yii\helpers\HtmlPurifier;
                 <span class="media-left">
                     <?= Html::a(Html::encode('Подробнее...'), ['view', 'id' => $model->id]).' ' ?>
                 </span>
-                <span class="media-right">Оплата: <b><?php if ($model->price==0){
+                <span class="media-right">Оплата: <b><?php if ($model->price==0 or $model->price==1){
                         echo 'договор';
                     } else{?>
                         <?= $model->price ?>р

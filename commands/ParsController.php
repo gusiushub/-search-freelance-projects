@@ -58,35 +58,16 @@ class ParsController extends Controller
 
                 Yii::$app->db->createCommand()->insert('task', [
                     'site_id' => 6,
-//                    'categories_id' => $category,
-//                    'subcategories_id' => $subCutegory,
-//                    'title' => $job['title'],
                     'title' => $post['name'],
                     'text' => $post['description'],
-//                    'price' => trim($job['budget']),
+                    'price' => (int)$post['budget_amount'],
                     'list_id' => (int)$post['project_id'],
                     'url' => $post['url'],
                     'date' => date('Y-m-d'),
                     'time_unix' => (int)(time()),
                 ])->execute();
             }
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post);
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post['skills']);
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post['project_id']);
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post['url']);
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post['description']);
-//            echo "<br>"; echo "<br>"; echo "<br>";
-//            var_dump($post['description_html']);
-//            echo "<br>"; echo "<br>"; echo "<br>";
         }
-
-//        var_dump($model->parseProjects(2));
-
     }
 
     /**

@@ -1,0 +1,49 @@
+header{
+    /* Включаем режим Flexbox. */
+    /*	display: flex; */
+
+    /*
+         Распределяем элементы внутри шапки
+        justify-content: space-between;
+    */
+
+    /* Выравниваем элементы вертикально по центру. */
+    align-items: center;
+
+    background-color: black;
+
+    height: 200px;
+    width: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+
+#top-menu{
+    width: 100%;
+    text-align: right;
+
+
+}
+.menu{
+    color: white;
+}
+.menu-list li{
+    display: inline;
+    padding: 10px;
+
+
+}
+.menu-list{
+    margin-right: 400px;
+    /*    padding-right: 100px;*/
+
+}
+#big-logo{
+    text-align: center;
+    /*    padding: 10px;*/
+}
