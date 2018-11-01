@@ -74,27 +74,34 @@ $this->title = 'Главная';
 </div>
 <div  class="col-lg-8 col-sm-8">
 <?php for ($i=0;$i<9;$i++){ ?>
+    <hr border="3px solid grey" color="grey">
     <div class='media'>
+        <h4 class="media-heading">
+            <?= Html::a(Html::encode($task[$i]['title']), ['view', 'id' => $model->id]).' ' ?>
+        </h4>
         <a class='pull-right' href='/site/login'>
-            <img    class='media-object' src='../../web/img/<?= HomePage::getImg($task[$i]['site_id']) ?>' width='100x' height='100px' alt='...'>
+            <img  vspace="5" hspace="5" style="margin-left: 5px" class="media-object"  src='../../web/img/<?= HomePage::getImg($task[$i]['site_id']) ?>' width='80x' height='80px' alt='...'>
         </a>
         <div class='media-body'>
-            <a href="/site/login"><h3 style=' font-weight: 600' class='media-heading'>
-
-                <?= $task[$i]['title'] ?></h3></a><hr><?= $task[$i]['text'] ?>
-
-            <br><br>
+<!--            <a href="/site/login"><h3 style=' font-weight: 600' class='media-heading'>-->
+<!---->
+<!--                --><?//= $task[$i]['title'] ?><!--</h3></a><hr>-->
+            <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
+                <?= $task[$i]['text'] ?>
+            </p>
             <p class='media-left' style='font-size: large'>
                 <?php if ($task[$i]['price']==0 or $task[$i]['price']==1){
-                    echo 'Цена: договор';
+                    echo "Цена:<b> договор</b>";
                 } else{?>
                     Цена:<b> <?= $task[$i]['price'] ?></b>р
                 <?php } ?>
 
             </p>
-            <p style='text-align: right' class='media-right'>
+            <span class="media-right">
+<!--                --><?//= Html::a(Html::encode('Подробнее...'), ['view', 'id' => $task[$i]['id']]).' ' ?>
                 <a href='<?= $task[$i]['url'] ?>'>Перейти на сайт с объявлением</a>
-            </p>
+<!--                <a href='--><?//= $task[$i]['url'] ?><!--'>Перейти на сайт с объявлением</a>-->
+            </span>
         </div>
     </div>
     <br>

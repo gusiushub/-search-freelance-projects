@@ -183,15 +183,17 @@ class SiteController extends Controller
 //                    $user->save();
 
                     $identity = User::findByEAuth($eauth);
+//                    var_dump($identity);exit;
                     //Yii::$app->getUser()->login($identity);
                     if (isset($identity->profile) and Yii::$app->getUser()->login($identity)) {
                         $user_vk = $identity->profile;
+
                         $name_vk = explode(' ',$user_vk['name']);
                         $model = User::find()->where(['username' => 'vk_'.$user_vk['id']])->one();
                         if (empty($model)) {
                             $user = new User();
                             $user->username = 'vk_'.$user_vk['id'];
-//                            $user->email = 'admin@кодер.укр';
+                            $user->email = 'vk_'.$user_vk['id'].'@test.ru';
                             $user->f_name = $name_vk['0'];
                             $user->s_name = $name_vk['1'];
                             $user->setPassword($user_vk['id']);
