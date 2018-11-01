@@ -12,7 +12,7 @@ header{
 
     background-color: black;
 
-    height: 200px;
+    height:22%;
     width: 100%;
 }
 body{
@@ -25,7 +25,9 @@ a {
 
 #top-menu{
     width: 100%;
-    text-align: right;
+    /*text-align: right;*/
+    background-color: black;
+    color: black;
 
 
 }
@@ -34,16 +36,17 @@ a {
 }
 .menu-list li{
     display: inline;
-    padding: 10px;
+    /*padding: 10px;*/
 
 
 }
 .menu-list{
-    margin-right: 400px;
+    /*margin-right: 400px;*/
     /*    padding-right: 100px;*/
 
 }
 #big-logo{
     text-align: center;
-    /*    padding: 10px;*/
+    /*padding-left: 100px;*/
+        /*padding: 10px;*/
 }

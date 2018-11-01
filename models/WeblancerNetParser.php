@@ -46,7 +46,7 @@ class WeblancerNetParser extends Model
             foreach ($result as $item) {
                 $unic =Task::find()->where(['list_id' => $item['id']])->andWhere('url=:url',[':url'=>$item['url']])->exists();
                 if(!$unic) {
-//                var_dump($content);
+
                 if (!empty($item['url']) && !empty($item['id']) ) {
 
                     if ($model = $this->findUrl($item['id'], 2)) {

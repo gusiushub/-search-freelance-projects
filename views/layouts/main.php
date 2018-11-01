@@ -32,8 +32,9 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <header>
-    <div id="big-logo">
-        <img src="../../web/img/2222.png">
+    <div class="col-sm-12"  >
+    <div class="col-sm-offset-3 col-sm-6"  >
+        <img id="big-logo" class="img-responsive"   src="../../web/img/2222.png">
         <!--		<img src="img/to.png">-->
 
     </div>
@@ -41,33 +42,113 @@ AppAsset::register($this);
 
 //    NavBar::begin();
     ?>
-    <div id="top-menu">
-        <ul class="menu-list">
-            <?php if (Yii::$app->user->isGuest) { ?>
-                <li><a class="menu"  href="/site/index">Главния</a></li>
-            <?php }else{ ?>
-                <li><a class="menu" href="/task-list/index">Поиск</a></li>
-                <li><a class="menu" href="/user/index">Личный кабинет</a></li>
-            <?php } ?>
-            <li><a class="menu" href="#">Новости</a></li>
-            <li><a class="menu" href="#">FAQ</a></li>
-            <?php if (Yii::$app->user->isGuest) { ?>
-                <li><a class="menu" href="/site/signup">Регистрация</a></li>
-                <li><a class="menu" href="/site/login">Авторизация</a></li>
-            <?php } ?>
-            <?php if (!Yii::$app->user->isGuest) { ?>
-                <li><a class="menu" href="/user/logout">Выход</a></li>
-            <?php } ?>
-        </ul>
-    </div>
+    <div class="col-sm-6"  id="top-menu">
+<!--        <ul class="menu-list">-->
+<!--            --><?php //if (Yii::$app->user->isGuest) { ?>
+<!--                <li><a class="menu"  href="/site/index">Главния</a></li>-->
+<!--            --><?php //}else{ ?>
+<!--                <li><a class="menu" href="/task-list/index">Поиск</a></li>-->
+<!--                <li><a class="menu" href="/user/index">Личный кабинет</a></li>-->
+<!--            --><?php //} ?>
+<!--            <li><a class="menu" href="#">Новости</a></li>-->
+<!--            <li><a class="menu" href="#">FAQ</a></li>-->
+<!--            --><?php //if (Yii::$app->user->isGuest) { ?>
+<!--                <li><a class="menu" href="/site/signup">Регистрация</a></li>-->
+<!--                <li><a class="menu" href="/site/login">Авторизация</a></li>-->
+<!--            --><?php //} ?>
+<!--            --><?php //if (!Yii::$app->user->isGuest) { ?>
+<!--                <li><a class="menu" href="/user/logout">Выход</a></li>-->
+<!--            --><?php //} ?>
+<!--        </ul>-->
+<!--    </div>-->
     <?php
 //    NavBar::end();
     ?>
-</header>
+
 <?php
+echo Nav::widget([
+    'items' => [
+        [
+            'label' => 'Home',
+            'url' => ['/site/index'],
+            'linkOptions' => [],
+        ],
+        [
+            'label' => 'Новости',
+            'url' => ['/site/news'],
+            'linkOptions' => [],
+        ],
+        [
+            'label' => 'FAQ',
+            'url' => ['/site/faq'],
+            'linkOptions' => [],
+        ],
+        [
+            'label' => 'Регистрация',
+            'url' => ['/site/signup'],
+            'linkOptions' => [],
+        ],
+        [
+            'label' => 'Авторизация',
+            'url' => ['/site/login'],
+            'linkOptions' => [],
+        ],
+        [
+            'label' => 'Dropdown',
+            'items' => [
+                 ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                 '<div class="dropdown-divider"></div>',
+                 '<div class="dropdown-header">Dropdown Header</div>',
+                 ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+            ],
+        ],
+        [
+            'label' => 'Login',
+            'url' => ['site/login'],
+            'visible' => Yii::$app->user->isGuest
+        ],
+    ],
+    'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
+]);
 
-NavBar::begin();
 
+    //NavBar::begin([
+    //            'options' => [
+    //                'class' => 'navbar navbar-default navbar-static-top',
+    //            ],
+    //        ]);
+    //?>
+    </div>
+    </div>
+<!--<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>-->
+<!--            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <div class="collapse navbar-collapse navbar-menubuilder">-->
+<!--            <ul class="nav navbar-nav navbar-right">-->
+<!--                <li><a href="/">Home</a>-->
+<!--                </li>-->
+<!--                <li><a href="/products">Products</a>-->
+<!--                </li>-->
+<!--                <li><a href="/about-us">About Us</a>-->
+<!--                </li>-->
+<!--                <li><a href="/contact">Contact Us</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<?php
+?>
+
+<!--<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-static-top" role="navigation">-->
+
+<!--    <div class="container-fluid">-->
+
+<!--        <div class="collapse navbar-collapse navbar-menubuilder">-->
+            <?php
 //    $menuItems = [
 //        ['label' => 'Главная', 'url' => ['/site/index']],
 ////        ['label' => 'О нас', 'url' => ['/site/about']],
@@ -95,12 +176,18 @@ NavBar::begin();
 //    }
 //
 //    echo Nav::widget([
-//        'options' => ['class' => 'navbar-nav navbar-right'],
+//        'options' => ['class' => 'nav navbar-nav navbar-right'],
 //        'items' => $menuItems,
 //    ]);
-
-NavBar::end();
-?>
+//    ?>
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<?php
+//NavBar::end();
+//?>
+    </div>
+</header>
 <div class="container">
 
 

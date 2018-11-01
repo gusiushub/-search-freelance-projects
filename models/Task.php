@@ -72,4 +72,10 @@ class Task extends \yii\db\ActiveRecord
     {
         return Task::find()->one();
     }
+
+    public function getImg()
+    {
+        $site = Site::findOne($this->site_id);
+        return $site;
+    }
 }

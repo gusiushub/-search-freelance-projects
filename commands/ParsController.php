@@ -23,6 +23,7 @@ class ParsController extends Controller
         $this->actionFreelancehunt();
         $this->actionWeblancer();
         $this->actionFreelance();
+        $this->actionVk();
     }
 
     public function actionVk()

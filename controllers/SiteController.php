@@ -2,7 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\HomePage;
 use app\models\SignupForm;
+use app\models\Task;
+use app\models\TaskSearch;
 use app\models\User;
 use Yii;
 use yii\base\InvalidParamException;
@@ -72,7 +75,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $task = HomePage::getRandTask();
+        $model = new TaskSearch();
+//        var_dump(HomePage::getRand());
+        return $this->render('index',['task'=>$task,'model'=>$model]);
     }
 
 
