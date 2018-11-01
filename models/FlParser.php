@@ -13,7 +13,7 @@ class FlParser extends Model
     {
         $FlGrabber = new FlGrabber('/');
         $jobs = $FlGrabber->getFilteredJobs($arr,$arr2);
-        $field = Task::find()->where('site_id=:site_id',[':site_id'=>1])->orderBy('id DESC')->one();
+        $field = Task::find()->where('site_id=:site_id',[':site_id'=>1])->groupBy('id')->orderBy('id DESC')->one();
         $field = $field['list_id'];//вывод последнего id из бд
         foreach ($jobs as $job){
             $unic =Task::find()->where(['list_id' => $job['id']])->exists();

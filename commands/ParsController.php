@@ -6,6 +6,7 @@ use app\models\FlParser;
 use app\models\FreelancehuntComParser;
 use app\models\FreelanceParser;
 
+use app\models\FreelanceRuParser;
 use app\models\FreelansimParserRu;
 use app\models\Task;
 use app\models\WeblancerNetParser;
@@ -39,8 +40,11 @@ class ParsController extends Controller
      */
     public function actionFreelance()
     {
-       $model = new FreelanceParser();
-       echo $model->freelance();
+//       $model = new FreelanceParser();
+//       echo $model->freelance();
+        $model = new FreelanceRuParser();
+        $model->getUrlProgects(3);
+        echo '<br>';
     }
 
     public function actionWeblancer()

@@ -111,9 +111,5 @@ $posts= [
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-<script>
-    $.get("dropdown?id="+$('#cat').val(), function(data) {
-        $("ul#tasksearch-subcategories_id").html(data);
-    })
-</script>
+
 

@@ -60,6 +60,7 @@ class TaskListController extends Controller
 
             $posts = Subcategories::find()
                 ->where(['categories_id' => $id])
+                ->groupBy('name')
                 ->orderBy('name ASC')
                 ->all();
 //            $posts= [

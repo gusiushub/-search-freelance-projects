@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
+use app\models\FreelanceRuParser;
 use app\models\SettingForm;
 use app\models\Task;
 use phpQuery;
@@ -44,6 +45,11 @@ class UserController extends Controller
                 ])->execute();
             }
             }
+    }
+
+    public function actionRu()
+    {
+
     }
 
 

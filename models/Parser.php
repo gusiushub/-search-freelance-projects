@@ -1,11 +1,9 @@
 <?php
-/**
- * freelansim.ru task parser
- *
- * @author ndawn (Max Burmistrov) <burmistrovm@live.ru>
- */
+
+
 namespace app\models;
-//require __DIR__.'/../simple_html_dom.php';
+
+
 /**
  * Class Parser
  * @package app\components\common

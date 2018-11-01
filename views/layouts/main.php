@@ -34,8 +34,6 @@ AppAsset::register($this);
     <div class="col-sm-12"  >
     <div class="col-sm-offset-3 col-sm-6"  >
         <img id="big-logo" class="img-responsive"   src="../../web/img/2222.png">
-        <!--		<img src="img/to.png">-->
-
     </div>
 </header>
 <?php
@@ -105,15 +103,11 @@ echo Nav::widget([
 NavBar::end();
 ?>
 
-<div class="container">
-
-
-
     <div class="container">
 
         <?= $content ?>
+
     </div>
-</div>
 
 <footer class="footer">
     <div class="container">
