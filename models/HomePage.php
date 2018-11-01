@@ -12,11 +12,11 @@ class HomePage extends Model
         $info = [];
         $k = 0;
         foreach ($sites as $site) {
-             $info [$k]= Task::find()->where(['like','id',self::getRandIdTask($site['id'])])->one();
+             $info [$k]= Task::find()->where(['like','id',self::getRandIdTask($site['id'])])->orderBy('id DESC')->one();
              $k++;
         }
         foreach ($sites as $site) {
-            $info [$k]= Task::find()->where(['like','id',self::getRandIdTask($site['id'])])->one();
+            $info [$k]= Task::find()->where(['like','id',self::getRandIdTask($site['id'])])->orderBy('id DESC')->one();
             $k++;
         }
 
