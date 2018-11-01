@@ -119,12 +119,12 @@ echo Nav::widget([
             'linkOptions' => [],
             'visible' => Yii::$app->user->isGuest
         ],
-        [
-            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/user/logout'],
-            'linkOptions' => [],
-            'visible' => !Yii::$app->user->isGuest
-        ],
+//        [
+//            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
+//            'url' => ['/user/logout'],
+//            'linkOptions' => [],
+//            'visible' => !Yii::$app->user->isGuest
+//        ],
 
     ],
     'options' => ['class' =>'nav navbar-nav navbar-right'], // set this to nav-tab to get tab-styled navigation
