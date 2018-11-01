@@ -97,15 +97,17 @@ class TaskSearch extends Task
             'check_time1' => $this->time_unix,
         ]);
 
+        $site = array();
         if (isset($_GET['TaskSearch']['site_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
-            $site = array();
+
             foreach ($_GET['TaskSearch']['site_id'] as $sites) {
                 $site[] = (int)$sites;
             }
         }
 
+        $categ = array();
         if (isset($_GET['TaskSearch']['categories_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
-            $categ = array();
+
             //var_dump($_GET['TaskSearch']['categories_id']);
                 foreach ($_GET['TaskSearch']['categories_id'] as $ca) {
                     $categ[] = $ca;
