@@ -18,6 +18,10 @@ header{
 body{
     margin: 0;
     padding: 0;
+
+}
+div.container{
+    min-height: 71%;
 }
 a {
     text-decoration: none; /* Отменяем подчеркивание у ссылки */

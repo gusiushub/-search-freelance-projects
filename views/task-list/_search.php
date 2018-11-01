@@ -23,8 +23,15 @@ use yii\widgets\ActiveForm;
     <div class="control-group">
     <?= $form->field($model, 'site_id')
              ->dropDownList(ArrayHelper::map(Site::find()
-             ->all(),'id','name'),['prompt'=>'Все сайты']) ?>
-
+             ->all(),'id','name'),['prompt'=>'Все сайты','onchange'=>' 
+     $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?site_id=').'"+$(this).val(), function(data) { 
+     
+     })']) ?>
+        <?php
+        $session = Yii::$app->session;
+        foreach ($session['site'] as $value) {  ?>
+        <span class="label label-danger"><?php echo $value ?></span>
+<?php  } ?>
     <?= $form->field($model, 'title')->textInput(['placeholder'=>'Ключевое слово']) ?>
 
     <?= $form->field($model,'categories_id')->dropDownList(

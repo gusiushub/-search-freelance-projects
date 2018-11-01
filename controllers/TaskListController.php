@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Site;
 use app\models\Subcategories;
 use app\models\User;
 use Yii;
@@ -35,11 +36,24 @@ class TaskListController extends Controller
 
     public function actionDropdown($id=null, $subcategories_id=null)
     {
+
+        $session = Yii::$app->session;
+        var_dump($session->get('site'));
+
         if (isset($_GET['subcategories_id'])){
 
         }
-
+        $k=0;
+        if (isset($_GET['site_id'])){
+            if (!$session->isActive){
+                $session->open();
+            }
+            $site = Site::findOne($_GET['site_id']);
+            $session->set('site', [$_GET['site_id']=>$site['name']]);
+            //$session->close();
+        }
         if (isset($_GET['id'])){
+
             $countPosts = Subcategories::find()
                 ->where(['categories_id' => $id])
                 ->count();
