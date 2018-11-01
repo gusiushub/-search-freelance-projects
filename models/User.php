@@ -204,6 +204,12 @@ class User extends ActiveRecord  implements IdentityInterface
     }
 
 
+    /**
+     * Заполнен ли профиль пользователя информацией
+     *
+     *
+     * @return int|string
+     */
     public static function isProfileComplete()
     {
         $email = Yii::$app->user->identity->email;

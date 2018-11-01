@@ -41,6 +41,9 @@ class PayModel extends Model
         }
     }
 
+    /**
+     *
+     */
     public static function Result()
     {
         $mrh_pass2 = "password-2"; // пароль #2

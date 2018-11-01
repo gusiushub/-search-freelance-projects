@@ -2,12 +2,17 @@
 
 namespace app\models;
 
-
 use Yii;
 use yii\base\Model;
 
 class FreelansimParser extends Model
 {
+    /**
+     * @param $url
+     * @param $categories_id
+     * @param $subcategories_id
+     * @throws \yii\db\Exception
+     */
     public static function run($url, $categories_id, $subcategories_id)
     {
         echo "Начало \n";

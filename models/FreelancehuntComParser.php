@@ -1,12 +1,19 @@
 <?php
+
 namespace app\models;
-use app\models\FhApiSettings;
-use app\models\Projects;
+
+//use app\models\FhApiSettings;
+//use app\models\Projects;
 use yii\base\Model,
-    app\components\helpers\FunctionHelper,
-    app\models\Parser;
+    app\components\helpers\FunctionHelper;
+//    app\models\Parser;
+
+
 class FreelancehuntComParser extends Model
 {
+    /**
+     * @return mixed
+     */
     public function getProjectsByApi()
     {
         //$keys = FhApiSettings::findOne(1);
@@ -25,6 +32,11 @@ class FreelancehuntComParser extends Model
         curl_close($curl);
         return json_decode($return, true);
     }
+
+
+    /**
+     *
+     */
     public function parseProjects(){
         $projectsByApi = $this->getProjectsByApi();
         //var_dump($projectsByApi);exit;

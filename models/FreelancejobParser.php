@@ -1,4 +1,7 @@
 <?php
+
+use app\models\Parser;
+
 class Freelancejob extends Parser
 {
     public $domain = 'https://www.freelancejob.ru';
@@ -7,6 +10,12 @@ class Freelancejob extends Parser
         '/projects/'
     ];
     public $update_time = 200; // сек
+
+
+    /**
+     * @param $published_string
+     * @return bool|int
+     */
     public function parsePublished($published_string)
     {
         $str = "Проект добавлен: ";
@@ -21,6 +30,11 @@ class Freelancejob extends Parser
         }
         return $date->getTimestamp();
     }
+
+    /**
+     * @param $anchor
+     * @return array|bool
+     */
     public function parseItem($anchor)
     {
         $link = pq($anchor)->find('a.big');
@@ -28,17 +42,16 @@ class Freelancejob extends Parser
         $title = $link->html();
         $published_string = pq($anchor)->find('.x20')->html();
         $published = $this->parsePublished($published_string);
-        if($published === false)
-        {
+        if($published === false) {
             return false;
         }
         return [
-            'domain' => 'freelancejob',
-            'url' => $href,
-            'title' => $title,
-            'published' => $published,
-            'founded' => date("Y-m-d H:i:s", time() ),
-            'description' => ''
+                'domain' => 'freelancejob',
+                'url' => $href,
+                'title' => $title,
+                'published' => $published,
+                'founded' => date("Y-m-d H:i:s", time() ),
+                'description' => ''
         ];
     }
 }

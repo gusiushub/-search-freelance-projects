@@ -1,7 +1,12 @@
 <?php
+
 namespace app\models;
+
+
 use app\components\helpers\FunctionHelper;
 use Yii;
+
+
 /**
  * This is the model class for table "projects".
  *
@@ -168,6 +173,8 @@ class Projects extends \yii\db\ActiveRecord
         }
         return $number;
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -175,6 +182,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'authorId']);
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -182,6 +191,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(UsersFl24::className(), ['userId' => 'authorId']);
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -189,6 +200,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Offices::className(), ['id' => 'office']);
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -196,6 +209,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'managerId']);
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -203,6 +218,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProjectParts::className(), ['projectId' => 'id']);
     }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -210,6 +227,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(self::className(), ['id' => 'parent']);
     }
+
+
     /**
      * @return int|string
      */

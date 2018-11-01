@@ -49,10 +49,14 @@ class Parser {
      * @var string|null URL to parse
      */
     private $url = null;
+
+
     /**
      * @var string|null Tags glued to be an URL param
      */
     private $tags = null;
+
+
     /**
      * Parser constructor
      * Initialises given params
@@ -74,6 +78,8 @@ class Parser {
             $this->tags = join('', $tags);
         }
     }
+
+
     /**
      * Searches for the task container element by the CSS selector in given page object
      *
@@ -86,6 +92,8 @@ class Parser {
     private function getContainerNode($page) {
         return $page->find($this::CONTAINER, 0);
     }
+
+
     /**
      * Searches for the task elements by the CSS selector in given container node
      *
@@ -95,6 +103,8 @@ class Parser {
     private function getTaskNodes($container) {
         return $container->find('li');
     }
+
+
     /**
      * Extracts tags from given container node and pushes them to an array
      *
@@ -108,6 +118,8 @@ class Parser {
         }
         return $tags;
     }
+
+
     /**
      * Checks whether given price info node has price value in it or not;
      * if true, returns associative array of price value and suffix;
@@ -142,6 +154,8 @@ class Parser {
             ];
         }
     }
+
+
     /**
      * Extracts task data from given task node to an associative array;
      * if task title equals to null then returns null
@@ -179,6 +193,8 @@ class Parser {
             return null;
         }
     }
+
+
     /**
      * Extracts task data for every task node found on the page and pushes it in an array
      *
@@ -201,6 +217,8 @@ class Parser {
         }
         return $tasks;
     }
+
+
     /**
      * Requests an URL and creates a page DOM element out of response body
      *
@@ -221,6 +239,8 @@ class Parser {
         );
         return str_get_html($htmlRaw);
     }
+
+
     /**
      * Parses the task list for given page
      *

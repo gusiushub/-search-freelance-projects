@@ -46,26 +46,24 @@ class WeblancerNetParser extends Model
             foreach ($result as $item) {
                 $unic =Task::find()->where(['list_id' => $item['id']])->andWhere('url=:url',[':url'=>$item['url']])->exists();
                 if(!$unic) {
+                    if (!empty($item['url']) && !empty($item['id']) ) {
 
-                if (!empty($item['url']) && !empty($item['id']) ) {
+                        if ($model = $this->findUrl($item['id'], 2)) {
 
-                    if ($model = $this->findUrl($item['id'], 2)) {
+    //                        $model->title= $content['title'];
+    //                        $model->text= $content['text'];
+                            $model->site_id = 2;
+                            $model->time_unix = time();
+                            $model->list_id = $item['id'];
+                            $model->date = date('Y-m-d');
+                            $model->save(false);
 
-//                        $model->title= $content['title'];
-//                        $model->text= $content['text'];
-                        $model->site_id = 2;
-                        $model->time_unix = time();
-                        $model->list_id = $item['id'];
-                        $model->date = date('Y-m-d');
-                        $model->save(false);
-
-//                        $content = $this->getProgects($item['url']);
+    //                        $content = $this->getProgects($item['url']);
+                        }
+                        $this->getProgects($item['url'],$item['id']);
                     }
-                    $this->getProgects($item['url'],$item['id']);
-                }
                 }
             }
-
         }
 
         //return true;

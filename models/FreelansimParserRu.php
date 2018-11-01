@@ -12,7 +12,11 @@ class FreelansimParserRu extends Model
 
     }
 
-    public function getUrlProgects($pages,$category)
+    /**
+     * @param $pages
+     * @param $category
+     */
+    public function getUrlProgects($pages, $category)
     {
         $pagesArr = [];
         $pagesArr[] = 'https://freelansim.ru/?categories='.$category;
@@ -73,7 +77,12 @@ class FreelansimParserRu extends Model
         }
         //return true;
     }
-    public function getProgects($url2,$list_id)
+
+    /**
+     * @param $url2
+     * @param $list_id
+     */
+    public function getProgects($url2, $list_id)
     {
         $item = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->one();
             $curl = curl_init();
@@ -347,6 +356,7 @@ class FreelansimParserRu extends Model
             [3 => 'Художественная/Артфотосъемка', 'our' => 5],
         ];
     }
+
     /**
      * @param $url
      * @param $source
@@ -360,6 +370,7 @@ class FreelansimParserRu extends Model
             return new Task;
         }
     }
+
     /**
      * @return mixed
      */
@@ -368,6 +379,10 @@ class FreelansimParserRu extends Model
         $result = Parser::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
         return $result;
     }
+
+    /**
+     * @return array
+     */
     public static function getReportByParsing()
     {
         $getDays = self::getDates();

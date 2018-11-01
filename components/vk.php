@@ -1,8 +1,5 @@
 <?php
-# Скрипт граббера записей вк для группы (так же для страницы вк, чтоб на страницу вы где написано ваша группа ставите свой id без минуса)
-# Слив для VKSERV.ru от Yury Rolix
-# vk.com/id141418455
-# Автор: Юрий Абрамов
+
 
 use app\models\Task;
 
@@ -61,9 +58,7 @@ class rob
             }
         }
         exit;
-//        var_dump($link);exit;
-        //$count = rand(0,$this->max_post);
-//        var_dump(count($array_info[response][items][$count][attachments]));exit;
+
         if(isset($array_info[response][items][$count][attachments]))
         {
             foreach ($array_info[response][items][$count][attachments] as $key => &$value)
@@ -83,10 +78,12 @@ class rob
             print_r($query);
         }
     }
+
     function SetVar($name_var, $value_var)
     {
         return $this->$name_var = $value_var;
     }
+
     function curl($url)
     {
         $ch = curl_init($url);
@@ -98,4 +95,4 @@ class rob
         return $response;
     }
 }
-echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\nАвтор скрипта Юрий Абрамов.\nСлив для VKSERV.ru от Yury Rolix vk.com/id141418455";
+echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";

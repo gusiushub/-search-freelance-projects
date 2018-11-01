@@ -20,6 +20,8 @@ class TaskSearch extends Task
     public $check_time3;
     public $check_time6;
     public $check_time7dn;
+
+
     /**
      * {@inheritdoc}
      */
@@ -36,6 +38,10 @@ class TaskSearch extends Task
         ];
     }
 
+
+    /**
+     * @return array
+     */
     public function attributeLabels()
     {
         return [
@@ -54,6 +60,7 @@ class TaskSearch extends Task
         ];
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -62,6 +69,7 @@ class TaskSearch extends Task
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+
 
     /**
      * Creates data provider instance with search query applied
@@ -108,14 +116,11 @@ class TaskSearch extends Task
         $categ = array();
         if (isset($_GET['TaskSearch']['categories_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
 
-            //var_dump($_GET['TaskSearch']['categories_id']);
                 foreach ($_GET['TaskSearch']['categories_id'] as $ca) {
                     $categ[] = $ca;
                 }
 
         }
-        //var_dump($_GET['TaskSearch']['categories_id']);exit;
-//var_dump($site);exit;
 
         $subcategory = $_GET;
 
@@ -147,7 +152,7 @@ class TaskSearch extends Task
                     ->andFilterWhere(['categories_id'=>$categ])
 //                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
                     ->andFilterWhere([ 'subcategories_id'=>$subcat ])
-                ->andFilterWhere(['site_id'=>$site])
+                    ->andFilterWhere(['site_id'=>$site])
                     ->andFilterWhere(['>=', 'price', $this->min_price])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])

@@ -18,12 +18,14 @@ class ParsController extends Controller
 {
     public function actionIndex()
     {
+        $start = microtime(true);
         $this->actionFreelansim();
         $this->actionFl();
         $this->actionFreelancehunt();
         $this->actionWeblancer();
         $this->actionFreelance();
         $this->actionVk();
+        echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";
     }
 
     public function actionVk()

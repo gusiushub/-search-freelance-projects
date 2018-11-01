@@ -23,6 +23,11 @@ class HomePage extends Model
         return $info;
     }
 
+    /**
+     *  Возвращает info для всех сайтов из бд
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public static function getSite()
     {
         return Site::find()->all();
@@ -32,18 +37,23 @@ class HomePage extends Model
     {
 
     }
+
     public static function getImg($id)
     {
         $site = Site::findOne($id);
         return $site['logo'];
     }
 
+    /**
+     * возвращает случайный id поста из таблицы task
+     *
+     * @param $siteId
+     * @return int
+     */
     public static function getRandIdTask($siteId)
     {
         $minId = Task::find()->where(['>', 'time_unix', time() - 86400])->andWhere(['like','site_id',$siteId])->min('id');
         $maxId = Task::find()->where(['>', 'time_unix', time() - 86400])->andWhere(['like','site_id',$siteId])->max('id');
-//        var_dump($minId);
-//        var_dump($maxId);
         return rand($minId, $maxId);
     }
 
