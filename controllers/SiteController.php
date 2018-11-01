@@ -191,7 +191,7 @@ class SiteController extends Controller
                         if (empty($model)) {
                             $user = new User();
                             $user->username = 'vk_'.$user_vk['id'];
-//                            $user->email = 'admin@кодер.укр';
+                           $user->email = 'adm44i711177n@кодер.укр';
                             $user->f_name = $name_vk['0'];
                             $user->s_name = $name_vk['1'];
                             $user->setPassword($user_vk['id']);
