@@ -72,7 +72,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find();
+        $query = Task::find()->orderBy('id DESC');
 
         // add conditions that should always apply here
 
@@ -98,7 +98,7 @@ class TaskSearch extends Task
         ]);
 
         $site = array();
-        if (isset($_GET['TaskSearch']['site_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
+        if (isset($_GET['TaskSearch']['site_id']) and !empty($_GET['TaskSearch']['site_id']) and $_GET['TaskSearch']['site_id']!='') {
 
             foreach ($_GET['TaskSearch']['site_id'] as $sites) {
                 $site[] = (int)$sites;
@@ -127,6 +127,21 @@ class TaskSearch extends Task
             $subcat[] =  (int)$category;
         }
 
+        if (isset($_GET['TaskSearch']['site_id'])){
+            if ($this->check_price==1){
+                $check_price = 0;
+            }
+            $query  ->andFilterWhere(['like', 'title', $this->title])
+                ->andFilterWhere(['categories_id'=>$categ])
+//                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
+                ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
+                ->andFilterWhere(['>','site_id',0])
+                ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
+                ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
+                ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
+                ->andFilterWhere(['like', 'price', $check_price])
+                ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
+        }
         if ($this->min_price!='') {
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['categories_id'=>$categ])
