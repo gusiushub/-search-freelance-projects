@@ -139,7 +139,7 @@ class TaskSearch extends Task
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
-                ->andFilterWhere(['like', 'price', $check_price])
+                ->andFilterWhere(['like', 'price', 0])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time7dn]);
         }
         if ($this->min_price!='') {
