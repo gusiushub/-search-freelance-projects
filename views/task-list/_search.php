@@ -21,44 +21,80 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
     <div class="control-group">
-    <?= $form->field($model, 'site_id')
-             ->dropDownList(ArrayHelper::map(Site::find()
-             ->all(),'id','name'),['prompt'=>'Все сайты','onchange'=>' 
-     $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?site_id=').'"+$(this).val(), function(data) { 
-     
-     })']) ?>
-        <?php
-//        $session = Yii::$app->session;
-//        foreach ($session['site'] as $value) {  ?>
-<!--        <span class="label label-danger">--><?php //echo $value ?><!--</span>-->
-<?php // } ?>
-    <?= $form->field($model, 'title')->textInput(['placeholder'=>'Ключевое слово']) ?>
-
-    <?= $form->field($model,'categories_id')->dropDownList(
-        ArrayHelper::map(Сategories::find()->all(),
-            'id','name'),
-        ['prompt' => Yii::t('app','Все категории'),
-            'id'=>'cat',
-            'onchange'=>' 
-     $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?id=').'"+$(this).val(), function(data) { 
-     $("ul#tasksearch-subcategories_id").html(data); 
-     })']
-    ); ?>
-
-    <?= $form->field($model, 'subcategories_id', ['template' => "
+<!--    --><?//= $form->field($model, 'site_id')
+//             ->dropDownList(ArrayHelper::map(Site::find()
+//             ->all(),'id','name'),['prompt'=>'Все сайты','onchange'=>'
+//     $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?site_id=').'"+$(this).val(), function(data) {
+//
+//     })']) ?>
+        <?= $form->field($model, 'site_id', ['template' => "
                                                 <div class='dropdown'>
                                                     <button
                                                     class='btn btn-default dropdown-toggle'
                                                     data-toggle='dropdown'
                                                     type='button'>
-                                                    <span>Подкатегории</span>
+                                                    <span>Все сайты</span>
                                                     <span class='caret'></span>
                                                     </button>
                                                     {input}
-                                                </div>"])->checkboxList([],
-                                                ['tag' => 'ul',
+                                                </div>"])->checkboxList((ArrayHelper::map(Site::find()
+            ->all(),'id','name')),
+            ['tag' => 'ul',
+                'separator' => '<br>',
+                'class' => 'dropdown-menu',]); ?>
+        <?php
+//        $session = Yii::$app->session;
+//        foreach ($session['site'] as $value) {  ?>
+<!--        <span class="label label-danger">--><?php //echo $value ?><!--</span>-->
+<?php // }
+$posts= [
+    'FR'=>'France',
+    'DE'=>'Germany'
+];
 
-                                                'class' => 'dropdown-menu',]); ?>
+ ?>
+
+        <?= $form->field($model, 'categories_id', ['template' => "
+                                                <div class='dropdown'>
+                                                    <button
+                                                    class='btn btn-default dropdown-toggle'
+                                                    data-toggle='dropdown'
+                                                    type='button'>
+                                                    <span>Категории</span>
+                                                    <span class='caret'></span>
+                                                    </button>
+                                                    {input}
+                                                </div>"])->checkboxList(ArrayHelper::map(Сategories::find()->all(),
+            'id','name'),
+            ['tag' => 'ul',
+'separator' => '<br>',
+                'class' => 'dropdown-menu',]); ?>
+
+
+    <?= $form->field($model, 'title')->textInput(['placeholder'=>'Ключевое слово']) ?>
+
+<!--    --><?//= $form->field($model,'categories_id')->dropDownList(
+//        ArrayHelper::map(Сategories::find()->all(),
+//            'id','name'),
+//        ['prompt' => Yii::t('app','Все категории'),
+//            'id'=>'cat',
+//            ]
+//    ); ?>
+
+<!--    --><?//= $form->field($model, 'subcategories_id', ['template' => "
+//                                                <div class='dropdown'>
+//                                                    <button
+//                                                    class='btn btn-default dropdown-toggle'
+//                                                    data-toggle='dropdown'
+//                                                    type='button'>
+//                                                    <span>Подкатегории</span>
+//                                                    <span class='caret'></span>
+//                                                    </button>
+//                                                    {input}
+//                                                </div>"])->checkboxList([],
+//                                                ['tag' => 'ul',
+//
+//                                                'class' => 'dropdown-menu',]); ?>
     <?php echo $form->field($model, 'min_price')->textInput(['style'=>'width:25%;']) ?>
 
         <div class="controls">
@@ -70,10 +106,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
     <div  class="btn-group-sm">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger',"style"=>"margin: 5px; width:30%",'onclick'=>' 
-     $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?id=').'"+$("#cat").val(), function(data) { 
-     $("ul#tasksearch-subcategories_id").html(data); 
-     })' ]) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger',"style"=>"margin: 5px; width:30%" ]) ?>
         <?= Html::resetButton ('Сброс', ['class' => 'btn btn-default',"style"=>"margin: 5px; width:30% "]) ?>
     </div>
     <?php ActiveForm::end(); ?>

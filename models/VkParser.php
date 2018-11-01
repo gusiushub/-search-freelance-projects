@@ -49,7 +49,7 @@ class VkParser
                     'categories_id' => 7,
                     'title' => 'vkGroupe_frwork_ru',
                     'text' => $text,//iconv(mb_detect_encoding($text),'CP1251',$text),
-                    'price' => 'договор',
+                    'price' => 1,
                     'list_id' => $from_id . $id,
                     'url' => $link,
                     'date' => date('Y-m-d'),

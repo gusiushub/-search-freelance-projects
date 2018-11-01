@@ -13,6 +13,7 @@ class TaskSearch extends Task
     public $min_price;
     public $max_price;
     public $categories_id;
+    public $site_id;
     public $subcategories_id;
     public $check_price;
     public $check_time1;
@@ -25,12 +26,12 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [[  'id','categories_id', 'site_id', 'price',
+            [[  'id', 'price',
                 'min_price','max_price',
                 'check_time1','time_unix','check_time3',
                 'check_time6','check_time7dn','check_price'],
                 'integer'],
-            [['title', 'date', 'text', 'status','subcategories_id',
+            [['title', 'date', 'categories_id','text', 'status','subcategories_id','site_id',
                 'check_time1','check_time3','check_time6','check_time7dn'], 'safe'],
         ];
     }
@@ -95,7 +96,27 @@ class TaskSearch extends Task
 //            'subcategories_id' => $this->subcategories_id,
             'check_time1' => $this->time_unix,
         ]);
+
+        if (isset($_GET['TaskSearch']['site_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
+            $site = array();
+            foreach ($_GET['TaskSearch']['site_id'] as $sites) {
+                $site[] = (int)$sites;
+            }
+        }
+
+        if (isset($_GET['TaskSearch']['categories_id']) and !empty($_GET['TaskSearch']['categories_id']) and $_GET['TaskSearch']['categories_id']!='') {
+            $categ = array();
+            //var_dump($_GET['TaskSearch']['categories_id']);
+                foreach ($_GET['TaskSearch']['categories_id'] as $ca) {
+                    $categ[] = $ca;
+                }
+
+        }
+        //var_dump($_GET['TaskSearch']['categories_id']);exit;
+//var_dump($site);exit;
+
         $subcategory = $_GET;
+
         unset($subcategory['TaskSearch']);
 
 
@@ -106,8 +127,10 @@ class TaskSearch extends Task
 
         if ($this->min_price!='') {
             $query  ->andFilterWhere(['like', 'title', $this->title])
-                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
+                    ->andFilterWhere(['categories_id'=>$categ])
+//                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
                     ->andFilterWhere([ 'subcategories_id'=>$subcat ])
+                ->andFilterWhere(['site_id'=>$site])
                     ->andFilterWhere(['>=', 'price', $this->min_price])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
@@ -118,8 +141,10 @@ class TaskSearch extends Task
                 $check_price = 0;
             }
             $query  ->andFilterWhere(['like', 'title', $this->title])
-                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
+                    ->andFilterWhere(['categories_id'=>$categ])
+//                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
                     ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
+                    ->andFilterWhere(['site_id'=>$site])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time6])
