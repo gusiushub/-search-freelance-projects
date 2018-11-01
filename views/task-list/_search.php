@@ -28,10 +28,10 @@ use yii\widgets\ActiveForm;
      
      })']) ?>
         <?php
-        $session = Yii::$app->session;
-        foreach ($session['site'] as $value) {  ?>
-        <span class="label label-danger"><?php echo $value ?></span>
-<?php  } ?>
+//        $session = Yii::$app->session;
+//        foreach ($session['site'] as $value) {  ?>
+<!--        <span class="label label-danger">--><?php //echo $value ?><!--</span>-->
+<?php // } ?>
     <?= $form->field($model, 'title')->textInput(['placeholder'=>'Ключевое слово']) ?>
 
     <?= $form->field($model,'categories_id')->dropDownList(
