@@ -42,7 +42,7 @@ AppAsset::register($this);
 
 //    NavBar::begin();
     ?>
-    <div class="col-sm-6"  id="top-menu">
+<!--    <div class="col-sm-6"  id="top-menu">-->
 <!--        <ul class="menu-list">-->
 <!--            --><?php //if (Yii::$app->user->isGuest) { ?>
 <!--                <li><a class="menu"  href="/site/index">Главния</a></li>-->
@@ -64,15 +64,39 @@ AppAsset::register($this);
     <?php
 //    NavBar::end();
     ?>
-
+<!--    </div>-->
+</header>
 <?php
+NavBar::begin([
+    'options' => [
+//            'style'=>[
+//            'width:100%; margin:0 ; padding:0;'],navbar navbar-inverse navbar-fixed-top
+        'class' => 'navbar navbar-inverse navbar-static-top',
+    ],
+]);
 echo Nav::widget([
     'items' => [
         [
-            'label' => 'Home',
+            'label' => 'Главная',
             'url' => ['/site/index'],
             'linkOptions' => [],
+            'visible' => Yii::$app->user->isGuest
         ],
+
+        [
+            'label' => 'Поиск',
+            'url' => ['/task-list/index'],
+            'linkOptions' => [],
+            'visible' => !Yii::$app->user->isGuest
+        ],
+
+        [
+            'label' => 'Личный кабинет',
+            'url' => ['/user/index'],
+            'linkOptions' => [],
+            'visible' => !Yii::$app->user->isGuest
+        ],
+
         [
             'label' => 'Новости',
             'url' => ['/site/news'],
@@ -87,39 +111,34 @@ echo Nav::widget([
             'label' => 'Регистрация',
             'url' => ['/site/signup'],
             'linkOptions' => [],
+            'visible' => Yii::$app->user->isGuest
         ],
         [
             'label' => 'Авторизация',
             'url' => ['/site/login'],
             'linkOptions' => [],
-        ],
-        [
-            'label' => 'Dropdown',
-            'items' => [
-                 ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                 '<div class="dropdown-divider"></div>',
-                 '<div class="dropdown-header">Dropdown Header</div>',
-                 ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
-            ],
-        ],
-        [
-            'label' => 'Login',
-            'url' => ['site/login'],
             'visible' => Yii::$app->user->isGuest
         ],
+        [
+            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
+            'url' => ['/user/logout'],
+            'linkOptions' => [],
+            'visible' => !Yii::$app->user->isGuest
+        ],
+
     ],
-    'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
+    'options' => ['class' =>'nav navbar-nav navbar-right'], // set this to nav-tab to get tab-styled navigation
 ]);
 
-
-    //NavBar::begin([
-    //            'options' => [
-    //                'class' => 'navbar navbar-default navbar-static-top',
-    //            ],
-    //        ]);
+NavBar::end();
+//    NavBar::begin([
+//                'options' => [
+//                    'class' => 'navbar navbar-default navbar-static-top',
+//                ],
+//            ]);
     //?>
-    </div>
-    </div>
+<!--    </div>-->
+<!--    </div>-->
 <!--<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">-->
 <!--    <div class="container-fluid">-->
 <!--        <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>-->
@@ -186,17 +205,13 @@ echo Nav::widget([
 <?php
 //NavBar::end();
 //?>
-    </div>
-</header>
+
 <div class="container">
 
 
 
     <div class="container">
-<!--        --><?//= Breadcrumbs::widget([
-//            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-//        ]) ?>
-<!--        --><?//= Alert::widget() ?>
+
         <?= $content ?>
     </div>
 </div>

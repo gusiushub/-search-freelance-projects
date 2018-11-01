@@ -10,9 +10,9 @@ header{
     /* Выравниваем элементы вертикально по центру. */
     align-items: center;
 
-    background-color: black;
+    background-color: #222;
 
-    height:22%;
+    height:12%;
     width: 100%;
 }
 body{
@@ -26,8 +26,8 @@ a {
 #top-menu{
     width: 100%;
     /*text-align: right;*/
-    background-color: black;
-    color: black;
+    /*background-color: black;*/
+    /*color: black;*/
 
 
 }
