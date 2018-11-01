@@ -32,7 +32,7 @@ class ParsController extends Controller
     public function actionVk()
     {
         $robber = new VkParser();
-        //var_dump($robber);
+//        var_dump($robber);
 
     }
     /**
