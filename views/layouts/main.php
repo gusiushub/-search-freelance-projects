@@ -3,11 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\widgets\Alert;
+
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -38,33 +37,6 @@ AppAsset::register($this);
         <!--		<img src="img/to.png">-->
 
     </div>
-    <?php
-
-//    NavBar::begin();
-    ?>
-<!--    <div class="col-sm-6"  id="top-menu">-->
-<!--        <ul class="menu-list">-->
-<!--            --><?php //if (Yii::$app->user->isGuest) { ?>
-<!--                <li><a class="menu"  href="/site/index">Главния</a></li>-->
-<!--            --><?php //}else{ ?>
-<!--                <li><a class="menu" href="/task-list/index">Поиск</a></li>-->
-<!--                <li><a class="menu" href="/user/index">Личный кабинет</a></li>-->
-<!--            --><?php //} ?>
-<!--            <li><a class="menu" href="#">Новости</a></li>-->
-<!--            <li><a class="menu" href="#">FAQ</a></li>-->
-<!--            --><?php //if (Yii::$app->user->isGuest) { ?>
-<!--                <li><a class="menu" href="/site/signup">Регистрация</a></li>-->
-<!--                <li><a class="menu" href="/site/login">Авторизация</a></li>-->
-<!--            --><?php //} ?>
-<!--            --><?php //if (!Yii::$app->user->isGuest) { ?>
-<!--                <li><a class="menu" href="/user/logout">Выход</a></li>-->
-<!--            --><?php //} ?>
-<!--        </ul>-->
-<!--    </div>-->
-    <?php
-//    NavBar::end();
-    ?>
-<!--    </div>-->
 </header>
 <?php
 NavBar::begin([
@@ -119,92 +91,19 @@ echo Nav::widget([
             'linkOptions' => [],
             'visible' => Yii::$app->user->isGuest
         ],
-//        [
-//            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
-//            'url' => ['/user/logout'],
-//            'linkOptions' => [],
-//            'visible' => !Yii::$app->user->isGuest
-//        ],
+        [
+            "label" => "Выход (". Yii::$app->user->identity->username .")",
+            'url' => ['/user/logout'],
+            'linkOptions' => [],
+            'visible' => !Yii::$app->user->isGuest
+        ],
 
     ],
     'options' => ['class' =>'nav navbar-nav navbar-right'], // set this to nav-tab to get tab-styled navigation
 ]);
 
 NavBar::end();
-//    NavBar::begin([
-//                'options' => [
-//                    'class' => 'navbar navbar-default navbar-static-top',
-//                ],
-//            ]);
-    //?>
-<!--    </div>-->
-<!--    </div>-->
-<!--<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">-->
-<!--    <div class="container-fluid">-->
-<!--        <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>-->
-<!--            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        <div class="collapse navbar-collapse navbar-menubuilder">-->
-<!--            <ul class="nav navbar-nav navbar-right">-->
-<!--                <li><a href="/">Home</a>-->
-<!--                </li>-->
-<!--                <li><a href="/products">Products</a>-->
-<!--                </li>-->
-<!--                <li><a href="/about-us">About Us</a>-->
-<!--                </li>-->
-<!--                <li><a href="/contact">Contact Us</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<?php
 ?>
-
-<!--<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-static-top" role="navigation">-->
-
-<!--    <div class="container-fluid">-->
-
-<!--        <div class="collapse navbar-collapse navbar-menubuilder">-->
-            <?php
-//    $menuItems = [
-//        ['label' => 'Главная', 'url' => ['/site/index']],
-////        ['label' => 'О нас', 'url' => ['/site/about']],
-////        ['label' => 'Поиск', 'url' => ['/task-list/index']],
-//    ];
-//
-//    if (Yii::$app->user->isGuest) {
-//        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-//        $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
-//    } else {
-//        $menuItems = [
-//            ['label' => 'Поиск', 'url' => ['/task-list/index']],
-////            ['label' => 'О нас', 'url' => ['/site/about']],
-//            ['label' => 'Личный кабинет', 'url' => ['/user/index']],
-//
-//        ];
-//        $menuItems[] = '<li>'
-//            . Html::beginForm(['/site/logout'], 'post')
-//            . Html::submitButton(
-//                'Выход (' . Yii::$app->user->identity->username . ')',
-//                ['class' => 'btn btn-link logout']
-//            )
-//            . Html::endForm()
-//            . '</li>';
-//    }
-//
-//    echo Nav::widget([
-//        'options' => ['class' => 'nav navbar-nav navbar-right'],
-//        'items' => $menuItems,
-//    ]);
-//    ?>
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<?php
-//NavBar::end();
-//?>
 
 <div class="container">
 
