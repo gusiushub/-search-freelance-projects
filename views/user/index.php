@@ -1,15 +1,21 @@
+
 <?php
 
 use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 var_dump($_POST);
-
+file_put_contents('data.txt',$_POST);
 ?>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Профиль</a></li>
-    <li><a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=ID_4233&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">Оплата</a></li>
-<!--    <li><a href="#">Уведомления: </a></li>-->
+    <li class="active">
+        <a href="#">Профиль</a>
+    </li>
+    <li>
+        <a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=<?php echo Yii::$app->user->identity->username.'_'.time() ?>&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">
+            Оплата
+        </a>
+    </li>
 </ul>
 
 <?php if (User::isProfileComplete()!=1){ ?>
@@ -146,3 +152,4 @@ JS;
 <!--<script type="text/javascript" src="https://auth.robokassa.ru/Merchant/PaymentForm/FormSS.js?MerchantLogin=waytowork&InvoiceID=0&Culture=ru&Encoding=utf-8&OutSum=1&SignatureValue=fea798e07fb286deecfbec5e00af361d"></script>-->
 
 
+>>>>>>> 3c993e423d82a3d184dc8ef2baf7299908a36528

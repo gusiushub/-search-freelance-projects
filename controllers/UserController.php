@@ -7,8 +7,7 @@ use app\models\FreelancehuntComParser;
 use app\models\SettingForm;
 use app\models\Task;
 use Omnipay\InterKassa\Gateway;
-//use Omnipay\Omnipay;
-//use hiqdev\omnipay-interkassa;
+
 use phpQuery;
 use app\models\VkParser;
 use Yii;
@@ -17,8 +16,8 @@ use yii\web\Controller;
 class UserController extends Controller
 {
 
-  public $enableCsrfValidation = false;
-  
+    public $enableCsrfValidation = false;
+
     public function actionVk()
     {
         $model = new VkParser();
@@ -165,7 +164,8 @@ class UserController extends Controller
 
     public function actionIndex()
     {
-      $this->enableCsrfValidation = false;
+        $this->enableCsrfValidation = false;
+        Yii::$app->controller->enableCsrfValidation = false;
         if (!\Yii::$app->user->isGuest) {
 
             return $this->render('index');
@@ -197,8 +197,13 @@ class UserController extends Controller
 
     public function actionPay()
     {
-      file_put_contents('data.txt',$_POST['ik_inv_st'],FILE_APPEND);
-      file_put_contents('data.txt',' _|_ ',FILE_APPEND);
+        if (isset($_POST['ik_inv_st'])){
+            if ($_POST['ik_inv_st']=='success'){
+                file_put_contents('data.txt',$_POST['ik_pm_no'],FILE_APPEND);
+                file_put_contents('data.txt',' _|_ ',FILE_APPEND);
+            }
+        }
+
         if (isset($_POST['pay'])){
             $gateway = new Gateway();//::create('Stripe');
 //        $gateway->setApiKey('abc123');
