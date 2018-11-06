@@ -7,9 +7,14 @@ var_dump($_POST);
 file_put_contents('data.txt',$_POST);
 ?>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Профиль</a></li>
-    <li><a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=ID_4233&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">Оплата</a></li>
-<!--    <li><a href="#">Уведомления: </a></li>-->
+    <li class="active">
+        <a href="#">Профиль</a>
+    </li>
+    <li>
+        <a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=<?php echo Yii::$app->user->identity->username.'_'.time() ?>&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">
+            Оплата
+        </a>
+    </li>
 </ul>
 
 <?php if (User::isProfileComplete()!=1){ ?>
