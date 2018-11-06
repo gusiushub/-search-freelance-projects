@@ -193,6 +193,18 @@ class UserController extends Controller
     public function actionPay()
     {
         if (isset($_POST['ik_inv_st'])){
+            Yii::$app->db->createCommand()->insert('task', [
+                'user_id' => 6,
+//                    'categories_id' => $category,
+//                    'subcategories_id' => $subCutegory,
+//                    'title' => $job['title'],
+                'status' => $_POST['ik_inv_st'],
+//                    'price' => trim($job['budget']),
+                'cod' => $_POST['ik_pm_no'],
+                'ik_inv_id' => $_POST['ik_inv_id'],
+                'date' => date('Y-m-d'),
+                'ik_co_id' => $_POST['ik_co_id'],
+            ])->execute();
             if ($_POST['ik_inv_st']=='success'){
                 file_put_contents('data.txt',$_POST['ik_pm_no'],FILE_APPEND);
                 file_put_contents('data.txt',' _|_ ',FILE_APPEND);
