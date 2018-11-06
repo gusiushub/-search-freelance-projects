@@ -3,11 +3,11 @@
 use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-
+var_dump($_POST);
 ?>
 <ul class="nav nav-tabs">
     <li class="active"><a href="#">Профиль</a></li>
-    <li><a href="/user/pay">Оплата</a></li>
+    <li><a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=ID_4233&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">Оплата</a></li>
 <!--    <li><a href="#">Уведомления: </a></li>-->
 </ul>
 

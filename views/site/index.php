@@ -13,6 +13,57 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Главная';
 
 ?>
+<div class="container">
+    <div class="col-lg-12">
+        <br>
+        <h1 class="heading">Сколько времени вы тратите на поиск новой работы / проектов?</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-lg-9">
+            <div class="uCalc_150430"></div>
+        </div>
+        <div class="col-lg-3">
+            <div class="img-responsive">
+                <img src="../../web/img/5be0268242686c81c618f05c_7.png" srcset="../../web/img/5be0268242686c81c618f05c_7-p-500.png 500w, ../../web/img/5be0268242686c81c618f05c_7.png 618w" width=400  alt="" class="image-2" />
+            </div>
+<!--            <div class="text-block-2">-->
+<!--                <br><br><br>-->
+<!--                <h4>Перестань терять время и деньги с нами!</h4>-->
+<!--                <br>-->
+<!--                <p class="col-lg-offset-1"><a href="/site/signup" class="btn btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a></p>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-offset-3 col-lg-8 col-sm-8">
+            <br>
+            <p>
+                <div class="text-block-2">
+                    <h3>Перестань терять время и деньги с нами!</h3>
+                </div>
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="col-lg-offset-4 col-lg-8">
+            <br>
+            <p class="col-lg-offset-1"><a href="/site/signup" class="btn btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a></p>
+        </div>
+    </div>
+</div>
+
+<!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+<script>
+    // var widgetOptions150430 = { bg_color: "transparent" };
+    (function() {
+        var a = document.createElement("script"), h = "head";
+        a.async = true;
+        a.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//ucalc.pro/api/widget.js?id=150430&t="+Math.floor(new Date()/18e5);
+        document.getElementsByTagName(h)[0].appendChild(a) })();
+</script>
+
 <div style="margin-bottom: 0; padding-bottom: 0;" class="col-lg-3 col-sm-3" >
     <?php $form = ActiveForm::begin([
         'action' => ['/site/login'],

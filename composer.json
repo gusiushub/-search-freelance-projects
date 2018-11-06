@@ -22,7 +22,9 @@
         "yiisoft/yii2-authclient": "^2.1",
         "nodge/yii2-eauth": "~2.0",
         "yii-cms/yii2-robokassa": "^1.2",
-        "electrolinux/phpquery": "^0.9.6"
+        "electrolinux/phpquery": "^0.9.6",
+        "lan143/yii2-interkassa": "*",
+        "hiqdev/omnipay-interkassa": "^0.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

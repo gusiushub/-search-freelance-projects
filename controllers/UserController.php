@@ -4,9 +4,11 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
-use app\models\FreelanceRuParser;
 use app\models\SettingForm;
 use app\models\Task;
+use Omnipay\InterKassa\Gateway;
+//use Omnipay\Omnipay;
+//use hiqdev\omnipay-interkassa;
 use phpQuery;
 use app\models\VkParser;
 use Yii;
@@ -154,6 +156,11 @@ class UserController extends Controller
         return $enc;
     }
 
+    public function actionPayError()
+    {
+        return $this->render('pay');
+    }
+
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -187,6 +194,24 @@ class UserController extends Controller
 
     public function actionPay()
     {
+        if (isset($_POST['pay'])){
+            $gateway = new Gateway();//::create('Stripe');
+//        $gateway->setApiKey('abc123');
+
+            $formData = array('number' => '4242424242424242', 'expiryMonth' => '6', 'expiryYear' => '2030', 'cvv' => '123');
+            $response = $gateway->purchase(array('amount' => '10.00', 'currency' => 'USD', 'card' => $formData))->send();
+
+            if ($response->isRedirect()) {
+                // redirect to offsite payment gateway
+                $response->redirect();
+            } elseif ($response->isSuccessful()) {
+                // payment was successful: update database
+                print_r($response);
+            } else {
+                // payment failed: display message to customer
+                echo $response->getMessage();
+            }
+        }
         return $this->render('pay');
     }
 
