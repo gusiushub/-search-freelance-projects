@@ -197,7 +197,7 @@ class UserController extends Controller
 
             if ($_POST['ik_inv_st']=='success'){
                 Yii::$app->db->createCommand()->insert('payments', [
-                    'user_id' => Yii::$app->user->id,
+                    'user_id' => Yii::$app->user->identity->id,
                     'status' => $_POST['ik_inv_st'],
                     'cod' => $_POST['ik_pm_no'],
                     'ik_inv_id' => $_POST['ik_inv_id'],
@@ -205,7 +205,7 @@ class UserController extends Controller
                     'ik_co_id' => $_POST['ik_co_id'],
                 ])->execute();
 
-                $user = User::findOne(Yii::$app->user->id);
+                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
                 $user->paid_to = time()+2678400;
                 $user->save();
             }
