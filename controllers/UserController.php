@@ -4,9 +4,9 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
+use app\models\Payments;
 use app\models\SettingForm;
 use app\models\Task;
-use Omnipay\InterKassa\Gateway;
 
 use phpQuery;
 use app\models\VkParser;
@@ -48,11 +48,6 @@ class UserController extends Controller
                 ])->execute();
             }
             }
-    }
-
-    public function actionRu()
-    {
-
     }
 
 
@@ -201,28 +196,19 @@ class UserController extends Controller
             if ($_POST['ik_inv_st']=='success'){
                 file_put_contents('data.txt',$_POST['ik_pm_no'],FILE_APPEND);
                 file_put_contents('data.txt',' _|_ ',FILE_APPEND);
+                $model = new Payments();
+                $model->date = date('Y-m-d');
+                $model->status = $_POST['ik_inv_st'];
+                $model->cod = $_POST['ik_pm_no'];
+                $model->ik_co_id = $_POST['ik_co_id'];
+                $model->ik_inv_id = $_POST['ik_inv_id'];
+                $model->user_id = Yii::$app->user->id;
+                $model->save();
             }
         }
 
-        if (isset($_POST['pay'])){
-            $gateway = new Gateway();//::create('Stripe');
-//        $gateway->setApiKey('abc123');
-
-            $formData = array('number' => '4242424242424242', 'expiryMonth' => '6', 'expiryYear' => '2030', 'cvv' => '123');
-            $response = $gateway->purchase(array('amount' => '10.00', 'currency' => 'USD', 'card' => $formData))->send();
-
-            if ($response->isRedirect()) {
-                // redirect to offsite payment gateway
-                $response->redirect();
-            } elseif ($response->isSuccessful()) {
-                // payment was successful: update database
-                print_r($response);
-            } else {
-                // payment failed: display message to customer
-                echo $response->getMessage();
-            }
-        }
         return $this->render('pay');
     }
+
 
 }
