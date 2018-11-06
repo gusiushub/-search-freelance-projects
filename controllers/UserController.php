@@ -10,7 +10,7 @@ use app\models\Task;
 
 use app\models\User;
 use phpQuery;
-use app\models\VkParser;
+//use app\models\VkParser;
 use Yii;
 use yii\web\Controller;
 
@@ -19,13 +19,13 @@ class UserController extends Controller
 
     public $enableCsrfValidation = false;
 
-    public function actionVk()
-    {
-        $model = new VkParser();
-        $model->Login('89859929791','gusigusi');
-        $html = $model->search('https://vk.com/php2all');
-        var_dump($html);
-    }
+//    public function actionVk()
+//    {
+//        $model = new VkParser();
+//        $model->Login('89859929791','gusigusi');
+//        $html = $model->search('https://vk.com/php2all');
+//        var_dump($html);
+//    }
 
     public function actionTest()
     {
@@ -207,7 +207,7 @@ class UserController extends Controller
 
                 $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
                 $user->paid_to = time()+2678400;
-                $user->save();
+                $user->save(false);
             }
         }
 
