@@ -55,7 +55,7 @@ use yii\bootstrap\Html;
                 </div>
             </div>
         </section>
-
+<?php ActiveForm::end(); ?>
     </div>
 
 

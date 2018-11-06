@@ -7,7 +7,8 @@ use app\models\FreelancehuntComParser;
 use app\models\SettingForm;
 use app\models\Task;
 use Omnipay\InterKassa\Gateway;
-use Omnipay\Omnipay;
+//use Omnipay\Omnipay;
+//use hiqdev\omnipay-interkassa;
 use phpQuery;
 use app\models\VkParser;
 use Yii;
@@ -153,6 +154,11 @@ class UserController extends Controller
             }
         }
         return $enc;
+    }
+
+    public function actionPayError()
+    {
+        return $this->render('pay');
     }
 
     public function actionIndex()
