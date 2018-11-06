@@ -5,7 +5,6 @@ use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 var_dump($_POST);
-file_put_contents('data.txt',$_POST);
 ?>
 <ul class="nav nav-tabs">
     <li class="active">
@@ -152,4 +151,4 @@ JS;
 <!--<script type="text/javascript" src="https://auth.robokassa.ru/Merchant/PaymentForm/FormSS.js?MerchantLogin=waytowork&InvoiceID=0&Culture=ru&Encoding=utf-8&OutSum=1&SignatureValue=fea798e07fb286deecfbec5e00af361d"></script>-->
 
 
->>>>>>> 3c993e423d82a3d184dc8ef2baf7299908a36528
+
