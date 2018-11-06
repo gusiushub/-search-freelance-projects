@@ -8,6 +8,7 @@ use app\models\Payments;
 use app\models\SettingForm;
 use app\models\Task;
 
+use app\models\User;
 use phpQuery;
 use app\models\VkParser;
 use Yii;
@@ -196,13 +197,17 @@ class UserController extends Controller
 
             if ($_POST['ik_inv_st']=='success'){
                 Yii::$app->db->createCommand()->insert('payments', [
-                    'user_id' => 6,
+                    'user_id' => Yii::$app->user->id,
                     'status' => $_POST['ik_inv_st'],
                     'cod' => $_POST['ik_pm_no'],
                     'ik_inv_id' => $_POST['ik_inv_id'],
                     'date' => date('Y-m-d'),
                     'ik_co_id' => $_POST['ik_co_id'],
                 ])->execute();
+
+                $user = User::findOne(Yii::$app->user->id);
+                $user->paid_to = time()+2678400;
+                $user->save();
             }
         }
 

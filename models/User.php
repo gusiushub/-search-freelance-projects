@@ -170,13 +170,32 @@ class User extends ActiveRecord  implements IdentityInterface
         $this->password_reset_token = null;
     }
 
+    /**
+     * Проверка оплаты
+     *
+     * @return bool
+     */
+    public static function isPay()
+    {
+        $paidTo = Yii::$app->user->identity->paid_to;
+        if ($paidTo!=null){
+            $true = $paidTo - time();
+            if ($true>=0){
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
 
     /**
      * Проверка пробного периода
      *
      * @return bool
      */
-    public static function trialPeriod($numDay=3)
+    private static function trialPeriod($numDay=3)
     {
         $created = Yii::$app->user->identity->created_at;
         $D = time() - $created;
@@ -188,6 +207,8 @@ class User extends ActiveRecord  implements IdentityInterface
     }
 
     /**
+     * Права доступа
+     *
      * @return bool
      */
     public static function accessPermission()

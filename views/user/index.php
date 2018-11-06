@@ -3,7 +3,7 @@
 use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-var_dump($_POST);
+
 ?>
 <ul class="nav nav-tabs">
     <li class="active">
@@ -65,6 +65,13 @@ var_dump($_POST);
                         <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
                     </div>
                     <hr>
+                <?php if (User::isPay()){ ?>
+                <div class="input-group">
+                    <span class="input-group-addon">Оплачено до: </span>
+                    <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
+                </div>
+                    <hr>
+                <?php } ?>
                 <?= Html::submitButton('Обновить', ['class'=>'btn btn-danger']) ?>
                 <?php ActiveForm::end(); ?>
                 <?php
