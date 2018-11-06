@@ -4,7 +4,7 @@ use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 var_dump($_POST);
-file_put_contents('data.txt',$_POST);
+
 ?>
 <ul class="nav nav-tabs">
     <li class="active"><a href="#">Профиль</a></li>

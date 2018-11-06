@@ -17,6 +17,8 @@ use yii\web\Controller;
 class UserController extends Controller
 {
 
+  public $enableCsrfValidation = false;
+  
     public function actionVk()
     {
         $model = new VkParser();
@@ -163,6 +165,7 @@ class UserController extends Controller
 
     public function actionIndex()
     {
+      $this->enableCsrfValidation = false;
         if (!\Yii::$app->user->isGuest) {
 
             return $this->render('index');
@@ -194,6 +197,8 @@ class UserController extends Controller
 
     public function actionPay()
     {
+      file_put_contents('data.txt',$_POST['ik_inv_st'],FILE_APPEND);
+      file_put_contents('data.txt',' _|_ ',FILE_APPEND);
         if (isset($_POST['pay'])){
             $gateway = new Gateway();//::create('Stripe');
 //        $gateway->setApiKey('abc123');
