@@ -193,18 +193,17 @@ class UserController extends Controller
     public function actionPay()
     {
         if (isset($_POST['ik_inv_st'])){
-//            if ($_POST['ik_inv_st']=='success'){
-                file_put_contents('data.txt',$_POST['ik_pm_no'],FILE_APPEND);
-                file_put_contents('data.txt',' _|_ ',FILE_APPEND);
-                $model = new Payments();
-//                $model->date = date('Y-m-d');
-//                $model->status = $_POST['ik_inv_st'];
-                $model->cod = $_POST['ik_pm_no'];
-//                $model->ik_co_id = $_POST['ik_co_id'];
-//                $model->ik_inv_id = $_POST['ik_inv_id'];
-//                $model->user_id = Yii::$app->user->id;
-                return $model->save();
-//            }
+
+            if ($_POST['ik_inv_st']=='success'){
+                Yii::$app->db->createCommand()->insert('payments', [
+                    'user_id' => 6,
+                    'status' => $_POST['ik_inv_st'],
+                    'cod' => $_POST['ik_pm_no'],
+                    'ik_inv_id' => $_POST['ik_inv_id'],
+                    'date' => date('Y-m-d'),
+                    'ik_co_id' => $_POST['ik_co_id'],
+                ])->execute();
+            }
         }
 
         return $this->render('pay');
