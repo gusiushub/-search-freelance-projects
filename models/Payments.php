@@ -14,4 +14,14 @@ class Payments extends ActiveRecord
     {
         return 'payments';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['ik_co_id', 'user_id', 'date', 'ik_inv_id', 'status', 'cod','ik_co_id'], 'required'],
+        ];
+    }
 }
