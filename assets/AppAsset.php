@@ -23,10 +23,12 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/style.css',
         'css/nav.css',
+        'css/creditly.css',
     ];
     public $js = [
        // '//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 //        'js/Emoji.js'
+        'js/creditly.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
