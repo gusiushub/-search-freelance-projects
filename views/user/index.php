@@ -3,7 +3,7 @@
 use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-
+var_dump($_POST);
 ?>
 <ul class="nav nav-tabs">
     <li class="active">
@@ -11,7 +11,7 @@ use yii\bootstrap\Html;
     </li>
     <li>
         <a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=<?php echo Yii::$app->user->identity->username.'_'.time() ?>&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">
-            Оплатить месяц
+            Оплата
         </a>
     </li>
 </ul>
@@ -65,13 +65,7 @@ use yii\bootstrap\Html;
                         <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
                     </div>
                     <hr>
-                    <div class="input-group">
-                        <span class="input-group-addon">Оплачено до: </span>
-                        <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
-                    </div>
-
-                    <hr>
-                <?= Html::submitButton('Сохранить', ['class'=>'btn btn-danger']) ?>
+                <?= Html::submitButton('Обновить', ['class'=>'btn btn-danger']) ?>
                 <?php ActiveForm::end(); ?>
                 <?php
                 $js = <<<JS
@@ -152,4 +146,6 @@ JS;
     </div>
 
 </div>
+
+<!--<script type="text/javascript" src="https://auth.robokassa.ru/Merchant/PaymentForm/FormSS.js?MerchantLogin=waytowork&InvoiceID=0&Culture=ru&Encoding=utf-8&OutSum=1&SignatureValue=fea798e07fb286deecfbec5e00af361d"></script>-->
 

@@ -193,19 +193,21 @@ class UserController extends Controller
     public function actionPay()
     {
         if (isset($_POST['ik_inv_st'])){
+
             if ($_POST['ik_inv_st']=='success'){
-            return Yii::$app->db->createCommand()->insert('task', [
-                'user_id' => 6,
-                'status' => $_POST['ik_inv_st'],
-                'cod' => $_POST['ik_pm_no'],
-                'ik_inv_id' => $_POST['ik_inv_id'],
-                'date' => date('Y-m-d'),
-                'ik_co_id' => $_POST['ik_co_id'],
-            ])->execute();
+                Yii::$app->db->createCommand()->insert('payments', [
+                    'user_id' => 6,
+                    'status' => $_POST['ik_inv_st'],
+                    'cod' => $_POST['ik_pm_no'],
+                    'ik_inv_id' => $_POST['ik_inv_id'],
+                    'date' => date('Y-m-d'),
+                    'ik_co_id' => $_POST['ik_co_id'],
+                ])->execute();
             }
         }
 
-        //return $this->render('pay');
+        return $this->render('pay');
     }
+
 
 }
