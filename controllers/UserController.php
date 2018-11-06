@@ -197,13 +197,13 @@ class UserController extends Controller
                 file_put_contents('data.txt',$_POST['ik_pm_no'],FILE_APPEND);
                 file_put_contents('data.txt',' _|_ ',FILE_APPEND);
                 $model = new Payments();
-                $model->date = date('Y-m-d');
+//                $model->date = date('Y-m-d');
                 $model->status = $_POST['ik_inv_st'];
                 $model->cod = $_POST['ik_pm_no'];
-                $model->ik_co_id = $_POST['ik_co_id'];
-                $model->ik_inv_id = $_POST['ik_inv_id'];
-                $model->user_id = Yii::$app->user->id;
-                $model->save();
+//                $model->ik_co_id = $_POST['ik_co_id'];
+//                $model->ik_inv_id = $_POST['ik_inv_id'];
+//                $model->user_id = Yii::$app->user->id;
+                return $model->save();
             }
         }
 
