@@ -230,7 +230,7 @@ class UserController extends Controller
 
 
 
-        file_put_contents('1.txt', "Логин: $_POST[ik_x_id], сум: $_POST[ik_am]");
+//        file_put_contents('1.txt', "Логин: $_POST[ik_x_id], сум: $_POST[ik_am]");
 
 
 //        var_dump($_POST);
