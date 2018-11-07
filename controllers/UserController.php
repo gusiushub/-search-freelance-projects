@@ -8,9 +8,9 @@ use app\models\Payments;
 use app\models\SettingForm;
 use app\models\Task;
 
-use app\models\User;
+
 use phpQuery;
-//use app\models\VkParser;
+
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
@@ -213,8 +213,13 @@ class UserController extends Controller
             }
 
             try {
-                $paid_to = time() + 2678400;
-                Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to<time()) {
+                    $paid_to = time() + 2678400;
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
+                    $paid_to = Yii::$app->user->identity->paid_to+2678400;
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                }
             } catch (Exception $e) {
                 echo 'error '. $e;
             }
