@@ -193,7 +193,7 @@ class UserController extends Controller
 
     public function actionPay()
     {
-        var_dump(Yii::$app->user->id);
+        var_dump(time()+2678400);
         if (isset($_POST['ik_inv_st'])){
 
             if ($_POST['ik_inv_st']=='success'){
@@ -207,9 +207,9 @@ class UserController extends Controller
                         'ik_co_id' => $_POST['ik_co_id'],
                     ])->execute();
 
-                    //$sql = ;
+//                    $sql = 'UPDATE user SET paid_to = ' . time() + 2678400 .'" WHERE id=' . Yii::$app->user->id;
 
-                    Yii::$app->db->createCommand('UPDATE user SET paid_to = ' . time() + 2678400 .' WHERE id=' . Yii::$app->user->id)->execute();
+                    Yii::$app->db->createCommand()->update('user',['paid_to'=>time() + 2678400],'id>'.Yii::$app->user->id)->execute();
                 }catch (\Exception $e){
                     throw $e;
                 }
