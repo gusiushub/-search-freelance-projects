@@ -256,5 +256,14 @@ class User extends ActiveRecord  implements IdentityInterface
         }
 
     }
+    
+    public static function setPayDay($timeTo)
+    {
+    	$user = User ::find()->where(['id'=>Yii::$app->user->id])->one();
+    
+    	$user->paid_to = $timeTo;
+    	// $this->username = Yii::$app->user->identity->username;
+    	$user->save();
+    }
 
 }

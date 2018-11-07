@@ -105,7 +105,7 @@ $posts= [
             <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()-604800)]) ?>
         </div>
     </div>
-    <div  class="btn-group-sm">
+    <div  class="text-centr">
         <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger',"style"=>"margin: 5px; width:30%" ]) ?>
         <?= Html::resetButton ('Сброс', ['class' => 'btn btn-default',"style"=>"margin: 5px; width:30% "]) ?>
     </div>

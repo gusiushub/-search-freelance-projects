@@ -32,7 +32,7 @@ class rob
         $query = $this->curl("https://api.vk.com/method/wall.get?owner_id=".$this->id_group_rob."&count=100&v=5.42&access_token=".$this->token."");
         $array_info = json_decode($query, true);
 
-        for($i=0;$i<10;$i++) {
+        for($i=0;$i<50;$i++) {
 
             echo 'Номер '.$i;
             echo "\n";

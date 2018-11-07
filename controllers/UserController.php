@@ -19,13 +19,6 @@ class UserController extends Controller
 
     public $enableCsrfValidation = false;
 
-//    public function actionVk()
-//    {
-//        $model = new VkParser();
-//        $model->Login('89859929791','gusigusi');
-//        $html = $model->search('https://vk.com/php2all');
-//        var_dump($html);
-//    }
 
     public function actionTest()
     {
@@ -49,6 +42,12 @@ class UserController extends Controller
                 ])->execute();
             }
             }
+    }
+    
+    public function actionYa()
+    {
+    	//$user = new User();
+    	 User::setPayDay(1133311);
     }
 
 
@@ -184,15 +183,6 @@ class UserController extends Controller
         }
     }
 
-//    public function actionSetting()
-//    {
-//        if (!\Yii::$app->user->isGuest) {
-//            $model = new SettingForm();
-//            return $this->render('setting', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
 
     /**
      * @throws Exception
@@ -227,13 +217,17 @@ class UserController extends Controller
                 'paid_to'=>time()+2678400,
         ])->execute();
 
-        Yii::$app->db
-            ->createCommand()
-            ->update('payments', [
-//            'user_id' => $_POST['ik_x_id'],
-//            'price' => $_POST['ik_am'],
-                'paid_to'=>time()+2678400,
-            ],'user_id=:id',[':id'=>Yii::$app->user->id])->execute();
+
+
+		User::setPayDay(345678);
+
+//         Yii::$app->db
+//             ->createCommand()
+//             ->update('payments', [
+// //            'user_id' => $_POST['ik_x_id'],
+// //            'price' => $_POST['ik_am'],
+//                 'paid_to'=>time()+2678400,
+//             ],'user_id=:id',[':id'=>Yii::$app->user->id])->execute();
 
 //        Yii::$app->db
 //            ->createCommand()

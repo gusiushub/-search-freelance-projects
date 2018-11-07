@@ -19,15 +19,15 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
         	</p>
 <!--        <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>--><?//= HtmlPurifier::process(trim($model->text)) ?><!--</p>-->
 
-        <span class="media-left col-lg-3">
+        <span class="media-left col-lg-3 col-sm-3">
             <?= Html::a(Html::encode('Подробнее...'), ['view', 'id' => $model->id]).' ' ?>
         </span>
-        <span class="col-lg-4">
+        <span class="col-lg-4 col-sm-4">
             <?php
             echo('Дата:  '. $model->date .'  Время: '. date("H:i",$model->time_unix));
             ?>
         </span>
-        <span class="media-right col-lg-3">Оплата:
+        <span class="media-right col-lg-3 col-sm-3">Оплата:
             <b><?php if ($model->price==0 or $model->price==1){
                 echo 'договор';
             } else{?>
