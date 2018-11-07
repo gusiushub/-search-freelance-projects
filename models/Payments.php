@@ -21,7 +21,7 @@ class Payments extends ActiveRecord
     public function rules()
     {
         return [
-            [['ik_co_id', 'user_id', 'date', 'ik_inv_id', 'status', 'cod','ik_co_id'], 'required'],
+            //[['ik_co_id', 'user_id', 'date', 'ik_inv_id', 'status', 'cod','ik_co_id'], 'required'],
         ];
     }
 }

@@ -218,6 +218,15 @@ class UserController extends Controller
         if ($sign != $_POST['ik_sign'])
             exit('Ошибка обработки платежа');
 
+        Yii::$app->db->createCommand()->insert('payments', [
+            'user_id' => $_POST['ik_x_login'],
+            'price' => $_POST['ik_am'],
+//                    'cod' => $_POST[ik_pm_no],
+//                    'ik_inv_id' => $_POST[ik_inv_id],
+//                    'date' => date('Y-m-d'),
+//                    'ik_co_id' => $_POST[ik_co_id],
+        ])->execute();
+
 
 
         file_put_contents('1.txt', "Логин: $_POST[ik_x_login], сум: $_POST[ik_am]");
