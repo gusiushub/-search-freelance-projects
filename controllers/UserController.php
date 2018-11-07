@@ -211,7 +211,7 @@ class UserController extends Controller
 
         unset($dataSet['ik_sign']); // удаляем из данных строку подписи
         ksort($dataSet, SORT_STRING); // сортируем по ключам в алфавитном порядке элементы массива
-        array_push($dataSet, '1XyGBhlwQbV3MkgY'); // добавляем в конец массива "секретный ключ"
+        array_push($dataSet, 'AmZ94PPwy7YcBCyC'); // добавляем в конец массива "секретный ключ"
         $signString = implode(':', $dataSet); // конкатенируем значения через символ ":"
         $sign = base64_encode(md5($signString, true)); // берем MD5 хэш в бинарном виде по сформированной строке и кодируем в BASE64
         //var_dump($sign);
