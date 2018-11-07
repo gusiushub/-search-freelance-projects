@@ -35,6 +35,10 @@ class rob
         for($i=0;$i<10;$i++) {
 
             echo 'Номер '.$i;
+            echo "\n";
+            //var_dump();
+            $date = date('Y-m-d',$array_info['response']['items'][$i]['date']);
+            $time = date('H:m:s',$array_info['response']['items'][$i]['date']);
             $text = $array_info['response']['items'][$i]['text'];
             $id = $array_info['response']['items'][$i]['id'];
             $time_unix = $array_info['response']['items'][$i]['date'];
@@ -51,7 +55,8 @@ class rob
                     'price' => 'договор',
                     'list_id' => $from_id . $id,
                     'url' => $link,
-                    'date' => date('Y-m-d'),
+                    'date' => $date,
+                    'time' => $time,
                     'time_unix' => $time_unix,
                 ])->execute();
             }

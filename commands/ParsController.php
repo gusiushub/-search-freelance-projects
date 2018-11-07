@@ -70,6 +70,10 @@ class ParsController extends Controller
             if(!$unic){
                 echo "Запись в бд нового поста \n";
 
+				$unixTime = strtotime($post['publication_time']);
+				$date = date('Y-m-d',$unixTime);
+				$time = date('H:m:s',$unixTime);
+			
                 Yii::$app->db->createCommand()->insert('task', [
                     'site_id' => 6,
                     'title' => $post['name'],
@@ -77,7 +81,8 @@ class ParsController extends Controller
                     'price' => (int)$post['budget_amount'],
                     'list_id' => (int)$post['project_id'],
                     'url' => $post['url'],
-                    'date' => date('Y-m-d'),
+                    'date' => $date,
+                    'time' => $time,
                     'time_unix' => (int)(time()),
                 ])->execute();
             }

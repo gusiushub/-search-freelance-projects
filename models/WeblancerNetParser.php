@@ -172,13 +172,17 @@ class WeblancerNetParser extends Model
 
         $unic =Task::find()->where(['list_id' => $list_id])->exists();
 
-        if($unic) {
+        if ($unic) {
+        	// var_dump(date('Y-m-d',$publishDate[0]));
+        	$date = date('Y-m-d',(int)$publishDate[0]);
+        	$time = date('H:m:s',(int)$publishDate[0]);
             $description = str_replace('<br />','',trim(htmlspecialchars_decode($projectText)));
             $item->categories_id = $category > 0 ? $category : 9;
             $item->text = $description;
+            $item->time = $time;
             $item->title = $name[0];
             $item->url = 'https://www.weblancer.net'.$url2;
-            $item->date = date('Y-m-d');
+            $item->date = $date;
             $item->save(false);
         }
     }
