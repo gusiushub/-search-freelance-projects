@@ -223,9 +223,9 @@ class UserController extends Controller
             'price' => $_POST['ik_am'],
             'status' => 'success',
                     'cod' => $_POST['ik_pm_no'],
-//                    'ik_inv_id' => $_POST[ik_inv_id],
+                    'ik_inv_id' => $_POST[ik_inv_id],
                     'date' => $_POST['ik_exp'],
-//                    'ik_co_id' => $_POST[ik_exp],
+                    'ik_co_id' => $_POST['ik_co_id'],
         ])->execute();
 
 
