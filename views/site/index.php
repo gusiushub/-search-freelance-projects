@@ -34,19 +34,19 @@ $this->title = 'Главная';
         </div>
     </div>
     <div class="col-lg-12 col-sm-12">
-        <div class="col-lg-offset-3 col-lg-8 col-sm-8">
+        <div class="col-lg-offset-2 col-lg-8 col-sm-8">
             <br>
             <p>
-                <div class="text-block-2">
+                <div class="text-center">
                     <h3>Перестань терять время и деньги с нами!</h3>
                 </div>
             </p>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="col-lg-offset-4 col-lg-8">
+    <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-offset-4  col-sm-offset-4 col-lg-4 col-sm-4">
             <br>
-            <p class="col-lg-offset-1"><a href="/site/signup" class="btn btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a></p>
+            <p class="text-center"><a href="/site/signup" class="btn btn-danger">ЗАРЕГИСТРИРОВАТЬСЯ</a></p>
         </div>
     </div>
 
