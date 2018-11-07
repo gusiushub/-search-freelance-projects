@@ -4,8 +4,6 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
-use app\models\Payments;
-use app\models\SettingForm;
 use app\models\Task;
 
 
@@ -159,6 +157,9 @@ class UserController extends Controller
         return $this->render('pay');
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         $this->enableCsrfValidation = false;
@@ -172,7 +173,7 @@ class UserController extends Controller
     /**
      * Logout action.
      *
-     * @return Response
+     * @return \yii\web\Response
      */
     public function actionLogout()
     {
@@ -182,18 +183,46 @@ class UserController extends Controller
         }
     }
 
-    public function actionSetting()
-    {
-        if (!\Yii::$app->user->isGuest) {
-            $model = new SettingForm();
-            return $this->render('setting', [
-                'model' => $model,
-            ]);
-        }
-    }
+//    public function actionSetting()
+//    {
+//        if (!\Yii::$app->user->isGuest) {
+//            $model = new SettingForm();
+//            return $this->render('setting', [
+//                'model' => $model,
+//            ]);
+//        }
+//    }
 
+    /**
+     * @throws Exception
+     */
     public function actionPay()
     {
+
+
+
+        $dataSet = $_POST;
+
+
+        if (!$dataSet)
+            exit('Ошибка платежа');
+
+
+        unset($dataSet['ik_sign']); // удаляем из данных строку подписи
+        ksort($dataSet, SORT_STRING); // сортируем по ключам в алфавитном порядке элементы массива
+        array_push($dataSet, 'AmZ94PPwy7YcBCyC'); // добавляем в конец массива "секретный ключ"
+        $signString = implode(':', $dataSet); // конкатенируем значения через символ ":"
+        $sign = base64_encode(md5($signString, true)); // берем MD5 хэш в бинарном виде по сформированной строке и кодируем в BASE64
+        //var_dump($sign);
+
+        if ($sign != $_POST['ik_sign'])
+            exit('Ошибка обработки платежа');
+
+
+
+        file_put_contents('1.txt', "Логин: $_POST[ik_x_login], сум: $_POST[ik_am]");
+
+
 //        var_dump($_POST);
 //        var_dump($_GET);
 //        var_dump($_SESSION);
@@ -217,7 +246,7 @@ class UserController extends Controller
 
 
 
-        file_put_contents('1.txt', "Логин: $_POST[ik_x_login],$_POST[ik_pm_no], $_POST[ik_inv_st],$_POST[ik_inv_id], сум: $_POST[ik_am]");
+//        file_put_contents('1.txt', "Логин: $_POST[ik_x_login],$_POST[ik_pm_no], $_POST[ik_inv_st],$_POST[ik_inv_id], сум: $_POST[ik_am]");
 //        if (isset($_POST['ik_pm_no'])){
 
             //if ($_POST['ik_inv_st']=='success'){
