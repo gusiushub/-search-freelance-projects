@@ -227,7 +227,11 @@ class UserController extends Controller
                 'paid_to'=>time(),
         ])->execute();
 
-
+        Yii::$app->db
+            ->createCommand()
+            ->insert('user', [
+                'payment_status' => 1,
+            ])->execute();
 $user = User::find()->where(['like','id',Yii::$app->user->id])->one();
 $user->paid_id=time() + 2678400;
 $user->save(false);
