@@ -59,12 +59,14 @@ class FreelansimParserRu extends Model
                 }
                 $id = explode('/', $href[0]);
                 $result[] = ['url' => 'https://freelansim.ru' . $href[0], 'name' => $name[0], 'id' => $id[2]];
+
             }
             foreach ($result as $item) {
                 $unic =Task::find()->where(['list_id' => $item['id']])->andWhere('url=:url',[':url'=>$item['url']])->exists();
                 if(!$unic) {
                 if (!empty($item['url']) && !empty($item['id'])) {
                     if ($model = $this->findUrl($item['url'], 3)) {
+
                         $model->site_id = 3;
                         $model->list_id = $item['id'];
                         $model->date = date('Y-m-d');
@@ -139,6 +141,13 @@ class FreelansimParserRu extends Model
         }
         //--END--Бюджет проекта
 
+        $publish = explode(' ',$publish[0]);
+        $day = $publish[0];
+        $month = $publish[1];
+        $year = $publish[2];
+        $year = str_replace(',','',$year);
+        $time = trim($publish[3]);
+//            var_dump($time);
         $item->title = $name[0];
         $item->text = htmlspecialchars_decode($projectText);
         $item->price = $budget;
