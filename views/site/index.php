@@ -128,7 +128,7 @@ $this->title = 'Главная';
             <?= Html::a(Html::encode($task[$i]['title']), ['view', 'id' => $model->id]).' ' ?>
         </h4>
         <a class='pull-right' href='/site/login'>
-            <img  vspace="5" hspace="5" style="margin-left: 5px" class="media-object"  src='../../web/img/<?= HomePage::getImg($task[$i]['site_id']) ?>' width='64x' height='64px' alt='...'>
+            <img  vspace="5" hspace="5" style="margin-left: 5px" class="media-object"  src='../../web/img/<?= HomePage::getImg($task[$i]['site_id']) ?>' width='64px' height='64px' alt='...'>
         </a>
         <div class='media-body'>
 <!--            <a href="/site/login"><h3 style=' font-weight: 600' class='media-heading'>-->
