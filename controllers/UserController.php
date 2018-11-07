@@ -194,7 +194,7 @@ class UserController extends Controller
     public function actionPay()
     {
         //var_dump(time()+2678400);
-        if (isset($_POST['ik_inv_st'])){
+//        if (isset($_POST['ik_inv_st'])){
 
             //if ($_POST['ik_inv_st']=='success'){
                 //try {
@@ -217,9 +217,9 @@ class UserController extends Controller
 //                $user->paid_to = time()+2678400;
 //                $user->save(false);
             //}
-        }
+//        }
 
-        return $this->render('pay');
+//        return $this->render('pay');
     }
 
 
