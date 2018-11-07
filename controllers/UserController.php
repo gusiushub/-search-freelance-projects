@@ -4,7 +4,6 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
-use app\models\Payments;
 use app\models\Task;
 
 
@@ -220,37 +219,31 @@ class UserController extends Controller
         if ($sign != $_POST['ik_sign'])
             exit('Ошибка обработки платежа');
 
-
-
-//        $payments = Payments::find()->where('user_id=:user_id',[':user_id'=>Yii::$app->user->id])->one();
-//        $paid_to = 2678400;
-        try {
-            Yii::$app->db->createCommand()->insert('payments', [
-                'user_id' => $_POST['ik_x_id'],
-                'price' => $_POST['ik_am'],
-                'status' => 'success',
-            ])->execute();
-        }catch (Exception $e) {
-        }
+        return Yii::$app->db->createCommand()->insert('payments', [
+            'user_id' => $_POST['ik_x_id'],
+            'price' => $_POST['ik_am'],
+            'status' => 'success',
+//                    'cod' => $_POST['ik_pm_no'],
+//                    'ik_inv_id' => $_POST['ik_inv_id'],
+//                    'date' => $_POST['ik_exp'],
+//                    'ik_co_id' => $_POST['ik_co_id'],
+        ])->execute();
 
 
 //$user = User::find()->where(['like','id',Yii::$app->user->id])->one();
 //$user->paid_id=time() + 2678400;
 //$user->save(false);
-//        $id = Yii::$app->user->id;
-//        $model = User::find()->where(['id' => $id])->one();
-//        $model->phone = 26784005;
-//        return $model->save();
-//            try {
-                if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
 
-                    $paid_to = time() + 2678400;
-                    return Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
-                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
-                    $paid_to = Yii::$app->user->identity->paid_to;
-                    $paid_to = $paid_to+2678400;
-                    return Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
-                }
+//            try {
+//                if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
+//
+//                    $paid_to = time() + 2678400;
+//                   Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
+//                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
+//                    $paid_to = Yii::$app->user->identity->paid_to;
+//                    $paid_to = $paid_to+2678400;
+//                    Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
+//                }
 
 //        file_put_contents('1.txt', "Логин: $_POST[ik_x_id], сум: $_POST[ik_am]");
 
