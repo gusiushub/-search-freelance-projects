@@ -217,13 +217,11 @@ class UserController extends Controller
 //                    $sql = 'UPDATE user SET paid_to = ' . time() + 2678400 .'" WHERE id=' . Yii::$app->user->id;
                     $paid_to = time() + 2678400;
             try {
-                Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id>' . Yii::$app->user->id)->execute();
+                Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
             } catch (Exception $e) {
                 echo 'error '. $e;
             }
-//                }catch (\Exception $e){
-//                    throw $e;
-//                }
+//
 //                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
 //                $user->paid_to = time()+2678400;
 //                $user->save(false);
