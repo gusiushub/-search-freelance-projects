@@ -16,7 +16,7 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
         </a>
         <div class='media-body'>
         <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
-        	<?php echo mb_strimwidth(strip_tags ($model->text), 0, 500, "..."); ?>
+        	<?php echo mb_strimwidth(htmlspecialchars(strip_tags ($model->text)), 0, 500, "..."); ?>
         	</p>
 <!--        <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>--><?//= HtmlPurifier::process(trim($model->text)) ?><!--</p>-->
 
