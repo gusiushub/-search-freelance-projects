@@ -41,6 +41,8 @@ class FreelancehuntComParser extends Model
             if ($find = Parser::findOne(['source' => 'freelancehunt.com', 'projectId' => $projectByApi['project_id']])){
                 continue;
             }
+            
+            
             $parser = new Parser([
                 'source' => 'freelancehunt.com',
                 'url' => $projectByApi['url'],
