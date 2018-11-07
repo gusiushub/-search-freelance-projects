@@ -237,10 +237,10 @@ class UserController extends Controller
 //$user = User::find()->where(['like','id',Yii::$app->user->id])->one();
 //$user->paid_id=time() + 2678400;
 //$user->save(false);
-        $id = Yii::$app->user->id;
-        $model = User::find()->where(['id' => $id])->one();
-        $model->phone = 26784005;
-        return $model->save();
+//        $id = Yii::$app->user->id;
+//        $model = User::find()->where(['id' => $id])->one();
+//        $model->phone = 26784005;
+//        return $model->save();
 //            try {
                 if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
 
