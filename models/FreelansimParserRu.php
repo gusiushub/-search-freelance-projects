@@ -64,20 +64,19 @@ class FreelansimParserRu extends Model
             foreach ($result as $item) {
                 $unic =Task::find()->where(['list_id' => $item['id']])->andWhere('url=:url',[':url'=>$item['url']])->exists();
                 if(!$unic) {
-                if (!empty($item['url']) && !empty($item['id'])) {
-                    if ($model = $this->findUrl($item['url'], 3)) {
+                    if (!empty($item['url']) && !empty($item['id'])) {
+                        if ($model = $this->findUrl($item['url'], 3)) {
 
-                        $model->site_id = 3;
-                        $model->list_id = $item['id'];
-                        $model->date = date('Y-m-d');
-                        $model->save(false);
+                            $model->site_id = 3;
+                            $model->list_id = $item['id'];
+//                            $model->date = date('Y-m-d');
+                            $model->save(false);
+                        }
+                        $this->getProgects($item['url'],$item['id']);
                     }
-                    $this->getProgects($item['url'],$item['id']);
                 }
             }
-            }
         }
-        //return true;
     }
 
     /**
@@ -147,12 +146,12 @@ class FreelansimParserRu extends Model
         $year = $publish[2];
         $year = str_replace(',','',$year);
         $time = trim($publish[3]);
-//            var_dump($time);
         $item->title = $name[0];
         $item->text = htmlspecialchars_decode($projectText);
-        $item->price = $budget;
+        $item->price = (int)$budget;
         $item->currency = $currency;
-        $item->date = date('Y-m-d');
+        $item->date = date($year.' '.$month.' '.$day);
+        $item->time = $time;
         $item->url = $url2;
         $item->time_unix = (int)(time());
         $item->save(false);
@@ -166,7 +165,7 @@ class FreelansimParserRu extends Model
     {
         $model = Task::find()->where(['list_id' => 0, 'source' => 'freelance.ua'])->all();
         foreach ($model as $item) {
-//            $item->setError();
+            $item->setError();
         }
     }
 
@@ -370,8 +369,8 @@ class FreelansimParserRu extends Model
 
 
     /**
-     * @param $url
-     * @param $source
+     * @param $list_id
+     * @param $site_id
      * @return Parser|null|static
      */
     protected function findUrl($list_id, $site_id)

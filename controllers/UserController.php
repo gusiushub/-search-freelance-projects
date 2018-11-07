@@ -8,7 +8,7 @@ use app\models\Task;
 
 
 use app\models\User;
-use phpQuery;
+//use phpQuery;
 
 use Yii;
 use yii\db\Exception;
@@ -34,7 +34,7 @@ class UserController extends Controller
 //                    'subcategories_id' => $subCutegory,
 //                    'title' => $job['title'],
                     'text' => $post['description'],
-//                    'price' => trim($job['budget']),
+                    'price' => trim($post['budget']),
                     'list_id' => $post['project_id'],
                     'url' => 'https://fl.ru'.$post['url'],
                     'date' => date('Y-m-d'),
@@ -47,73 +47,73 @@ class UserController extends Controller
     public function actionYa()
     {
     	//$user = new User();
-    	 User::setPayDay(1133311);
+//    	 User::setPayDay(1133311);
     }
 
 
     /**
      * freelance.ru
      */
-    public function actionFreelance()
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://freelance.ru/projects/?spec=577");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        $headers = array();
-        $headers[] = "Connection: keep-alive";
-        $headers[] = "Upgrade-Insecure-Requests: 1";
-        $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 YaBrowser/18.6.1.770 Yowser/2.5 Safari/537.36";
-        $headers[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
-        $headers[] = "Accept-Encoding: gzip, deflate, br";
-        $headers[] = "Accept-Language: ru,en;q=0.9";
-        $headers[] = "Cookie: user_id=H8BvGVtj37BDw38zQKuaAg==; _ym_uid=1533271986837930734; _ym_d=1533271986; last_visit=1533266897502::1533277697502; _ym_isad=1; _ym_visorc_39101460=w";
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close ($ch);
-        preg_match('/(?<=charset=)(.*)(?=(?:")|(?:\'))/iu',$result, $xd);
-        if(strlen($xd['1'])!=0) {$charset=$xd['1'];} else {$charset='';}
-
-        if($charset=='') {
-
-            $zxdsl = iconv($this->detect_encoding($result),'utf-8', $result);
-            $pq = phpQuery::newDocument($zxdsl);
-
-            $posts = $pq->find('div.proj.not_public');
-
-            foreach ($posts as $post) {
-                $pqLink = pq($post);
-                $price[] = $pqLink->find('b.visible-xs.cost_xs')->html();
-            }
-
-            foreach ($posts as $post) {
-                $pqLink = pq($post);
-                $title[] = $pqLink->find('a.ptitle > span')->html();
-                $pq->find('b.visible-xs.cost_xs')->remove();
-                $text[] = $pqLink->find('p > span')->html();
-                $tag[] = $pqLink->find('li.proj-inf.status.pull-left')->html();
-                $href[] = $pqLink->find('a.ptitle')->attr('href');
-            }
-
-            var_dump($href);
-            var_dump($title);
-            var_dump($text);
-            var_dump($tag);
-            var_dump($price);
-            preg_match('/(windows-1251)/iu',$zxdsl, $xd).'<hr />';
-            if(strlen($xd['1'])!=0) {$charset=$xd['1'];} else {$charset='';}
-
-            if($charset!='') {$result=$zxdsl;}
-            else
-            {}
-
-        }
-
-    }
+//    public function actionFreelance()
+//    {
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, "https://freelance.ru/projects/?spec=577");
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+//        $headers = array();
+//        $headers[] = "Connection: keep-alive";
+//        $headers[] = "Upgrade-Insecure-Requests: 1";
+//        $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 YaBrowser/18.6.1.770 Yowser/2.5 Safari/537.36";
+//        $headers[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+//        $headers[] = "Accept-Encoding: gzip, deflate, br";
+//        $headers[] = "Accept-Language: ru,en;q=0.9";
+//        $headers[] = "Cookie: user_id=H8BvGVtj37BDw38zQKuaAg==; _ym_uid=1533271986837930734; _ym_d=1533271986; last_visit=1533266897502::1533277697502; _ym_isad=1; _ym_visorc_39101460=w";
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        $result = curl_exec($ch);
+//        if (curl_errno($ch)) {
+//            echo 'Error:' . curl_error($ch);
+//        }
+//        curl_close ($ch);
+//        preg_match('/(?<=charset=)(.*)(?=(?:")|(?:\'))/iu',$result, $xd);
+//        if(strlen($xd['1'])!=0) {$charset=$xd['1'];} else {$charset='';}
+//
+//        if($charset=='') {
+//
+//            $zxdsl = iconv($this->detect_encoding($result),'utf-8', $result);
+//            $pq = phpQuery::newDocument($zxdsl);
+//
+//            $posts = $pq->find('div.proj.not_public');
+//
+//            foreach ($posts as $post) {
+//                $pqLink = pq($post);
+//                $price[] = $pqLink->find('b.visible-xs.cost_xs')->html();
+//            }
+//
+//            foreach ($posts as $post) {
+//                $pqLink = pq($post);
+//                $title[] = $pqLink->find('a.ptitle > span')->html();
+//                $pq->find('b.visible-xs.cost_xs')->remove();
+//                $text[] = $pqLink->find('p > span')->html();
+//                $tag[] = $pqLink->find('li.proj-inf.status.pull-left')->html();
+//                $href[] = $pqLink->find('a.ptitle')->attr('href');
+//            }
+//
+//            var_dump($href);
+//            var_dump($title);
+//            var_dump($text);
+//            var_dump($tag);
+//            var_dump($price);
+//            preg_match('/(windows-1251)/iu',$zxdsl, $xd).'<hr />';
+//            if(strlen($xd['1'])!=0) {$charset=$xd['1'];} else {$charset='';}
+//
+//            if($charset!='') {$result=$zxdsl;}
+//            else
+//            {}
+//
+//        }
+//
+//    }
 
     /**
      * @param $string

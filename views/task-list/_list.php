@@ -2,7 +2,6 @@
 
 use app\models\Site;
 use yii\helpers\Html;
-use yii\helpers\HtmlPurifier;
 
 $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->one(); ?>
 <hr border="3px solid grey" color="grey">
@@ -16,17 +15,16 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
             <a class="pull-left" href="#">
                 <img  vspace="5" hspace="5" style="margin-right: 15px" class="media-object" src="../../web/img/<?php  echo $site['logo']; ?>" width="64px" height="64px" alt="...">
             </a>
-        <p  style='max-height: 80px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
-        	<?php echo mb_strimwidth(htmlspecialchars(strip_tags ($model->text)), 0, 350, "..."); ?>
+            <p style='max-height: 80px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
+        	<?=  mb_strimwidth(htmlspecialchars(strip_tags ($model->text)), 0, 350, "..."); ?>
         	</p>
-<!--        <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>--><?//= HtmlPurifier::process(trim($model->text)) ?><!--</p>-->
 
         <span class="col-lg-3 col-sm-3 media-left">
             <?= Html::a(Html::encode('Подробнее...'), ['view', 'id' => $model->id]).' ' ?>
         </span>
         <span class="col-lg-3 col-sm-3">
             <?php
-            echo($model->date .' | '. date("H:i",$model->time_unix));
+            echo($model->date .' | '. $model->time);
             ?>
         </span>
         <span class="media-right col-lg-3 col-sm-3">Оплата:
@@ -37,7 +35,6 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
             <?php } ?>
             </b>
         </span>
-<!--                    <p><a href="--><?//= HtmlPurifier::process($model->url) ?><!--">--><?//= HtmlPurifier::process($model->url) ?><!--</a> </p>-->
     </div>
 
 </p>

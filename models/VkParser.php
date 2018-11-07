@@ -36,7 +36,6 @@ class rob
 
             echo 'Номер '.$i;
             echo "\n";
-            //var_dump();
             $date = date('Y-m-d',$array_info['response']['items'][$i]['date']);
             $time = date('H:m:s',$array_info['response']['items'][$i]['date']);
             $text = $array_info['response']['items'][$i]['text'];

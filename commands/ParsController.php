@@ -4,8 +4,6 @@ namespace app\commands;
 
 use app\models\FlParser;
 use app\models\FreelancehuntComParser;
-//use app\models\FreelanceParser;
-
 use app\models\FreelanceRuParser;
 use app\models\FreelansimParserRu;
 use app\models\Task;
@@ -24,12 +22,17 @@ class ParsController extends Controller
     {
         $start = microtime(true);
         $this->actionFreelansim();
+        echo "Время выполнения (actionFreelansim): ".(microtime(true)-$start)." секунд.\n";
         $this->actionFreelancehunt();
+        echo "Время выполнения actionFreelancehunt: ".(microtime(true)-$start)." секунд.\n";
         $this->actionWeblancer();
+        echo "Время выполнения actionWeblancer: ".(microtime(true)-$start)." секунд.\n";
         $this->actionFreelance();
+        echo "Время выполнения actionFreelance: ".(microtime(true)-$start)." секунд.\n";
         $this->actionVk();
+        echo "Время выполнения actionVk: ".(microtime(true)-$start)." секунд.\n";
         $this->actionFl();
-        echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";
+        echo "Время выполнения actionFl: ".(microtime(true)-$start)." секунд.\n";
     }
 
     /**
@@ -54,7 +57,7 @@ class ParsController extends Controller
     public function actionWeblancer()
     {
         $parseUrl = new WeblancerNetParser();
-        $parseUrl->getUrlProgects(2) ;
+        $parseUrl->getUrlProgects(3) ;
     }
 
     /**
@@ -94,13 +97,6 @@ class ParsController extends Controller
      */
     public function actionFreelansim()
     {
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=marketing_smm',3,3);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_backend',1,1);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_frontend',1,2);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=content_copywriting',6,5);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_desktop',1,9);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',6,11);
-//        FreelansimParser::run('https://freelansim.ru/tasks?categories=testing_sites',5,12);
         $parseUrl = new FreelansimParserRu();
         $parseUrl->getUrlProgects(2,'development_all_inclusive');
     }

@@ -89,7 +89,7 @@ class User extends ActiveRecord  implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             [['payment_status'],'integer'],
-//            ['paid_to', 'integer']
+            ['paid_to', 'integer']
         ];
     }
 

@@ -17,7 +17,6 @@ class FlParser extends Model
 //        $field = $field['list_id'];//вывод последнего id из бд
         foreach ($jobs as $job){
             $unic =Task::find()->where(['list_id' => $job['id']])->exists();
-            //var_damp($job);
             if(!$unic){
                 echo "Запись в бд нового поста \n";
                 Yii::$app->db->createCommand()->insert('task', [
@@ -30,6 +29,7 @@ class FlParser extends Model
                     'list_id' => $job['id'],
                     'url' => 'https://fl.ru'.$job['link'],
                     'date' => date('Y-m-d'),
+                    'time' => date('H:m:s'),
                     'time_unix' => (int)(time()),
                 ])->execute();
             }

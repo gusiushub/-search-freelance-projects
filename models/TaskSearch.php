@@ -33,7 +33,7 @@ class TaskSearch extends Task
                 'check_time1','time_unix','check_time3',
                 'check_time6','check_time7dn','check_price'],
                 'integer'],
-            [['title', 'date', 'categories_id','text', 'status','subcategories_id','site_id',
+            [['title', 'date', 'categories_id','text', 'status','site_id',
                 'check_time1','check_time3','check_time6','check_time7dn'], 'safe'],
         ];
     }
@@ -50,7 +50,7 @@ class TaskSearch extends Task
             'check_time6'       => 'За последние 6 часов',
             'check_time7dn'     => 'За неделю',
             'min_price'         => 'Минимальная цена',
-            'subcategories_id'  => 'Подкатегория',
+//            'subcategories_id'  => 'Подкатегория',
             'categories_id'     => '',
 //            'categories_id'     => 'Категория',
             'title'             => '',
@@ -80,7 +80,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find()->groupBy('time')->orderBy('date,time DESC');//->orderBy('id DESC');
+        $query = Task::find()->groupBy('date')->orderBy('date DESC');//->orderBy('id DESC');
 
         // add conditions that should always apply here
 
@@ -139,7 +139,7 @@ class TaskSearch extends Task
             $query  ->andFilterWhere(['like', 'title', $this->title])
                 ->andFilterWhere(['categories_id'=>$categ])
 //                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
-                ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
+//                ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
                 ->andFilterWhere(['>','site_id',0])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                 ->andFilterWhere(['>=', 'time_unix', $this->check_time3])
@@ -151,7 +151,7 @@ class TaskSearch extends Task
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['categories_id'=>$categ])
 //                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
-                    ->andFilterWhere([ 'subcategories_id'=>$subcat ])
+//                    ->andFilterWhere([ 'subcategories_id'=>$subcat ])
                     ->andFilterWhere(['site_id'=>$site])
                     ->andFilterWhere(['>=', 'price', $this->min_price])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
@@ -165,7 +165,7 @@ class TaskSearch extends Task
             $query  ->andFilterWhere(['like', 'title', $this->title])
                     ->andFilterWhere(['categories_id'=>$categ])
 //                    ->andFilterWhere(['like', 'categories_id', $this->categories_id])
-                    ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
+//                    ->andFilterWhere( [ 'subcategories_id'=>$subcat ])
                     ->andFilterWhere(['site_id'=>$site])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time1])
                     ->andFilterWhere(['>=', 'time_unix', $this->check_time3])

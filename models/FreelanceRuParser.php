@@ -74,7 +74,7 @@ class FreelanceRuParser extends Model
                     if ($model = $this->findUrl($item['url'], 4)) {
 //                        $model->url = $item['url'];
                         $published = explode(' ',$item['published']);
-                        var_dump(explode(' ',$item['published']));
+//                        var_dump(explode(' ',$item['published']));
                         $model->time = $published[1];
                         $model->date = $published[0];
                         $model->site_id = 4;
@@ -189,7 +189,7 @@ class FreelanceRuParser extends Model
     {
         $model = Task::find()->where(['parse' => 0, 'source' => 'freelance.ua'])->all();
         foreach ($model as $item) {
-            $item->setError();
+//            $item->setError();
         }
     }
     /**
