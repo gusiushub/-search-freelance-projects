@@ -21,7 +21,7 @@ class User extends ActiveRecord  implements IdentityInterface
     //    public $username;
     //    public $password;
         public $authKey;
-        public $paid_to;
+//        public $paid_to;
     //    public $accessToken;
 //    public $f_name;
 
@@ -88,7 +88,7 @@ class User extends ActiveRecord  implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            ['paid_to', 'integer']
+//            ['paid_to', 'integer']
         ];
     }
 

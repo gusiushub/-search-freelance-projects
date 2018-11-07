@@ -230,7 +230,7 @@ class UserController extends Controller
         ])->execute();
 
 
-$user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+$user = User::find()->where(['like','id',Yii::$app->user->id])->one();
 $user->paid_id=time() + 2678400;
 $user->save(false);
 
