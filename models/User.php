@@ -219,6 +219,8 @@ class User extends ActiveRecord  implements IdentityInterface
             return true;
         }elseif (self::trialPeriod()){
             return true;
+        }elseif (self::isPay()){
+            return true;
         }
 
         return false;

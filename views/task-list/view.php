@@ -29,11 +29,13 @@ $this->title = $model->title;
                 'value' => function($model){
                     $site = Site::findOne($model['site_id']);
                     echo "    <div class='media'>
-                                 <a class='pull-right' href='#'>
-                                    <img    class='media-object' src='../../web/img/".$site['logo']."' width='100x' height='100px' alt='...'>
-                                 </a>
+                                 
                                  <div class='media-body'>
-                                   <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3><hr>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+                                 
+                                   <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3><hr><a class='pull-right' href='#'>
+                                    <img  align='right'  vspace='5' hspace='5'   class='media-object' src='../../web/img/".$site['logo']."' width='64x' height='64px' alt='...'>
+                                 </a>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+
                     //return $data->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
                     if ($model['price']==0):
                         echo "<br> <br><p class='media-left'><b>Оплата по договору</b></p>";
