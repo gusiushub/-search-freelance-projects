@@ -11,24 +11,25 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
         <h4 class="media-heading">
                 <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
         </h4>
-        <a class="pull-left" href="#">
-            <img  vspace="5" hspace="5" style="margin-right: 5px" class="media-object" src="../../web/img/<?php  echo $site['logo']; ?>" width="64px" height="64px" alt="...">
-        </a>
+
         <div class='media-body'>
-        <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
-        	<?php echo mb_strimwidth(htmlspecialchars(strip_tags ($model->text)), 0, 500, "..."); ?>
+            <a class="pull-left" href="#">
+                <img  vspace="5" hspace="5" style="margin-right: 15px" class="media-object" src="../../web/img/<?php  echo $site['logo']; ?>" width="64px" height="64px" alt="...">
+            </a>
+        <p  style='max-height: 80px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>
+        	<?php echo mb_strimwidth(htmlspecialchars(strip_tags ($model->text)), 0, 350, "..."); ?>
         	</p>
 <!--        <p style='max-height: 60px; overflow: hidden; text-overflow: ellipsis" white-space: nowrap;'>--><?//= HtmlPurifier::process(trim($model->text)) ?><!--</p>-->
 
-        <span class="media-left col-lg-3">
+        <span class="col-lg-3 col-sm-3 media-left">
             <?= Html::a(Html::encode('Подробнее...'), ['view', 'id' => $model->id]).' ' ?>
         </span>
-        <span class="col-lg-4">
+        <span class="col-lg-3 col-sm-3">
             <?php
-            echo('Дата:  '. $model->date .'  Время: '. date("H:i",$model->time_unix));
+            echo($model->date .' | '. date("H:i",$model->time_unix));
             ?>
         </span>
-        <span class="media-right col-lg-3">Оплата:
+        <span class="media-right col-lg-3 col-sm-3">Оплата:
             <b><?php if ($model->price==0 or $model->price==1){
                 echo 'договор';
             } else{?>
@@ -37,7 +38,6 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
             </b>
         </span>
 <!--                    <p><a href="--><?//= HtmlPurifier::process($model->url) ?><!--">--><?//= HtmlPurifier::process($model->url) ?><!--</a> </p>-->
-    </div>
     </div>
 
 </p>

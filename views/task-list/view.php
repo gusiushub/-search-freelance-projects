@@ -35,7 +35,7 @@ $this->title = $model->title;
                                    <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3>
                                    <hr>
                                    <a class='pull-right' href='#'>
-                                    <img  align='right'  vspace='5' hspace='5'   class='media-object' src='../../web/img/".$site['logo']."' width='64x' height='64px' alt='...'>
+                                    <img  align='right'  vspace='5' hspace='5'   class='media-object' src='../../web/img/".$site['logo']."' width='150x' height='150x' alt='...'>
                                    </a>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
 
                     //return $data->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';

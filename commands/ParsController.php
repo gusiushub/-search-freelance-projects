@@ -4,7 +4,7 @@ namespace app\commands;
 
 use app\models\FlParser;
 use app\models\FreelancehuntComParser;
-use app\models\FreelanceParser;
+//use app\models\FreelanceParser;
 
 use app\models\FreelanceRuParser;
 use app\models\FreelansimParserRu;
