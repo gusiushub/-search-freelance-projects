@@ -222,14 +222,16 @@ class UserController extends Controller
 
 
 
-        $payments = Payments::find()->where('user_id=:user_id',[':user_id'=>Yii::$app->user->id])->one();
-        $paid_to = 2678400;
-        Yii::$app->db->createCommand()->insert('payments', [
-            'user_id' => $_POST['ik_x_id'],
-            'price' => $_POST['ik_am'],
-            'status' => 'success',
-            'paid_to' => $paid_to,
-        ])->execute();
+//        $payments = Payments::find()->where('user_id=:user_id',[':user_id'=>Yii::$app->user->id])->one();
+//        $paid_to = 2678400;
+        try {
+            Yii::$app->db->createCommand()->insert('payments', [
+                'user_id' => $_POST['ik_x_id'],
+                'price' => $_POST['ik_am'],
+                'status' => 'success',
+            ])->execute();
+        }catch (Exception $e) {
+        }
 
 
 //$user = User::find()->where(['like','id',Yii::$app->user->id])->one();
