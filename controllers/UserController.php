@@ -232,9 +232,7 @@ class UserController extends Controller
             ->update('user', [
                 'payment_status' => 1,
             ],'id=:id',[':id'=>Yii::$app->user->id])->execute();
-$user = User::find()->where(['like','id',Yii::$app->user->id])->one();
-$user->paid_id=time() + 2678400;
-$user->save(false);
+
 
 //            try {
                 if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {

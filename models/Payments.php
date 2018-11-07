@@ -21,7 +21,7 @@ class Payments extends ActiveRecord
     public function rules()
     {
         return [
-            [[ 'user_id','price'], 'required'],
+            [[ 'user_id','price','paid_to'], 'required'],
         ];
     }
 }
