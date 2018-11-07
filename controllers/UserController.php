@@ -235,10 +235,11 @@ class UserController extends Controller
                 if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
 
                     $paid_to = time() + 2678400;
-                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =:id',[ ':id'=> Yii::$app->user->id])->execute();
                 }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
-                    $paid_to = Yii::$app->user->identity->paid_to+2678400;
-                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                    $paid_to = Yii::$app->user->identity->paid_to;
+                    $paid_to = $paid_to+2678400;
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =:id',[ ':id'=> Yii::$app->user->id])->execute();
                 }
 
 //        file_put_contents('1.txt', "Логин: $_POST[ik_x_id], сум: $_POST[ik_am]");
