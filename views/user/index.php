@@ -21,7 +21,7 @@ use yii\bootstrap\Html;
     <input type="hidden" name="ik_co_id" value="5be1d6ae3b1eaf91488b4568">
     <input type="hidden" name="ik_pm_no" value="<?php echo time() ?>">
     <p><input type="text" name="ik_am" placeholder="Сумма"></p>
-    <p><input type="text" name="ik_x_login" placeholder="Логин"></p>
+    <p><input type="hidden" name="ik_x_login" value="<?php echo Yii::$app->user->id ?>"></p>
     <input type="hidden" name="ik_cur" value="RUB">
     <input type="hidden" name="ik_desc" value="Продажа змей">
     <p><input type="submit" value="Оплатить"></p>
