@@ -194,34 +194,61 @@ class UserController extends Controller
 
     public function actionPay()
     {
-        //var_dump(time()+2678400);
-        if (isset($_POST['ik_inv_st'])){
+//        var_dump($_POST);
+//        var_dump($_GET);
+//        var_dump($_SESSION);
+
+//        $dataSet = $_POST;
+//
+//
+//        if (!$dataSet)
+//            exit('Ошибка платежа');
+//
+//
+//        unset($dataSet['ik_sign']); // удаляем из данных строку подписи
+//        ksort($dataSet, SORT_STRING); // сортируем по ключам в алфавитном порядке элементы массива
+//        array_push($dataSet, '5be1d6ae3b1eaf91488b4568'); // добавляем в конец массива "секретный ключ"
+//        $signString = implode(':', $dataSet); // конкатенируем значения через символ ":"
+//        $sign = base64_encode(md5($signString, true)); // берем MD5 хэш в бинарном виде по сформированной строке и кодируем в BASE64
+
+
+//        if ($sign != $_POST['ik_sign'])
+//            exit('Ошибка обработки платежа');
+
+
+
+        file_put_contents('1.txt', "Логин: $_POST[ik_x_login],$_POST[ik_pm_no], $_POST[ik_inv_st],$_POST[ik_inv_id], сум: $_POST[ik_am]");
+//        if (isset($_POST['ik_pm_no'])){
 
             //if ($_POST['ik_inv_st']=='success'){
-            try {
-                    Yii::$app->db->createCommand()->insert('payments', [
+//            try {
+                    return Yii::$app->db->createCommand()->insert('payments', [
                     'user_id' => Yii::$app->user->id,
-                    'status' => $_POST['ik_inv_st'],
-                    'cod' => $_POST['ik_pm_no'],
-                    'ik_inv_id' => $_POST['ik_inv_id'],
-                    'date' => date('Y-m-d'),
-                    'ik_co_id' => $_POST['ik_co_id'],
+                    'status' => $_POST[ik_am],
+//                    'cod' => $_POST[ik_pm_no],
+//                    'ik_inv_id' => $_POST[ik_inv_id],
+//                    'date' => date('Y-m-d'),
+//                    'ik_co_id' => $_POST[ik_co_id],
                 ])->execute();
 
-            } catch (Exception $e) {
-                echo 'error '. $e;
-            }
+//            } catch (Exception $e) {
+//                echo 'error '. $e;
+//            }
 
-            try {
-                $paid_to = time() + 2678400;
-                Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
-            } catch (Exception $e) {
-                echo 'error '. $e;
-            }
+//            try {
+                if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
+                    $paid_to = time() + 2678400;
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
+                    $paid_to = Yii::$app->user->identity->paid_to+2678400;
+                    Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
+                }
+//            } catch (Exception $e) {
+//                echo 'error '. $e;
+//            }
 
-        }
+//        }
 
-//        return $this->render('pay');
     }
 
 

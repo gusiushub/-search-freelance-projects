@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=sitepars',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'mysql:host=localhost;dbname=cb68520_waywork',
+    'username' => 'cb68520_waywork',
+    'password' => 'qwerrewq',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

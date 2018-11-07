@@ -10,11 +10,43 @@ use yii\bootstrap\Html;
         <a href="#">Профиль</a>
     </li>
     <li>
-        <a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=<?php echo Yii::$app->user->identity->username.'_'.time() ?>&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description">
+        <a href="https://sci.interkassa.com/?ik_co_id=5be1d6ae3b1eaf91488b4568&ik_pm_no=<?php echo Yii::$app->user->identity->username.'_'.time() ?>&ik_am=100.00&ik_cur=RUB&ik_desc=Event+Description&ik_sign=<?php echo md5('AmZ94PPwy7YcBCyC') ?>">
             Оплата
         </a>
     </li>
 </ul>
+
+
+<form name="payment" method="post" action="https://sci.interkassa.com/" enctype="utf-8">
+    <input type="hidden" name="ik_co_id" value="5be1d6ae3b1eaf91488b4568">
+    <input type="hidden" name="ik_pm_no" value="<?php echo time() ?>">
+    <p><input type="text" name="ik_am" placeholder="Сумма"></p>
+    <p><input type="text" name="ik_x_login" placeholder="Логин"></p>
+    <input type="hidden" name="ik_cur" value="RUB">
+    <input type="hidden" name="ik_desc" value="Продажа змей">
+    <p><input type="submit" value="Оплатить"></p>
+    <input type="hidden" name="ik_exp" value="2018-11-08" />
+</form>
+
+
+<form id="payment" name="payment" method="post" action="https://sci.interkassa.com/" enctype="utf-8">
+    <input type="hidden" name="ik_co_id" value="5be1d6ae3b1eaf91488b4568" />
+    <input type="hidden" name="ik_pm_no" value="ID_423333" />
+    <input type="hidden" name="ik_am" value="100.00" />
+    <input type="hidden" name="ik_cur" value="RUB" />
+    <input type="hidden" name="ik_desc" value="Event Description" />
+    <input type="hidden" name="ik_suc_u" value="http://waytowork.ru/user/" />
+    <input type="hidden" name="ik_suc_m" value="post" />
+    <input type="hidden" name="ik_fal_u" value="http://waytowork.ru/user/pay" />
+    <input type="hidden" name="ik_fal_m" value="post" />
+    <input type="hidden" name="ik_pnd_u" value="http://waytowork.ru/user/pay" />
+    <input type="hidden" name="ik_pnd_m" value="post" />
+    <input type="hidden" name="ik_exp" value="2018-11-08" />
+    <input type="hidden" name="ik_ltm" value="2592000" />
+    <input type="hidden" name="ik_loc" value="ru" />
+    <input type="hidden" name="ik_enc" value="utf-8" />
+    <input type="submit" value="Pay">
+</form>
 
 <?php if (User::isProfileComplete()!=1){ ?>
 <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -68,11 +100,11 @@ use yii\bootstrap\Html;
                 <?php if (User::isPay()){ ?>
                 <div class="input-group">
                     <span class="input-group-addon">Оплачено до: </span>
-                    <input type="text" class="form-control" value="<?= Yii::$app->user->identity->tariff ?>">
+                    <input type="text" class="form-control" value="<?= date('Y-m-h',(int)Yii::$app->user->identity->paid_to) ?>">
                 </div>
                     <hr>
                 <?php } ?>
-                <?= Html::submitButton('Обновить', ['class'=>'btn btn-danger']) ?>
+                <?= Html::submitButton('Сохранить', ['class'=>'btn btn-danger']) ?>
                 <?php ActiveForm::end(); ?>
                 <?php
                 $js = <<<JS

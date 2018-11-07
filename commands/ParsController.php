@@ -21,11 +21,11 @@ class ParsController extends Controller
     {
         $start = microtime(true);
         $this->actionFreelansim();
-        $this->actionFl();
         $this->actionFreelancehunt();
         $this->actionWeblancer();
         $this->actionFreelance();
         $this->actionVk();
+        $this->actionFl();
         echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";
     }
 
