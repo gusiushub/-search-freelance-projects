@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\models\FreelancehuntComParser;
+use app\models\Payments;
 use app\models\Task;
 
 
@@ -218,15 +219,13 @@ class UserController extends Controller
 
         if ($sign != $_POST['ik_sign'])
             exit('Ошибка обработки платежа');
-
+        $payments = Payments::find()->where(['user_id'=>Yii::$app->user->id])->one();
+        $paid_to = $payments['paid_to']+2678400;
         Yii::$app->db->createCommand()->insert('payments', [
             'user_id' => $_POST['ik_x_id'],
             'price' => $_POST['ik_am'],
             'status' => 'success',
-//                    'cod' => $_POST['ik_pm_no'],
-//                    'ik_inv_id' => $_POST['ik_inv_id'],
-//                    'date' => $_POST['ik_exp'],
-//                    'ik_co_id' => $_POST['ik_co_id'],
+            'paid_to' => $paid_to,
         ])->execute();
 
 
@@ -235,7 +234,7 @@ class UserController extends Controller
 //$user->save(false);
         $id = Yii::$app->user->id;
         $model = User::find()->where(['id' => $id])->one();
-        $model->paid_to = 26784005;
+        $model->phone = 26784005;
         return $model->save();
 //            try {
                 if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
