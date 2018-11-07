@@ -197,7 +197,7 @@ class UserController extends Controller
         if (isset($_POST['ik_inv_st'])){
 
             if ($_POST['ik_inv_st']=='success'){
-                try {
+                //try {
                     Yii::$app->db->createCommand()->insert('payments', [
                         'user_id' => Yii::$app->user->identity->id,
                         'status' => $_POST['ik_inv_st'],
@@ -208,11 +208,11 @@ class UserController extends Controller
                     ])->execute();
 
 //                    $sql = 'UPDATE user SET paid_to = ' . time() + 2678400 .'" WHERE id=' . Yii::$app->user->id;
-
-                    Yii::$app->db->createCommand()->update('user',['paid_to'=>time() + 2678400],'id>'.Yii::$app->user->id)->execute();
-                }catch (\Exception $e){
-                    throw $e;
-                }
+                    $paid_to = time() + 2678400;
+                    return Yii::$app->db->createCommand()->update('user',['paid_to'=> $paid_to],'id>'.Yii::$app->user->id)->execute();
+//                }catch (\Exception $e){
+//                    throw $e;
+//                }
 //                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
 //                $user->paid_to = time()+2678400;
 //                $user->save(false);
