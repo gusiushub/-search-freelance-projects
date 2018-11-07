@@ -23,7 +23,7 @@ use yii\bootstrap\Html;
     <p><input type="text" name="ik_am" placeholder="Сумма"></p>
     <p><input type="hidden" name="ik_x_id" value="<?php echo Yii::$app->user->id ?>"></p>
     <input type="hidden" name="ik_cur" value="RUB">
-    <input type="hidden" name="ik_desc" value="Продажа змей">
+    <input type="hidden" name="ik_desc" value="Оплата тарифа">
     <p><input type="submit" value="Оплатить"></p>
     <input type="hidden" name="ik_exp" value="<?php echo date('Y-m-d',time()+86400) ?>" >
 </form>
