@@ -39,26 +39,22 @@ class FreelanceRuParser extends Model
             $result = [];
             $i = '';
             foreach ($pcs as $item) {
+
                 //return $item;
                 $href = FunctionHelper::resOtDo('<a class="ptitle" href="', '" >', $item);
                 if (!$href[0]) {
-//                    continue;
                 }
                 $id = FunctionHelper::resOtDo('data-project-id="', '" >', $item);
                 if (!$id[0]) {
-//                    continue;
                 }
                 $budget = FunctionHelper::resOtDo('btn-block hidden-xs" >', ' р.</a>', $item);
                 if (!$budget[0]) {
-//                    continue;
                 }
                 $createdStr = FunctionHelper::resOtDo('<li title="', '"', $item);
                 if (!$createdStr[0]) {
-//                    continue;
                 }
                 $name = FunctionHelper::resOtDo('.html" ><span>', '</span></a>', $item);
                 if (!$name[0]) {
-//                    continue;
                 }
                 $create = explode(' ', str_replace('Поднято ', '', $createdStr[0]));
                 $result[] = [
@@ -68,16 +64,18 @@ class FreelanceRuParser extends Model
                     'budget' => str_replace(' ', '', $budget[0]),
                     'name' => $name[0],
                 ];
-            }
+
+
             foreach ($result as $item) {
-
+                $unic = Task::find()->where('list_id=:list_id',[':list_id' => $item['id']])->exists();
+                if (!$unic) {
                 if (!empty($item['url']) && !empty($item['id'])) {
+//                    var_dump($item);
                     if ($model = $this->findUrl($item['url'], 4)) {
-//                        var_dump($item); exit;
-
 //                        $model->url = $item['url'];
                         $model->site_id = 4;
                         $model->list_id = $item['id'];
+                        $model->date = $item['published'];
 //                        $model->added = date('Y-m-d H:i:s');
 //                        $model->published = $item['published'];
                         if (!empty($item['budget']) and $item['budget']!=''){
@@ -88,10 +86,12 @@ class FreelanceRuParser extends Model
 
                         $model->currency = 'RUB';
                         $model->title = $item['name'];
-                        $model->save(false);
-                        $this->getProgects($item['url'],$item['id']);
+//                        $model->save(false);
+                        $this->getProgects($item['url'],$item['id'],$model);
                     }
                 }
+                }
+            }
             }
         }
         return true;
@@ -101,13 +101,15 @@ class FreelanceRuParser extends Model
     /**
      * @param $pageUrl - ссылка на отдельный пост
      * @param $list_id - id этого поста
+     * @return
      * @throws \Exception
      */
-    public function getProgects($pageUrl, $list_id)
+    public function getProgects($pageUrl, $list_id,$model)
     {
 
         $unic = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->exists();
-//        if (!$unic) {
+        if (!$unic) {
+//            echo 1;exit;
 //        foreach ($model as $item) {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_FAILONERROR, 1);
@@ -122,12 +124,10 @@ class FreelanceRuParser extends Model
             $textDiv = '<table id="proj_table" >';
             if (stristr($data, $textDiv) === FALSE) {
 //                $item->setError();
-//                continue;
             }
             $textProjectDiv = FunctionHelper::resOtDo($textDiv, '</table>', $data);
             if (!$textProjectDiv[0]) {
 //                $item->setError();
-//                continue;
             }
             $textProjectDiv = strstr($textProjectDiv[0], '<tr class="pub_keys_row" >', true);
             $text = $textDiv . $textProjectDiv . '</table>';
@@ -137,17 +137,14 @@ class FreelanceRuParser extends Model
             $blockCategories = '<ul class="breadcrumb" >';
             if (stristr($data, $blockCategories) === FALSE) {
 //                $item->setError();
-//                continue;
             }
             $textCategories2 = FunctionHelper::resOtDo($blockCategories, '</ul>', $data);
             if (!$textCategories2[0]) {
 //                $item->setError();
-//                continue;
             }
             $textCategories3 = FunctionHelper::resOtDo('class="active" >', '</a>', $textCategories2[0]);
             if (!$textCategories3[0]) {
 //                $item->setError();
-//                continue;
             }
             // return $textCategories3[0];
             $category = $textCategories3[0];
@@ -159,7 +156,8 @@ class FreelanceRuParser extends Model
                     break;
                 }
             }
-        $item = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->one();
+//            $model = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->one();
+//            var_dump($item);exit;
 //            $task = new Task();
 //            var_dump($textCategories3);exit;
 //            var_dump(htmlspecialchars_decode($text));
@@ -167,13 +165,17 @@ class FreelanceRuParser extends Model
 //        $item->title = $title;
 //        $item->price = $budget;
 //        $item->currency = 'RUB';
-        $item->time_unix = time();
-//        $item->url = $pageUrl;
-        $item->text = htmlspecialchars_decode($text);
-//            $item->parse = Parser::PARSE_SUCCESS;
-//        $item->site_id = 4;
-        return $item->save(false);
-//        }
+            $isText = str_replace('<table id="proj_table" ></table>','',$text);
+            if ($isText!='') {
+                $model->time_unix = time();
+                $model->url = $pageUrl;
+                $model->text = htmlspecialchars_decode($text);
+//            $model->parse = Parser::PARSE_SUCCESS;
+
+                return $model->save(false);
+            }
+//        return $item->save(false);
+        }
     }
     /**
      *

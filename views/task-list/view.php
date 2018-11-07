@@ -32,9 +32,11 @@ $this->title = $model->title;
                                  
                                  <div class='media-body'>
                                  
-                                   <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3><hr><a class='pull-right' href='#'>
+                                   <h3 style=' font-weight: 600' class='media-heading'>".$this->title."</h3>
+                                   <hr>
+                                   <a class='pull-right' href='#'>
                                     <img  align='right'  vspace='5' hspace='5'   class='media-object' src='../../web/img/".$site['logo']."' width='64x' height='64px' alt='...'>
-                                 </a>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
+                                   </a>".$model->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
 
                     //return $data->text;// ? '<span class="text-success">Показывается</span>' : '<span class="text-danger">Не показывается</span>';
                     if ($model['price']==0):
@@ -43,7 +45,12 @@ $this->title = $model->title;
                     if ($model['price']!=0):
                         echo " <br><br><p class='media-left' style='font-size: large'>Цена:<b> ".$model['price']. "р</b></p>";
                     endif;
-                    echo "<p style='text-align: right' class='media-right'><a href='".$model['url']."'>Перейти на сайт с объявлением</a></p></div></div><br>";
+                    echo "<p style='text-align: right' class='media-right'>
+<a href='".$model['url']."'>Перейти на сайт с объявлением</a>
+</p>
+</div>
+</div>
+<br>";
                     return $model['date'];
                 }
             ],
