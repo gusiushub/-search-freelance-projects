@@ -7,6 +7,7 @@ use app\models\FreelancehuntComParser;
 use app\models\Task;
 
 
+use app\models\User;
 use phpQuery;
 
 use Yii;
@@ -229,7 +230,9 @@ class UserController extends Controller
         ])->execute();
 
 
-
+$user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+$user->paid_id=time() + 2678400;
+$user->save(false);
 
 //            try {
                 if (Yii::$app->user->identity->paid_to==0 or Yii::$app->user->identity->paid_to < time()) {
