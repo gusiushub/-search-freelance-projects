@@ -104,13 +104,11 @@ class FreelanceRuParser extends Model
      * @return
      * @throws \Exception
      */
-    public function getProgects($pageUrl, $list_id,$model)
+    public function getProgects($pageUrl, $list_id, $model)
     {
 
         $unic = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->exists();
         if (!$unic) {
-//            echo 1;exit;
-//        foreach ($model as $item) {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_FAILONERROR, 1);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
@@ -177,6 +175,8 @@ class FreelanceRuParser extends Model
 //        return $item->save(false);
         }
     }
+
+
     /**
      *
      */
@@ -222,6 +222,8 @@ class FreelanceRuParser extends Model
             ['freelance' => '3D графика', 'our' => 2]
         ];
     }
+
+
     /**
      * @param $url
      * @param $source
@@ -235,6 +237,8 @@ class FreelanceRuParser extends Model
             return new Task;
         }
     }
+
+
     /**
      * @return mixed
      */
@@ -243,6 +247,8 @@ class FreelanceRuParser extends Model
         $result = Task::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
         return $result;
     }
+
+
     public static function getReportByParsing()
     {
         $getDays = self::getDates();

@@ -62,9 +62,8 @@ class WeblancerNetParser extends Model
                             $model->list_id = $item['id'];
                             $model->date = date('Y-m-d');
                             $model->save(false);
-
-    //                        $content = $this->getProgects($item['url']);
                         }
+
                         $this->getProgects($item['url'],$item['id']);
                     }
                 }

@@ -1,10 +1,11 @@
 <?php
 namespace app\models;
 
-use app\models\Projects;
+
 use yii\base\Model,
-    app\components\helpers\FunctionHelper,
-    app\models\Parser;
+    app\components\helpers\FunctionHelper;
+
+
 class FreelansimParserRu extends Model
 {
     public function getCategory()
@@ -59,7 +60,6 @@ class FreelansimParserRu extends Model
                 $id = explode('/', $href[0]);
                 $result[] = ['url' => 'https://freelansim.ru' . $href[0], 'name' => $name[0], 'id' => $id[2]];
             }
-            //var_dump($result);exit;
             foreach ($result as $item) {
                 $unic =Task::find()->where(['list_id' => $item['id']])->andWhere('url=:url',[':url'=>$item['url']])->exists();
                 if(!$unic) {
@@ -157,7 +157,7 @@ class FreelansimParserRu extends Model
     {
         $model = Task::find()->where(['list_id' => 0, 'source' => 'freelance.ua'])->all();
         foreach ($model as $item) {
-            $item->setError();
+//            $item->setError();
         }
     }
     /**
@@ -376,7 +376,7 @@ class FreelansimParserRu extends Model
      */
     public static function getDates()
     {
-        $result = Parser::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
+        $result = Task::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
         return $result;
     }
 
@@ -391,7 +391,7 @@ class FreelansimParserRu extends Model
             $days[] = date(FunctionHelper::dateForChart($day['date']));
             $where = [
                 'AND',
-                ['parse' => Parser::PARSE_SUCCESS],
+                ['parse' => Task::PARSE_SUCCESS],
                 ['between', "added", $day['date'] . ' 00:00:00', $day['date'] . ' 23:59:59']
             ];
             $projects[] = floatval(Task::find()->where($where)->count());
