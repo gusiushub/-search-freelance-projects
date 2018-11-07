@@ -25,7 +25,7 @@ use yii\bootstrap\Html;
     <input type="hidden" name="ik_cur" value="RUB">
     <input type="hidden" name="ik_desc" value="Продажа змей">
     <p><input type="submit" value="Оплатить"></p>
-    <input type="hidden" name="ik_exp" value="<?php echo date('Y-m-d') ?>" >
+    <input type="hidden" name="ik_exp" value="<?php echo date('Y-m-d',time()+86400) ?>" >
 </form>
 
 
