@@ -219,17 +219,18 @@ class UserController extends Controller
             exit('Ошибка обработки платежа');
 
         Yii::$app->db->createCommand()->insert('payments', [
-            'user_id' => $_POST['ik_x_login'],
+            'user_id' => $_POST['ik_x_id'],
             'price' => $_POST['ik_am'],
-//                    'cod' => $_POST[ik_pm_no],
+            'status' => 'success',
+                    'cod' => $_POST['ik_pm_no'],
 //                    'ik_inv_id' => $_POST[ik_inv_id],
-//                    'date' => date('Y-m-d'),
-//                    'ik_co_id' => $_POST[ik_co_id],
+                    'date' => $_POST['ik_exp'],
+//                    'ik_co_id' => $_POST[ik_exp],
         ])->execute();
 
 
 
-        file_put_contents('1.txt', "Логин: $_POST[ik_x_login], сум: $_POST[ik_am]");
+        file_put_contents('1.txt', "Логин: $_POST[ik_x_id], сум: $_POST[ik_am]");
 
 
 //        var_dump($_POST);

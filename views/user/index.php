@@ -19,13 +19,13 @@ use yii\bootstrap\Html;
 
 <form name="payment" method="post" action="https://sci.interkassa.com/" enctype="utf-8">
     <input type="hidden" name="ik_co_id" value="5be1d6ae3b1eaf91488b4568">
-    <input type="hidden" name="ik_pm_no" value="<?php echo time() ?>">
+    <input type="hidden" name="ik_pm_no" value="<?php echo Yii::$app->user->id.'_'.time() ?>">
     <p><input type="text" name="ik_am" placeholder="Сумма"></p>
-    <p><input type="hidden" name="ik_x_login" value="<?php echo Yii::$app->user->id ?>"></p>
+    <p><input type="hidden" name="ik_x_id" value="<?php echo Yii::$app->user->id ?>"></p>
     <input type="hidden" name="ik_cur" value="RUB">
     <input type="hidden" name="ik_desc" value="Продажа змей">
     <p><input type="submit" value="Оплатить"></p>
-    <input type="hidden" name="ik_exp" value="2018-11-08" />
+    <input type="hidden" name="ik_exp" value="<?php echo date('Y-m-d') ?>" >
 </form>
 
 
