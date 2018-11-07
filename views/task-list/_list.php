@@ -24,7 +24,7 @@ $site = Site::find()->where('id = :site_id', [':site_id' => $model->site_id])->o
         </span>
         <span class="col-lg-4 col-sm-4">
             <?php
-            echo('Дата:  '. $model->date .'  Время: '. date("H:i",$model->time_unix));
+            echo('Дата:  '. $model->date .'  Время: '. $model->time);//date("H:i",$model->time_unix));
             ?>
         </span>
         <span class="media-right col-lg-3 col-sm-3">Оплата:

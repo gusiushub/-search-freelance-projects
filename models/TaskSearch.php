@@ -80,7 +80,11 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
+<<<<<<< HEAD
+        $query = Task::find()->groupBy('id')->orderBy('date,time DESC');//orderBy('id DESC');
+=======
         $query = Task::find()->groupBy('time')->orderBy('date,time DESC');//->orderBy('id DESC');
+>>>>>>> 422c70b84f2462b102cc4802cbd7ecbe5552b188
 
         // add conditions that should always apply here
 

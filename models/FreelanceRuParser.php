@@ -73,9 +73,13 @@ class FreelanceRuParser extends Model
 //                    var_dump($item);
                     if ($model = $this->findUrl($item['url'], 4)) {
 //                        $model->url = $item['url'];
+                        $published = explode(' ',$item['published']);
+                        var_dump(explode(' ',$item['published']));
+                        $model->time = $published[1];
+                        $model->date = $published[0];
                         $model->site_id = 4;
                         $model->list_id = $item['id'];
-                        $model->date = $item['published'];
+
 //                        $model->added = date('Y-m-d H:i:s');
 //                        $model->published = $item['published'];
                         if (!empty($item['budget']) and $item['budget']!=''){
@@ -83,6 +87,7 @@ class FreelanceRuParser extends Model
                         }else{
                             $model->price = 0;
                         }
+
 
                         $model->currency = 'RUB';
                         $model->title = $item['name'];
