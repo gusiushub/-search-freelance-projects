@@ -12,6 +12,7 @@ use app\models\User;
 use phpQuery;
 //use app\models\VkParser;
 use Yii;
+use yii\db\Exception;
 use yii\web\Controller;
 
 class UserController extends Controller
@@ -198,14 +199,17 @@ class UserController extends Controller
 
             //if ($_POST['ik_inv_st']=='success'){
                 //try {
-            return Yii::$app->db->createCommand()->insert('payments', [
-                        'user_id' => Yii::$app->user->identity->id,
-                        'status' => $_POST['ik_inv_st'],
-                        'cod' => $_POST['ik_pm_no'],
-                        'ik_inv_id' => $_POST['ik_inv_id'],
-                        'date' => date('Y-m-d'),
-                        'ik_co_id' => $_POST['ik_co_id'],
-                    ])->execute();
+        try {
+                 Yii::$app->db->createCommand()->insert('payments', [
+                'user_id' => Yii::$app->user->id,
+                'status' => $_POST['ik_inv_st'],
+                'cod' => $_POST['ik_pm_no'],
+                'ik_inv_id' => $_POST['ik_inv_id'],
+                'date' => date('Y-m-d'),
+                'ik_co_id' => $_POST['ik_co_id'],
+            ])->execute();
+        } catch (Exception $e) {
+        }
 
 //                    $sql = 'UPDATE user SET paid_to = ' . time() + 2678400 .'" WHERE id=' . Yii::$app->user->id;
                     $paid_to = time() + 2678400;
