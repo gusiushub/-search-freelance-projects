@@ -14,11 +14,11 @@ $this->title = 'Главная';
 
 ?>
 
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-sm-12">
         <br>
         <h1 class="heading">Сколько времени вы тратите на поиск новой работы / проектов?</h1>
         <br>
-        <div class="col-lg-7 col-sm-6">
+        <div class="col-lg-7 col-sm-7">
             <div class="uCalc_150430"></div>
         </div>
         <div class="col-lg-5 col-sm-6">
