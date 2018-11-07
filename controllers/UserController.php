@@ -199,7 +199,7 @@ class UserController extends Controller
     public function actionPay()
     {
 
-        var_dump('sdf'.Yii::$app->user->identity->paid_to);exit;
+        var_dump(Yii::$app->user->identity->paid_to);exit;
 
         $dataSet = $_POST;
 
