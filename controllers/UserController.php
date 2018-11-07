@@ -223,7 +223,8 @@ class UserController extends Controller
             ->createCommand()
             ->insert('payments', [
             'user_id' => $_POST['ik_x_id'],
-            'price' => $_POST['ik_am']
+            'price' => $_POST['ik_am'],
+                'paid_to'=>time(),
         ])->execute();
 
 
@@ -236,7 +237,7 @@ $user->save(false);
 
                     $paid_to = time() + 2678400;
                    Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
-                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to>time()){
+                }elseif(Yii::$app->user->identity->paid_to!=0 and Yii::$app->user->identity->paid_to > time()){
                     $paid_to = Yii::$app->user->identity->paid_to;
                     $paid_to = $paid_to+2678400;
                     Yii::$app->db->createCommand()->update('user', array('paid_to' => $paid_to), 'id =:id',array( ':id'=> Yii::$app->user->id))->execute();
