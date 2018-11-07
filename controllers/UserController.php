@@ -198,34 +198,27 @@ class UserController extends Controller
         if (isset($_POST['ik_inv_st'])){
 
             //if ($_POST['ik_inv_st']=='success'){
-                //try {
-        try {
-                Yii::$app->db->createCommand()->insert('payments', [
-                'user_id' => Yii::$app->user->id,
-                'status' => $_POST['ik_inv_st'],
-                'cod' => $_POST['ik_pm_no'],
-                'ik_inv_id' => $_POST['ik_inv_id'],
-                'date' => date('Y-m-d'),
-                'ik_co_id' => $_POST['ik_co_id'],
-            ])->execute();
-
-        } catch (Exception $e) {
-            echo 'error '. $e;
-//            var_dump($e);
-        }
-
-//                    $sql = 'UPDATE user SET paid_to = ' . time() + 2678400 .'" WHERE id=' . Yii::$app->user->id;
-                    $paid_to = time() + 2678400;
             try {
+                    Yii::$app->db->createCommand()->insert('payments', [
+                    'user_id' => Yii::$app->user->id,
+                    'status' => $_POST['ik_inv_st'],
+                    'cod' => $_POST['ik_pm_no'],
+                    'ik_inv_id' => $_POST['ik_inv_id'],
+                    'date' => date('Y-m-d'),
+                    'ik_co_id' => $_POST['ik_co_id'],
+                ])->execute();
+
+            } catch (Exception $e) {
+                echo 'error '. $e;
+            }
+
+            try {
+                $paid_to = time() + 2678400;
                 Yii::$app->db->createCommand()->update('user', ['paid_to' => $paid_to], 'id =' . Yii::$app->user->id)->execute();
             } catch (Exception $e) {
                 echo 'error '. $e;
             }
-//
-//                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
-//                $user->paid_to = time()+2678400;
-//                $user->save(false);
-            //}
+
         }
 
 //        return $this->render('pay');
