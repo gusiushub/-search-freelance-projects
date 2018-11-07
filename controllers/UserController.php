@@ -224,14 +224,22 @@ class UserController extends Controller
             ->insert('payments', [
             'user_id' => $_POST['ik_x_id'],
             'price' => $_POST['ik_am'],
-                'paid_to'=>time(),
+                'paid_to'=>time()+2678400,
         ])->execute();
 
         Yii::$app->db
             ->createCommand()
-            ->update('user', [
-                'payment_status' => 1,
-            ],'id=:id',[':id'=>Yii::$app->user->id])->execute();
+            ->update('payments', [
+//            'user_id' => $_POST['ik_x_id'],
+//            'price' => $_POST['ik_am'],
+                'paid_to'=>time()+2678400,
+            ],'user_id=:id',[':id'=>Yii::$app->user->id])->execute();
+
+//        Yii::$app->db
+//            ->createCommand()
+//            ->update('user', [
+//                'payment_status' => 1,
+//            ],'id=:id',[':id'=>Yii::$app->user->id])->execute();
 
 
 //            try {
