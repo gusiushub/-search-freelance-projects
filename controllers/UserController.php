@@ -193,21 +193,26 @@ class UserController extends Controller
 
     public function actionPay()
     {
+        var_dump(Yii::$app->user->id);
         if (isset($_POST['ik_inv_st'])){
 
             if ($_POST['ik_inv_st']=='success'){
-                Yii::$app->db->createCommand()->insert('payments', [
-                    'user_id' => Yii::$app->user->identity->id,
-                    'status' => $_POST['ik_inv_st'],
-                    'cod' => $_POST['ik_pm_no'],
-                    'ik_inv_id' => $_POST['ik_inv_id'],
-                    'date' => date('Y-m-d'),
-                    'ik_co_id' => $_POST['ik_co_id'],
-                ])->execute();
+                try {
+                    Yii::$app->db->createCommand()->insert('payments', [
+                        'user_id' => Yii::$app->user->identity->id,
+                        'status' => $_POST['ik_inv_st'],
+                        'cod' => $_POST['ik_pm_no'],
+                        'ik_inv_id' => $_POST['ik_inv_id'],
+                        'date' => date('Y-m-d'),
+                        'ik_co_id' => $_POST['ik_co_id'],
+                    ])->execute();
 
-                $sql = "UPDATE user SET paid_to=". time()+2678400 ." WHERE id=". Yii::$app->user->id;
+                    //$sql = ;
 
-                Yii::$app->db->createCommand($sql)->execute();
+                    Yii::$app->db->createCommand('UPDATE user SET paid_to = ' . time() + 2678400 .' WHERE id=' . Yii::$app->user->id)->execute();
+                }catch (\Exception $e){
+                    throw $e;
+                }
 //                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
 //                $user->paid_to = time()+2678400;
 //                $user->save(false);
