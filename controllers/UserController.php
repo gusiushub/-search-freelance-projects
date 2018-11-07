@@ -205,7 +205,7 @@ class UserController extends Controller
                     'ik_co_id' => $_POST['ik_co_id'],
                 ])->execute();
 
-                $sql = "UPDATE user SET paid_id=". time()+2678400 ." WHERE id=". Yii::$app->user->id;
+                $sql = "UPDATE user SET paid_to=". time()+2678400 ." WHERE id=". Yii::$app->user->id;
 
                 Yii::$app->db->createCommand($sql)->execute();
 //                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
