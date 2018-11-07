@@ -229,9 +229,9 @@ class UserController extends Controller
 
         Yii::$app->db
             ->createCommand()
-            ->insert('user', [
+            ->update('user', [
                 'payment_status' => 1,
-            ])->execute();
+            ],'id=:id',[':id'=>Yii::$app->user->id])->execute();
 $user = User::find()->where(['like','id',Yii::$app->user->id])->one();
 $user->paid_id=time() + 2678400;
 $user->save(false);
