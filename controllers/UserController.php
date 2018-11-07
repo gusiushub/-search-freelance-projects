@@ -198,7 +198,7 @@ class UserController extends Controller
 
             //if ($_POST['ik_inv_st']=='success'){
                 //try {
-                    Yii::$app->db->createCommand()->insert('payments', [
+            return Yii::$app->db->createCommand()->insert('payments', [
                         'user_id' => Yii::$app->user->identity->id,
                         'status' => $_POST['ik_inv_st'],
                         'cod' => $_POST['ik_pm_no'],
