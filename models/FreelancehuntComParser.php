@@ -2,11 +2,9 @@
 
 namespace app\models;
 
-//use app\models\FhApiSettings;
-//use app\models\Projects;
 use yii\base\Model,
     app\components\helpers\FunctionHelper;
-//    app\models\Parser;
+
 
 
 class FreelancehuntComParser extends Model
@@ -39,7 +37,6 @@ class FreelancehuntComParser extends Model
      */
     public function parseProjects(){
         $projectsByApi = $this->getProjectsByApi();
-        //var_dump($projectsByApi);exit;
         foreach ($projectsByApi as $projectByApi) {
             if ($find = Parser::findOne(['source' => 'freelancehunt.com', 'projectId' => $projectByApi['project_id']])){
                 continue;

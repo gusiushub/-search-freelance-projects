@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\base\Model,
@@ -7,6 +8,10 @@ use yii\base\Model,
 
 class WeblancerNetParser extends Model
 {
+
+    /**
+     * @param $pages
+     */
     public function getUrlProgects($pages)
     {
         $pagesArr = [];
@@ -65,122 +70,127 @@ class WeblancerNetParser extends Model
                 }
             }
         }
-
-        //return true;
     }
-    public function getProgects($url2,$list_id)
+
+
+    /**
+     * @param $url2
+     * @param $list_id
+     */
+    public function getProgects($url2, $list_id)
     {
         $item = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->one();
-//        foreach ($model as $item) {
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_FAILONERROR, 1);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
-            curl_setopt($curl, CURLOPT_TIMEOUT, 10); // times out after 4s
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return into a variable
-            curl_setopt($curl, CURLOPT_URL, 'https://www.weblancer.net' . $url2);
-            curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 GTB6");
-            $data = iconv("windows-1251", "utf-8", curl_exec($curl));
-            //--START--Название проекта
-            $nameH1 = '<h1>';
-            if (stristr($data, $nameH1) === FALSE) {
-                $item->setError();
-            }
-            $name = FunctionHelper::resOtDo($nameH1, '</h1>', $data);
-            if (!$name[0] || $name[0] == 'Вы не авторизованы' || $name[0] == 'Ошибка 404: Страница не найдена') {
-                $item->setError();
-            }
-            //--END--Название проекта
-            //--START--Дату публикации
-            $publishDiv = '<div class="float-right text-muted hidden-xs-down">';
-            if (stristr($data, $publishDiv) === FALSE) {
-                $item->setError();
-            }
-            $publish = FunctionHelper::resOtDo($publishDiv, '</div>', $data);
-            if (!$publish[0]) {
-                $item->setError();
-            }
-            $publishDate = FunctionHelper::resOtDo('data-timestamp="', '" class="time_ago"', $publish[0]);
-            if (!$publishDate[0]) {
-                $item->setError();
-            }
-            //--END--Дату публикации
-            //--START--Текст проекта
-            $textDiv = '<div class="col-12 text_field">';
-            if (stristr($data, $textDiv) === FALSE) {
-                $item->setError();
-            }
-            $textProjectDiv = FunctionHelper::resOtDo($textDiv, '</div>', $data);
-            if (!$textProjectDiv[0]) {
-                $item->setError();
-            }
-            $textProjectP = FunctionHelper::resOtDo('<p>', '</p>', $data);
-            if (!$textProjectP[0]) {
-                $item->setError();
-            }
-            $projectText = $textProjectP[0];
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_FAILONERROR, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10); // times out after 4s
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return into a variable
+        curl_setopt($curl, CURLOPT_URL, 'https://www.weblancer.net' . $url2);
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 GTB6");
+        $data = iconv("windows-1251", "utf-8", curl_exec($curl));
+        //--START--Название проекта
+        $nameH1 = '<h1>';
+        if (stristr($data, $nameH1) === FALSE) {
+            $item->setError();
+        }
+        $name = FunctionHelper::resOtDo($nameH1, '</h1>', $data);
+        if (!$name[0] || $name[0] == 'Вы не авторизованы' || $name[0] == 'Ошибка 404: Страница не найдена') {
+            $item->setError();
+        }
+        //--END--Название проекта
+        //--START--Дату публикации
+        $publishDiv = '<div class="float-right text-muted hidden-xs-down">';
+        if (stristr($data, $publishDiv) === FALSE) {
+            $item->setError();
+        }
+        $publish = FunctionHelper::resOtDo($publishDiv, '</div>', $data);
+        if (!$publish[0]) {
+            $item->setError();
+        }
+        $publishDate = FunctionHelper::resOtDo('data-timestamp="', '" class="time_ago"', $publish[0]);
+        if (!$publishDate[0]) {
+            $item->setError();
+        }
+        //--END--Дату публикации
+        //--START--Текст проекта
+        $textDiv = '<div class="col-12 text_field">';
+        if (stristr($data, $textDiv) === FALSE) {
+            $item->setError();
+        }
+        $textProjectDiv = FunctionHelper::resOtDo($textDiv, '</div>', $data);
+        if (!$textProjectDiv[0]) {
+            $item->setError();
+        }
+        $textProjectP = FunctionHelper::resOtDo('<p>', '</p>', $data);
+        if (!$textProjectP[0]) {
+            $item->setError();
+        }
+        $projectText = $textProjectP[0];
 
-            //--END--Текст проекта
-            //--START--Бюджет проекта
-            $budgetDiv = 'title amount';
-            if (stristr($data, $budgetDiv) === FALSE) {
+        //--END--Текст проекта
+        //--START--Бюджет проекта
+        $budgetDiv = 'title amount';
+        if (stristr($data, $budgetDiv) === FALSE) {
+            $item->price = 1;
+            $item->currency = 'UAH';
+        } else {
+            $budget = FunctionHelper::resOtDo('<span class="title amount">', '</span>', $data);
+            if ($budget[0]) {
+                $item->price = str_replace('$', '', $budget[0]);
+                $item->currency = 'USD';
+            } else {
                 $item->price = 1;
                 $item->currency = 'UAH';
-            } else {
-                $budget = FunctionHelper::resOtDo('<span class="title amount">', '</span>', $data);
-                if ($budget[0]) {
-                    $item->price = str_replace('$', '', $budget[0]);
-                    $item->currency = 'USD';
-                } else {
-                    $item->price = 1;
-                    $item->currency = 'UAH';
-                }
             }
-            //--END--Бюджет проекта
-            //--START--Категория проекта
-            $original = $this->getOriginalCategories();
-            $blockCategories = '<span itemprop="itemListElement"';
-            if (stristr($data, $blockCategories) === FALSE) {
-                $item->setError();
+        }
+        //--END--Бюджет проекта
+        //--START--Категория проекта
+        $original = $this->getOriginalCategories();
+        $blockCategories = '<span itemprop="itemListElement"';
+        if (stristr($data, $blockCategories) === FALSE) {
+            $item->setError();
+        }
+        $textCategories = FunctionHelper::resOtDo($blockCategories, '</a>', $data);
+        if (!$textCategories[0]) {
+            $item->setError();
+        }
+        $category = FunctionHelper::resOtDo('<span itemprop="name">', '</span>', $textCategories[0]);
+        if (!$category[0]) {
+            $item->setError();
+        }
+
+        foreach ($original as $key => $value) {
+            $body = FunctionHelper::lightCyrillicToLatin($category[0]);
+            $search = FunctionHelper::lightCyrillicToLatin($original[$key]['weblancer']);
+
+            if (preg_match("/$search/", $body)) {
+
+                $category = $original[$key]['our'];
+
+                break;
             }
-            $textCategories = FunctionHelper::resOtDo($blockCategories, '</a>', $data);
-            if (!$textCategories[0]) {
-                $item->setError();
-            }
-            $category = FunctionHelper::resOtDo('<span itemprop="name">', '</span>', $textCategories[0]);
-            if (!$category[0]) {
-                $item->setError();
-            }
+        }
 
-            foreach ($original as $key => $value) {
-                $body = FunctionHelper::lightCyrillicToLatin($category[0]);
-                $search = FunctionHelper::lightCyrillicToLatin($original[$key]['weblancer']);
+        $unic =Task::find()->where(['list_id' => $list_id])->exists();
 
-                if (preg_match("/$search/", $body)) {
-
-                    $category = $original[$key]['our'];
-
-                    break;
-                }
-            }
-
-            $unic =Task::find()->where(['list_id' => $list_id])->exists();
-            if($unic) {
-                $item->categories_id = $category > 0 ? $category : 9;
-                $item->text = htmlspecialchars_decode($projectText);
-                $item->title = $name[0];
-                $item->url = $url2;
-                $item->date = date('Y-m-d');
-                $item->save(false);
-            }
-
-//        }
+        if($unic) {
+            $description = str_replace('<br />','',trim(htmlspecialchars_decode($projectText)));
+            $item->categories_id = $category > 0 ? $category : 9;
+            $item->text = $description;
+            $item->title = $name[0];
+            $item->url = 'https://www.weblancer.net'.$url2;
+            $item->date = date('Y-m-d');
+            $item->save(false);
+        }
     }
+
+
     /**
      *
      */
     public function getClearBags()
     {
-        $model = Parser::find()->where(['parse' => 0, 'source' => 'weblancer.net'])->all();
+        $model = Task::find()->where(['parse' => 0, 'source' => 'weblancer.net'])->all();
         foreach ($model as $item) {
             $item->setError();
         }
@@ -256,6 +266,8 @@ class WeblancerNetParser extends Model
             ['weblancer' => 'Юридические услуги', 'our' => 8],
         ];
     }
+
+
     /**
      * @param $url
      * @param $source
@@ -269,14 +281,21 @@ class WeblancerNetParser extends Model
             return new Task;
         }
     }
+
+
     /**
      * @return mixed
      */
     public static function getDates()
     {
-        $result = Parser::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
+        $result = Task::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
         return $result;
     }
+
+
+    /**
+     * @return array
+     */
     public static function getReportByParsing()
     {
         $getDays = self::getDates();
@@ -285,10 +304,10 @@ class WeblancerNetParser extends Model
             $days[] = date(FunctionHelper::dateForChart($day['date']));
             $where = [
                 'AND',
-                ['parse' => Parser::PARSE_SUCCESS],
+                ['parse' => Task::PARSE_SUCCESS],
                 ['between', "added", $day['date'] . ' 00:00:00', $day['date'] . ' 23:59:59']
             ];
-            $projects[] = floatval(Parser::find()->where($where)->count());
+            $projects[] = floatval(Task::find()->where($where)->count());
         }
         return [$days, $projects];
     }

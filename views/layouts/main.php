@@ -16,6 +16,7 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+    <link href="../../web/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <!--    <meta name="generator" content="2018.0.0.379"/>-->
@@ -25,8 +26,6 @@ AppAsset::register($this);
 
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-<!--    <link rel="stylesheet" type="text/css" href="../../web/css/site_global.css?crc=444006867"/>-->
-<!--    <link rel="stylesheet" type="text/css" href="../../web/css/index.css?crc=3860585067" id="pagesheet"/>-->
 </head>
 <body>
 <?php $this->beginBody() ?>
