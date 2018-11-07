@@ -111,7 +111,7 @@ $this->title = 'Главная';
             <?php  echo $form->field($model, 'check_time7dn')->checkbox(['value' => (int)(time()-604800)]) ?>
         </div>
     </div>
-    <div  class="btn-group-sm">
+    <div  class="btn-group-sm text-center">
         <?= Html::submitButton('Поиск', ['class' => 'btn btn-danger',"style"=>"margin: 5px; width:30%",'onclick'=>' 
      $.get("'.Yii::$app->urlManager->createUrl('task-list/dropdown?id=').'"+$("#cat").val(), function(data) { 
      $("ul#tasksearch-subcategories_id").html(data); 

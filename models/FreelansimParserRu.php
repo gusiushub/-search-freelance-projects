@@ -8,10 +8,10 @@ use yii\base\Model,
 
 class FreelansimParserRu extends Model
 {
-    public function getCategory()
-    {
-
-    }
+//    public function getCategory()
+//    {
+//
+//    }
 
     /**
      * @param $pages
@@ -85,70 +85,70 @@ class FreelansimParserRu extends Model
     public function getProgects($url2, $list_id)
     {
         $item = Task::find()->where('list_id=:list_id',[':list_id' => $list_id])->one();
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_FAILONERROR, 1);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
-            curl_setopt($curl, CURLOPT_TIMEOUT, 10); // times out after 4s
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return into a variable
-            curl_setopt($curl, CURLOPT_URL, $url2);
-            curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 GTB6");
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_FAILONERROR, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10); // times out after 4s
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return into a variable
+        curl_setopt($curl, CURLOPT_URL, $url2);
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 GTB6");
 //            $data = iconv("windows-1251", "utf-8", curl_exec($curl));
-//        $data = iconv("windows-1251", "utf-8", curl_exec($curl));
-            $data = curl_exec($curl);
+        $data = curl_exec($curl);
 
-            //--START--Название проекта
-            $nameH1 = '<h2 class=\'task__title\'>';
-            if (stristr($data, $nameH1) === FALSE) {
-                $item->setError();
-            }
-            $name = FunctionHelper::resOtDo($nameH1, '</h2>', $data);
+        //--START--Название проекта
+        $nameH1 = '<h2 class=\'task__title\'>';
+        if (stristr($data, $nameH1) === FALSE) {
+//            $item->setError();
+        }
+        $name = FunctionHelper::resOtDo($nameH1, '</h2>', $data);
 
-            //--END--Название проекта
-            //--START--Дату публикации
-            $publishDiv = '<div class=\'task__meta\'>';
-            if (stristr($data, $publishDiv) === FALSE) {
-                $item->setError();
-            }
-            $publish = FunctionHelper::resOtDo($publishDiv, '</div>', $data);
-            if (!$publish[0]) {
-                $item->setError();
-            }
+        //--END--Название проекта
+        //--START--Дату публикации
+        $publishDiv = '<div class=\'task__meta\'>';
+        if (stristr($data, $publishDiv) === FALSE) {
+//            $item->setError();
+        }
+        $publish = FunctionHelper::resOtDo($publishDiv, '</div>', $data);
+        if (!$publish[0]) {
+//            $item->setError();
+        }
 
-            //--END--Дату публикации
-            //--START--Текст проекта
-            $textProjectDiv = FunctionHelper::resOtDo('<div class=\'task__description\'>', '</div>', $data);
-            if (!$textProjectDiv[0]) {
-                $item->setError();
-            }
-            $projectText = $textProjectDiv[0];
-            //--END--Текст проекта
-            //--START--Бюджет проекта
-            $priceSpan = '<div class=\'task__finance\'>';
-            if (stristr($data, $priceSpan) === FALSE) {
+        //--END--Дату публикации
+        //--START--Текст проекта
+        $textProjectDiv = FunctionHelper::resOtDo('<div class=\'task__description\'>', '</div>', $data);
+        if (!$textProjectDiv[0]) {
+//            $item->setError();
+        }
+        $projectText = $textProjectDiv[0];
+        //--END--Текст проекта
+        //--START--Бюджет проекта
+        $priceSpan = '<div class=\'task__finance\'>';
+        if (stristr($data, $priceSpan) === FALSE) {
+            $budget = 1;
+            $currency = 'RUR';
+        } else {
+            $budgetSpan = FunctionHelper::resOtDo($priceSpan, '</span>', $data);
+            if (stristr($budgetSpan[0], '<span class=\'negotiated_price\'') === FALSE) {
+                $budgetRur = explode(' руб.', $budgetSpan[0]);
+                $budget = str_replace(' ', '', strip_tags($budgetRur[0]));
+            } else {
                 $budget = 1;
                 $currency = 'RUR';
-            } else {
-                $budgetSpan = FunctionHelper::resOtDo($priceSpan, '</span>', $data);
-                if (stristr($budgetSpan[0], '<span class=\'negotiated_price\'') === FALSE) {
-                    $budgetRur = explode(' руб.', $budgetSpan[0]);
-                    $budget = str_replace(' ', '', strip_tags($budgetRur[0]));
-                } else {
-                    $budget = 1;
-                    $currency = 'RUR';
-                }
-                $currency = 'RUR';
             }
-            //--END--Бюджет проекта
+            $currency = 'RUR';
+        }
+        //--END--Бюджет проекта
 
-            $item->title = $name[0];
-            $item->text = htmlspecialchars_decode($projectText);
-            $item->price = $budget;
-            $item->currency = $currency;
+        $item->title = $name[0];
+        $item->text = htmlspecialchars_decode($projectText);
+        $item->price = $budget;
+        $item->currency = $currency;
         $item->date = date('Y-m-d');
         $item->url = $url2;
         $item->time_unix = (int)(time());
         $item->save(false);
     }
+
 
     /**
      *
@@ -160,6 +160,8 @@ class FreelansimParserRu extends Model
 //            $item->setError();
         }
     }
+
+
     /**
      * @return array
      */
@@ -357,6 +359,7 @@ class FreelansimParserRu extends Model
         ];
     }
 
+
     /**
      * @param $url
      * @param $source
@@ -371,6 +374,7 @@ class FreelansimParserRu extends Model
         }
     }
 
+
     /**
      * @return mixed
      */
@@ -379,6 +383,7 @@ class FreelansimParserRu extends Model
         $result = Task::find()->select('DATE(added) as date')->distinct()->asArray()->orderBy(['added' => SORT_ASC])->all();
         return $result;
     }
+
 
     /**
      * @return array

@@ -17,6 +17,9 @@ use yii\console\Controller;
 
 class ParsController extends Controller
 {
+    /**
+     * @throws \yii\db\Exception
+     */
     public function actionIndex()
     {
         $start = microtime(true);
@@ -29,30 +32,34 @@ class ParsController extends Controller
         echo "<br><br>Время выполнения: ".(microtime(true)-$start)." секунд.\n";
     }
 
+    /**
+     *
+     */
     public function actionVk()
     {
         $robber = new VkParser();
-//        var_dump($robber);
-
     }
     /**
      * freelance.ru
      */
     public function actionFreelance()
     {
-//       $model = new FreelanceParser();
-//       echo $model->freelance();
         $model = new FreelanceRuParser();
         $model->getUrlProgects(3);
-        echo '<br>';
     }
 
+    /**
+     *
+     */
     public function actionWeblancer()
     {
         $parseUrl = new WeblancerNetParser();
         $parseUrl->getUrlProgects(2) ;
     }
 
+    /**
+     * @throws \yii\db\Exception
+     */
     public function actionFreelancehunt()
     {
         $model = new FreelancehuntComParser();
@@ -90,7 +97,7 @@ class ParsController extends Controller
 //        FreelansimParser::run('https://freelansim.ru/tasks?categories=development_other',6,11);
 //        FreelansimParser::run('https://freelansim.ru/tasks?categories=testing_sites',5,12);
         $parseUrl = new FreelansimParserRu();
-        var_dump($parseUrl->getUrlProgects(2,'development_all_inclusive')) ;
+        $parseUrl->getUrlProgects(2,'development_all_inclusive');
     }
 
     /**
