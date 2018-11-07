@@ -219,8 +219,11 @@ class UserController extends Controller
 
         if ($sign != $_POST['ik_sign'])
             exit('Ошибка обработки платежа');
-        $payments = Payments::find()->where(['user_id'=>Yii::$app->user->id])->one();
-        $paid_to = $payments['paid_to']+2678400;
+
+
+
+        $payments = Payments::find()->where('user_id=:user_id',[':user_id'=>Yii::$app->user->id])->one();
+        $paid_to = 2678400;
         Yii::$app->db->createCommand()->insert('payments', [
             'user_id' => $_POST['ik_x_id'],
             'price' => $_POST['ik_am'],
