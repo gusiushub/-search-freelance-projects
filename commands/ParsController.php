@@ -73,7 +73,7 @@ class ParsController extends Controller
 				$unixTime = strtotime($post['publication_time']);
 				$date = date('Y-m-d',$unixTime);
 				$time = date('H:m:s',$unixTime);
-			
+
                 Yii::$app->db->createCommand()->insert('task', [
                     'site_id' => 6,
                     'title' => $post['name'],
