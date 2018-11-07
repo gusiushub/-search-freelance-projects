@@ -196,7 +196,7 @@ class UserController extends Controller
         //var_dump(time()+2678400);
         if (isset($_POST['ik_inv_st'])){
 
-            if ($_POST['ik_inv_st']=='success'){
+            //if ($_POST['ik_inv_st']=='success'){
                 //try {
                     Yii::$app->db->createCommand()->insert('payments', [
                         'user_id' => Yii::$app->user->identity->id,
@@ -216,7 +216,7 @@ class UserController extends Controller
 //                $user = User::find()->where('id=:id',[':id'=>Yii::$app->user->identity->id])->one();
 //                $user->paid_to = time()+2678400;
 //                $user->save(false);
-            }
+            //}
         }
 
         return $this->render('pay');
